@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.website.server.dao.InterviewInfoMapper">
+  <resultMap id="BaseResultMap" type="com.website.server.pojo.InterviewInfo">
+    <id column="i_id" jdbcType="INTEGER" property="iId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="hr_id" jdbcType="INTEGER" property="hrId" />
+    <result column="hr_name" jdbcType="VARCHAR" property="hrName" />
+    <result column="i_address" jdbcType="VARCHAR" property="iAddress" />
+    <result column="i_time" jdbcType="TIMESTAMP" property="iTime" />
+    <result column="i_static" jdbcType="VARCHAR" property="iStatic" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    i_id, user_id, hr_id, hr_name, i_address, i_time, i_static
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from interview_info
+    where i_id = #{iId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from interview_info
+    where i_id = #{iId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.website.server.pojo.InterviewInfo">
+    insert into interview_info (i_id, user_id, hr_id, 
+      hr_name, i_address, i_time, 
+      i_static)
+    values (#{iId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{hrId,jdbcType=INTEGER}, 
+      #{hrName,jdbcType=VARCHAR}, #{iAddress,jdbcType=VARCHAR}, #{iTime,jdbcType=TIMESTAMP}, 
+      #{iStatic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.server.pojo.InterviewInfo">
+    insert into interview_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="iId != null">
+        i_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="hrId != null">
+        hr_id,
+      </if>
+      <if test="hrName != null">
+        hr_name,
+      </if>
+      <if test="iAddress != null">
+        i_address,
+      </if>
+      <if test="iTime != null">
+        i_time,
+      </if>
+      <if test="iStatic != null">
+        i_static,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="iId != null">
+        #{iId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="hrId != null">
+        #{hrId,jdbcType=INTEGER},
+      </if>
+      <if test="hrName != null">
+        #{hrName,jdbcType=VARCHAR},
+      </if>
+      <if test="iAddress != null">
+        #{iAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="iTime != null">
+        #{iTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iStatic != null">
+        #{iStatic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.InterviewInfo">
+    update interview_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="hrId != null">
+        hr_id = #{hrId,jdbcType=INTEGER},
+      </if>
+      <if test="hrName != null">
+        hr_name = #{hrName,jdbcType=VARCHAR},
+      </if>
+      <if test="iAddress != null">
+        i_address = #{iAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="iTime != null">
+        i_time = #{iTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iStatic != null">
+        i_static = #{iStatic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where i_id = #{iId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.InterviewInfo">
+    update interview_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      hr_id = #{hrId,jdbcType=INTEGER},
+      hr_name = #{hrName,jdbcType=VARCHAR},
+      i_address = #{iAddress,jdbcType=VARCHAR},
+      i_time = #{iTime,jdbcType=TIMESTAMP},
+      i_static = #{iStatic,jdbcType=VARCHAR}
+    where i_id = #{iId,jdbcType=INTEGER}
+  </update>
+</mapper>

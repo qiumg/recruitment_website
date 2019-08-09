@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.website.server.dao.UserJobwantMapper">
+  <resultMap id="BaseResultMap" type="com.website.server.pojo.UserJobwant">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="resume_id" jdbcType="INTEGER" property="resumeId" />
+    <result column="salary_want" jdbcType="VARCHAR" property="salaryWant" />
+    <result column="place_want" jdbcType="VARCHAR" property="placeWant" />
+    <result column="post_want" jdbcType="VARCHAR" property="postWant" />
+    <result column="work_types" jdbcType="VARCHAR" property="workTypes" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, resume_id, salary_want, place_want, post_want, work_types
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_jobwant
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_jobwant
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.website.server.pojo.UserJobwant">
+    insert into user_jobwant (id, resume_id, salary_want, 
+      place_want, post_want, work_types
+      )
+    values (#{id,jdbcType=INTEGER}, #{resumeId,jdbcType=INTEGER}, #{salaryWant,jdbcType=VARCHAR}, 
+      #{placeWant,jdbcType=VARCHAR}, #{postWant,jdbcType=VARCHAR}, #{workTypes,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.server.pojo.UserJobwant">
+    insert into user_jobwant
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="resumeId != null">
+        resume_id,
+      </if>
+      <if test="salaryWant != null">
+        salary_want,
+      </if>
+      <if test="placeWant != null">
+        place_want,
+      </if>
+      <if test="postWant != null">
+        post_want,
+      </if>
+      <if test="workTypes != null">
+        work_types,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resumeId != null">
+        #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="salaryWant != null">
+        #{salaryWant,jdbcType=VARCHAR},
+      </if>
+      <if test="placeWant != null">
+        #{placeWant,jdbcType=VARCHAR},
+      </if>
+      <if test="postWant != null">
+        #{postWant,jdbcType=VARCHAR},
+      </if>
+      <if test="workTypes != null">
+        #{workTypes,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.UserJobwant">
+    update user_jobwant
+    <set>
+      <if test="resumeId != null">
+        resume_id = #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="salaryWant != null">
+        salary_want = #{salaryWant,jdbcType=VARCHAR},
+      </if>
+      <if test="placeWant != null">
+        place_want = #{placeWant,jdbcType=VARCHAR},
+      </if>
+      <if test="postWant != null">
+        post_want = #{postWant,jdbcType=VARCHAR},
+      </if>
+      <if test="workTypes != null">
+        work_types = #{workTypes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.UserJobwant">
+    update user_jobwant
+    set resume_id = #{resumeId,jdbcType=INTEGER},
+      salary_want = #{salaryWant,jdbcType=VARCHAR},
+      place_want = #{placeWant,jdbcType=VARCHAR},
+      post_want = #{postWant,jdbcType=VARCHAR},
+      work_types = #{workTypes,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

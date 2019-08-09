@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.website.server.dao.JobKind1InfoMapper">
+  <resultMap id="BaseResultMap" type="com.website.server.pojo.JobKind1Info">
+    <id column="jk1_id" jdbcType="INTEGER" property="jk1Id" />
+    <result column="jk1_name" jdbcType="VARCHAR" property="jk1Name" />
+    <result column="jk_id" jdbcType="INTEGER" property="jkId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    jk1_id, jk1_name, jk_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from job_kind1_info
+    where jk1_id = #{jk1Id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from job_kind1_info
+    where jk1_id = #{jk1Id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.website.server.pojo.JobKind1Info">
+    insert into job_kind1_info (jk1_id, jk1_name, jk_id
+      )
+    values (#{jk1Id,jdbcType=INTEGER}, #{jk1Name,jdbcType=VARCHAR}, #{jkId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.server.pojo.JobKind1Info">
+    insert into job_kind1_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jk1Id != null">
+        jk1_id,
+      </if>
+      <if test="jk1Name != null">
+        jk1_name,
+      </if>
+      <if test="jkId != null">
+        jk_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jk1Id != null">
+        #{jk1Id,jdbcType=INTEGER},
+      </if>
+      <if test="jk1Name != null">
+        #{jk1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="jkId != null">
+        #{jkId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.JobKind1Info">
+    update job_kind1_info
+    <set>
+      <if test="jk1Name != null">
+        jk1_name = #{jk1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="jkId != null">
+        jk_id = #{jkId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where jk1_id = #{jk1Id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.JobKind1Info">
+    update job_kind1_info
+    set jk1_name = #{jk1Name,jdbcType=VARCHAR},
+      jk_id = #{jkId,jdbcType=INTEGER}
+    where jk1_id = #{jk1Id,jdbcType=INTEGER}
+  </update>
+</mapper>

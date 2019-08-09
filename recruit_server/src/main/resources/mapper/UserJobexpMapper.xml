@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.website.server.dao.UserJobexpMapper">
+  <resultMap id="BaseResultMap" type="com.website.server.pojo.UserJobexp">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="resume_id" jdbcType="INTEGER" property="resumeId" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="post_name" jdbcType="VARCHAR" property="postName" />
+    <result column="strat_time" jdbcType="DATE" property="stratTime" />
+    <result column="stop_time" jdbcType="DATE" property="stopTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, resume_id, company_name, post_name, strat_time, stop_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_jobexp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_jobexp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.website.server.pojo.UserJobexp">
+    insert into user_jobexp (id, resume_id, company_name, 
+      post_name, strat_time, stop_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{resumeId,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, 
+      #{postName,jdbcType=VARCHAR}, #{stratTime,jdbcType=DATE}, #{stopTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.server.pojo.UserJobexp">
+    insert into user_jobexp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="resumeId != null">
+        resume_id,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="postName != null">
+        post_name,
+      </if>
+      <if test="stratTime != null">
+        strat_time,
+      </if>
+      <if test="stopTime != null">
+        stop_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resumeId != null">
+        #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="postName != null">
+        #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="stratTime != null">
+        #{stratTime,jdbcType=DATE},
+      </if>
+      <if test="stopTime != null">
+        #{stopTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.UserJobexp">
+    update user_jobexp
+    <set>
+      <if test="resumeId != null">
+        resume_id = #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="postName != null">
+        post_name = #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="stratTime != null">
+        strat_time = #{stratTime,jdbcType=DATE},
+      </if>
+      <if test="stopTime != null">
+        stop_time = #{stopTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.UserJobexp">
+    update user_jobexp
+    set resume_id = #{resumeId,jdbcType=INTEGER},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      post_name = #{postName,jdbcType=VARCHAR},
+      strat_time = #{stratTime,jdbcType=DATE},
+      stop_time = #{stopTime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
