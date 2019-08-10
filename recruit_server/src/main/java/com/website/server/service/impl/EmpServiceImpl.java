@@ -12,7 +12,7 @@ public class EmpServiceImpl implements IEmpService {
     private EmpMapper empMapper;
     @Override
     public Emp queryEmpById(Integer id) {
-        Emp emp = empMapper.selectByPrimaryKey(1001);
+        Emp emp = empMapper.selectByPrimaryKey(id);
         return emp;
     }
 }
