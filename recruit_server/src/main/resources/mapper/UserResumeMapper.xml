@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.website.server.dao.UserResumeMapper">
+  <resultMap id="BaseResultMap" type="com.website.server.pojo.UserResume">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="self_introduction" jdbcType="VARCHAR" property="selfIntroduction" />
+    <result column="creation_time" jdbcType="DATE" property="creationTime" />
+    <result column="modify_time" jdbcType="DATE" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, self_introduction, creation_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_resume
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_resume
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.website.server.pojo.UserResume">
+    insert into user_resume (id, user_id, self_introduction, 
+      creation_time, modify_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{selfIntroduction,jdbcType=VARCHAR}, 
+      #{creationTime,jdbcType=DATE}, #{modifyTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.server.pojo.UserResume">
+    insert into user_resume
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="selfIntroduction != null">
+        self_introduction,
+      </if>
+      <if test="creationTime != null">
+        creation_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="selfIntroduction != null">
+        #{selfIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null">
+        #{creationTime,jdbcType=DATE},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.UserResume">
+    update user_resume
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="selfIntroduction != null">
+        self_introduction = #{selfIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null">
+        creation_time = #{creationTime,jdbcType=DATE},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.UserResume">
+    update user_resume
+    set user_id = #{userId,jdbcType=INTEGER},
+      self_introduction = #{selfIntroduction,jdbcType=VARCHAR},
+      creation_time = #{creationTime,jdbcType=DATE},
+      modify_time = #{modifyTime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

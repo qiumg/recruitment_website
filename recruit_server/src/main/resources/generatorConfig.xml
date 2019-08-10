@@ -9,7 +9,7 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
-        <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/stu?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false"
+        <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/recruitment?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false"
                         driverClass="com.mysql.jdbc.Driver"
                         password="root"
                         userId="root" />
@@ -31,7 +31,8 @@
             <property name="trimStrings" value="true"/>
         </javaClientGenerator>
 
-        <table schema="general" tableName="emp" domainObjectName="Emp" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+
+        <table schema="general" tableName="user_resume" domainObjectName="UserResume" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
 
     </context>

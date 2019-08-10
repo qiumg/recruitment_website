@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.website.server.dao.CompanySignLoginMapper">
+  <resultMap id="BaseResultMap" type="com.website.server.pojo.CompanySignLogin">
+    <id column="c_id" jdbcType="INTEGER" property="cId" />
+    <result column="c_name" jdbcType="VARCHAR" property="cName" />
+    <result column="c_pwd" jdbcType="VARCHAR" property="cPwd" />
+    <result column="c_email" jdbcType="VARCHAR" property="cEmail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    c_id, c_name, c_pwd, c_email
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from company_sign_login
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from company_sign_login
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.website.server.pojo.CompanySignLogin">
+    insert into company_sign_login (c_id, c_name, c_pwd, 
+      c_email)
+    values (#{cId,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, #{cPwd,jdbcType=VARCHAR}, 
+      #{cEmail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.server.pojo.CompanySignLogin">
+    insert into company_sign_login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        c_id,
+      </if>
+      <if test="cName != null">
+        c_name,
+      </if>
+      <if test="cPwd != null">
+        c_pwd,
+      </if>
+      <if test="cEmail != null">
+        c_email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null">
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cPwd != null">
+        #{cPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cEmail != null">
+        #{cEmail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.CompanySignLogin">
+    update company_sign_login
+    <set>
+      <if test="cName != null">
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cPwd != null">
+        c_pwd = #{cPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cEmail != null">
+        c_email = #{cEmail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.CompanySignLogin">
+    update company_sign_login
+    set c_name = #{cName,jdbcType=VARCHAR},
+      c_pwd = #{cPwd,jdbcType=VARCHAR},
+      c_email = #{cEmail,jdbcType=VARCHAR}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+</mapper>
