@@ -9,10 +9,10 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
-        <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/stu?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false"
+        <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/mysql?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false"
                         driverClass="com.mysql.jdbc.Driver"
                         password="root"
-                        userId="root" />
+                        userId="abcd986532" />
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
