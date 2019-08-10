@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.website.server.dao.CompanyInfoMapper">
+  <resultMap id="BaseResultMap" type="com.website.server.pojo.CompanyInfo">
+    <id column="c_id" jdbcType="INTEGER" property="cId" />
+    <result column="c_name" jdbcType="VARCHAR" property="cName" />
+    <result column="c_ctype" jdbcType="VARCHAR" property="cCtype" />
+    <result column="c_money" jdbcType="DOUBLE" property="cMoney" />
+    <result column="c_fdate" jdbcType="TIMESTAMP" property="cFdate" />
+    <result column="c_address" jdbcType="VARCHAR" property="cAddress" />
+    <result column="c_pname" jdbcType="VARCHAR" property="cPname" />
+    <result column="c_phone" jdbcType="INTEGER" property="cPhone" />
+    <result column="c_fax" jdbcType="VARCHAR" property="cFax" />
+    <result column="c_http" jdbcType="VARCHAR" property="cHttp" />
+    <result column="c_summary" jdbcType="VARCHAR" property="cSummary" />
+    <result column="c_license" jdbcType="VARCHAR" property="cLicense" />
+    <result column="c_static" jdbcType="VARCHAR" property="cStatic" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    c_id, c_name, c_ctype, c_money, c_fdate, c_address, c_pname, c_phone, c_fax, c_http, 
+    c_summary, c_license, c_static
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from company_info
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from company_info
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.website.server.pojo.CompanyInfo">
+    insert into company_info (c_id, c_name, c_ctype, 
+      c_money, c_fdate, c_address, 
+      c_pname, c_phone, c_fax, 
+      c_http, c_summary, c_license, 
+      c_static)
+    values (#{cId,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, #{cCtype,jdbcType=VARCHAR}, 
+      #{cMoney,jdbcType=DOUBLE}, #{cFdate,jdbcType=TIMESTAMP}, #{cAddress,jdbcType=VARCHAR}, 
+      #{cPname,jdbcType=VARCHAR}, #{cPhone,jdbcType=INTEGER}, #{cFax,jdbcType=VARCHAR}, 
+      #{cHttp,jdbcType=VARCHAR}, #{cSummary,jdbcType=VARCHAR}, #{cLicense,jdbcType=VARCHAR}, 
+      #{cStatic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.server.pojo.CompanyInfo">
+    insert into company_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        c_id,
+      </if>
+      <if test="cName != null">
+        c_name,
+      </if>
+      <if test="cCtype != null">
+        c_ctype,
+      </if>
+      <if test="cMoney != null">
+        c_money,
+      </if>
+      <if test="cFdate != null">
+        c_fdate,
+      </if>
+      <if test="cAddress != null">
+        c_address,
+      </if>
+      <if test="cPname != null">
+        c_pname,
+      </if>
+      <if test="cPhone != null">
+        c_phone,
+      </if>
+      <if test="cFax != null">
+        c_fax,
+      </if>
+      <if test="cHttp != null">
+        c_http,
+      </if>
+      <if test="cSummary != null">
+        c_summary,
+      </if>
+      <if test="cLicense != null">
+        c_license,
+      </if>
+      <if test="cStatic != null">
+        c_static,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null">
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cCtype != null">
+        #{cCtype,jdbcType=VARCHAR},
+      </if>
+      <if test="cMoney != null">
+        #{cMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="cFdate != null">
+        #{cFdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cAddress != null">
+        #{cAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cPname != null">
+        #{cPname,jdbcType=VARCHAR},
+      </if>
+      <if test="cPhone != null">
+        #{cPhone,jdbcType=INTEGER},
+      </if>
+      <if test="cFax != null">
+        #{cFax,jdbcType=VARCHAR},
+      </if>
+      <if test="cHttp != null">
+        #{cHttp,jdbcType=VARCHAR},
+      </if>
+      <if test="cSummary != null">
+        #{cSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="cLicense != null">
+        #{cLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="cStatic != null">
+        #{cStatic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.CompanyInfo">
+    update company_info
+    <set>
+      <if test="cName != null">
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cCtype != null">
+        c_ctype = #{cCtype,jdbcType=VARCHAR},
+      </if>
+      <if test="cMoney != null">
+        c_money = #{cMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="cFdate != null">
+        c_fdate = #{cFdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cAddress != null">
+        c_address = #{cAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cPname != null">
+        c_pname = #{cPname,jdbcType=VARCHAR},
+      </if>
+      <if test="cPhone != null">
+        c_phone = #{cPhone,jdbcType=INTEGER},
+      </if>
+      <if test="cFax != null">
+        c_fax = #{cFax,jdbcType=VARCHAR},
+      </if>
+      <if test="cHttp != null">
+        c_http = #{cHttp,jdbcType=VARCHAR},
+      </if>
+      <if test="cSummary != null">
+        c_summary = #{cSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="cLicense != null">
+        c_license = #{cLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="cStatic != null">
+        c_static = #{cStatic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.CompanyInfo">
+    update company_info
+    set c_name = #{cName,jdbcType=VARCHAR},
+      c_ctype = #{cCtype,jdbcType=VARCHAR},
+      c_money = #{cMoney,jdbcType=DOUBLE},
+      c_fdate = #{cFdate,jdbcType=TIMESTAMP},
+      c_address = #{cAddress,jdbcType=VARCHAR},
+      c_pname = #{cPname,jdbcType=VARCHAR},
+      c_phone = #{cPhone,jdbcType=INTEGER},
+      c_fax = #{cFax,jdbcType=VARCHAR},
+      c_http = #{cHttp,jdbcType=VARCHAR},
+      c_summary = #{cSummary,jdbcType=VARCHAR},
+      c_license = #{cLicense,jdbcType=VARCHAR},
+      c_static = #{cStatic,jdbcType=VARCHAR}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+</mapper>

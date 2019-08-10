@@ -13,6 +13,7 @@ public class EmpController {
     @RequestMapping("/emp")
     public Emp getEmp(Integer id){
         Emp emp = restTemplate.getForObject("http://PROVIDER-SERVER/emp?id=" + id, Emp.class);
+        System.out.println(emp);
         return emp;
     }
 }
