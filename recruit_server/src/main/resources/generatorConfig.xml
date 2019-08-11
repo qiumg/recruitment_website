@@ -2,14 +2,14 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!-- classPathEntry:数据库的JDBC驱动的jar包地址 -->
-    <classPathEntry  location="E:\Maven3\respoitory\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
+    <classPathEntry  location="E:\maven3\respoitory\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
     <context id="MYSQL" targetRuntime="MyBatis3">
         <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
-        <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/recruitment?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false"
+        <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/recruit?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false"
                         driverClass="com.mysql.jdbc.Driver"
                         password="root"
                         userId="root" />
