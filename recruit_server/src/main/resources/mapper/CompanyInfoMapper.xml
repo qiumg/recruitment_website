@@ -15,6 +15,7 @@
     <result column="c_summary" jdbcType="VARCHAR" property="cSummary" />
     <result column="c_license" jdbcType="VARCHAR" property="cLicense" />
     <result column="c_static" jdbcType="VARCHAR" property="cStatic" />
+    <collection property="ticketInfos" ofType="TicketInfo" select="selectTickets" column="c_id"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     c_id, c_name, c_ctype, c_money, c_fdate, c_address, c_pname, c_phone, c_fax, c_http, 
@@ -25,6 +26,12 @@
     <include refid="Base_Column_List" />
     from company_info
     where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <select id="selectCompanyAndTicket" resultMap="BaseResultMap">
+        select * from company_info
+  </select>
+  <select id="selectTickets" parameterType="int" resultType="TicketInfo">
+    select tic_name from ticket_info t,company_ticket c where t.tic_id=c.tic_id and c.c_id=#{cId}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from company_info

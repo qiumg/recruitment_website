@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.website.server.pojo.JobKindInfo">
     <id column="jk_id" jdbcType="INTEGER" property="jkId" />
     <result column="jk_name" jdbcType="VARCHAR" property="jkName" />
+    <collection property="jobKind1Infos" ofType="JobKind1Info" select="selectKind1" column="jk_id"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     jk_id, jk_name
@@ -13,6 +14,15 @@
     <include refid="Base_Column_List" />
     from job_kind_info
     where jk_id = #{jkId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultType="JobKindInfo">
+    select * from job_kind_info order by jk_id asc ;
+  </select>
+  <select id="selectJobKindAndKind1ById" parameterType="int" resultMap="BaseResultMap">
+        select * from job_kind_info where jk_id = #{kindId}
+  </select>
+  <select id="selectKind1" parameterType="int" resultType="JobKind1Info">
+        select jk1_id,jk1_name from job_kind1_info where jk_id = #{jkId}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from job_kind_info

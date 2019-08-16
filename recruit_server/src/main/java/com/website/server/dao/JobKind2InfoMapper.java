@@ -4,6 +4,8 @@ import com.website.server.pojo.JobKind2Info;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface JobKind2InfoMapper {
@@ -14,6 +16,8 @@ public interface JobKind2InfoMapper {
     int insertSelective(JobKind2Info record);
 
     JobKind2Info selectByPrimaryKey(Integer jk2Id);
+
+    List<JobKind2Info> selectByJK1Id(Integer jk1Id);
 
     int updateByPrimaryKeySelective(JobKind2Info record);
 

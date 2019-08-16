@@ -1,6 +1,7 @@
 package com.website.server.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class CompanyInfo {
     private Integer cId;
@@ -28,6 +29,16 @@ public class CompanyInfo {
     private String cLicense;
 
     private String cStatic;
+
+    private List<TicketInfo> ticketInfos;
+
+    public List<TicketInfo> getTicketInfos() {
+        return ticketInfos;
+    }
+
+    public void setTicketInfos(List<TicketInfo> ticketInfos) {
+        this.ticketInfos = ticketInfos;
+    }
 
     public Integer getcId() {
         return cId;
@@ -131,5 +142,25 @@ public class CompanyInfo {
 
     public void setcStatic(String cStatic) {
         this.cStatic = cStatic == null ? null : cStatic.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "CompanyInfo{" +
+                "cId=" + cId +
+                ", cName='" + cName + '\'' +
+                ", cCtype='" + cCtype + '\'' +
+                ", cMoney=" + cMoney +
+                ", cFdate=" + cFdate +
+                ", cAddress='" + cAddress + '\'' +
+                ", cPname='" + cPname + '\'' +
+                ", cPhone=" + cPhone +
+                ", cFax='" + cFax + '\'' +
+                ", cHttp='" + cHttp + '\'' +
+                ", cSummary='" + cSummary + '\'' +
+                ", cLicense='" + cLicense + '\'' +
+                ", cStatic='" + cStatic + '\'' +
+                ", ticketInfos=" + ticketInfos +
+                '}';
     }
 }
