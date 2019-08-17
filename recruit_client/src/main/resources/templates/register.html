@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <script id="allmobilize" charset="utf-8" src="style/js/allmobilize.min.js"></script>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -43,7 +43,7 @@ var youdao_conv_id = 271546;
         
     	<input type="hidden" id="resubmitToken" value="9b207beb1e014a93bc852b7ba450db27" />		
 		<div class="login_box">
-        	<form id="loginForm">
+        	<form id="loginForm" action="/user/register">
         		<ul class="register_radio clearfix">
 		            <li>
 		            	找工作
