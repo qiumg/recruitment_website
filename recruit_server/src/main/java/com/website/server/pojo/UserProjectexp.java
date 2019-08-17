@@ -11,7 +11,7 @@ public class UserProjectexp {
 
     private String postName;
 
-    private String describe;
+    private String describe1;
 
     private Date stratTime;
 
@@ -50,11 +50,11 @@ public class UserProjectexp {
     }
 
     public String getDescribe() {
-        return describe;
+        return describe1;
     }
 
     public void setDescribe(String describe) {
-        this.describe = describe == null ? null : describe.trim();
+        this.describe1 = describe == null ? null : describe.trim();
     }
 
     public Date getStratTime() {
@@ -71,5 +71,18 @@ public class UserProjectexp {
 
     public void setStopTime(Date stopTime) {
         this.stopTime = stopTime;
+    }
+
+    @Override
+    public String toString() {
+        return "UserProjectexp{" +
+                "id=" + id +
+                ", resumeId=" + resumeId +
+                ", projectName='" + projectName + '\'' +
+                ", postName='" + postName + '\'' +
+                ", describe='" + describe1 + '\'' +
+                ", stratTime=" + stratTime +
+                ", stopTime=" + stopTime +
+                '}';
     }
 }

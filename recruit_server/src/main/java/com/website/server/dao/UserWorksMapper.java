@@ -18,4 +18,6 @@ public interface UserWorksMapper {
     int updateByPrimaryKeySelective(UserWorks record);
 
     int updateByPrimaryKey(UserWorks record);
+
+    UserWorks selectByjianliname(String resumeName);
 }

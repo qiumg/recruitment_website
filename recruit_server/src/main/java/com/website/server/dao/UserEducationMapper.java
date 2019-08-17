@@ -18,4 +18,6 @@ public interface UserEducationMapper {
     int updateByPrimaryKeySelective(UserEducation record);
 
     int updateByPrimaryKey(UserEducation record);
+
+    UserEducation selectByjianliname(String resumeName);
 }

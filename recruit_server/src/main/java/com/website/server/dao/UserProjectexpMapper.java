@@ -18,4 +18,6 @@ public interface UserProjectexpMapper {
     int updateByPrimaryKeySelective(UserProjectexp record);
 
     int updateByPrimaryKey(UserProjectexp record);
+
+    UserProjectexp selectByjianliname(String resumeName);
 }
