@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.website.server.dao.UserEducationMapper">
+  <resultMap id="BaseResultMap" type="com.website.server.pojo.UserEducation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="resume_id" jdbcType="INTEGER" property="resumeId" />
+    <result column="university" jdbcType="VARCHAR" property="university" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="strat_time" jdbcType="DATE" property="stratTime" />
+    <result column="stop_time" jdbcType="DATE" property="stopTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, resume_id, university, education, major, strat_time, stop_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_education
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_education
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.website.server.pojo.UserEducation">
+    insert into user_education (id, resume_id, university, 
+      education, major, strat_time, 
+      stop_time)
+    values (#{id,jdbcType=INTEGER}, #{resumeId,jdbcType=INTEGER}, #{university,jdbcType=VARCHAR}, 
+      #{education,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{stratTime,jdbcType=DATE}, 
+      #{stopTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.server.pojo.UserEducation">
+    insert into user_education
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="resumeId != null">
+        resume_id,
+      </if>
+      <if test="university != null">
+        university,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="stratTime != null">
+        strat_time,
+      </if>
+      <if test="stopTime != null">
+        stop_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resumeId != null">
+        #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="university != null">
+        #{university,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="stratTime != null">
+        #{stratTime,jdbcType=DATE},
+      </if>
+      <if test="stopTime != null">
+        #{stopTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.UserEducation">
+    update user_education
+    <set>
+      <if test="resumeId != null">
+        resume_id = #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="university != null">
+        university = #{university,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="stratTime != null">
+        strat_time = #{stratTime,jdbcType=DATE},
+      </if>
+      <if test="stopTime != null">
+        stop_time = #{stopTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.UserEducation">
+    update user_education
+    set resume_id = #{resumeId,jdbcType=INTEGER},
+      university = #{university,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      strat_time = #{stratTime,jdbcType=DATE},
+      stop_time = #{stopTime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

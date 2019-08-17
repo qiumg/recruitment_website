@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.website.server.dao.UserProjectexpMapper">
+  <resultMap id="BaseResultMap" type="com.website.server.pojo.UserProjectexp">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="resume_id" jdbcType="INTEGER" property="resumeId" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="post_name" jdbcType="VARCHAR" property="postName" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="strat_time" jdbcType="DATE" property="stratTime" />
+    <result column="stop_time" jdbcType="DATE" property="stopTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, resume_id, project_name, post_name, describe, strat_time, stop_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_projectexp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_projectexp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.website.server.pojo.UserProjectexp">
+    insert into user_projectexp (id, resume_id, project_name, 
+      post_name, describe, strat_time, 
+      stop_time)
+    values (#{id,jdbcType=INTEGER}, #{resumeId,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, 
+      #{postName,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, #{stratTime,jdbcType=DATE}, 
+      #{stopTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.server.pojo.UserProjectexp">
+    insert into user_projectexp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="resumeId != null">
+        resume_id,
+      </if>
+      <if test="projectName != null">
+        project_name,
+      </if>
+      <if test="postName != null">
+        post_name,
+      </if>
+      <if test="describe != null">
+        describe,
+      </if>
+      <if test="stratTime != null">
+        strat_time,
+      </if>
+      <if test="stopTime != null">
+        stop_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resumeId != null">
+        #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="postName != null">
+        #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="stratTime != null">
+        #{stratTime,jdbcType=DATE},
+      </if>
+      <if test="stopTime != null">
+        #{stopTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.UserProjectexp">
+    update user_projectexp
+    <set>
+      <if test="resumeId != null">
+        resume_id = #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="postName != null">
+        post_name = #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="stratTime != null">
+        strat_time = #{stratTime,jdbcType=DATE},
+      </if>
+      <if test="stopTime != null">
+        stop_time = #{stopTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.UserProjectexp">
+    update user_projectexp
+    set resume_id = #{resumeId,jdbcType=INTEGER},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      post_name = #{postName,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR},
+      strat_time = #{stratTime,jdbcType=DATE},
+      stop_time = #{stopTime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

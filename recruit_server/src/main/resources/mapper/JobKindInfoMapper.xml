@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.website.server.dao.JobKindInfoMapper">
+  <resultMap id="BaseResultMap" type="com.website.server.pojo.JobKindInfo">
+    <id column="jk_id" jdbcType="INTEGER" property="jkId" />
+    <result column="jk_name" jdbcType="VARCHAR" property="jkName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    jk_id, jk_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from job_kind_info
+    where jk_id = #{jkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from job_kind_info
+    where jk_id = #{jkId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.website.server.pojo.JobKindInfo">
+    insert into job_kind_info (jk_id, jk_name)
+    values (#{jkId,jdbcType=INTEGER}, #{jkName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.server.pojo.JobKindInfo">
+    insert into job_kind_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jkId != null">
+        jk_id,
+      </if>
+      <if test="jkName != null">
+        jk_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jkId != null">
+        #{jkId,jdbcType=INTEGER},
+      </if>
+      <if test="jkName != null">
+        #{jkName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.JobKindInfo">
+    update job_kind_info
+    <set>
+      <if test="jkName != null">
+        jk_name = #{jkName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where jk_id = #{jkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.JobKindInfo">
+    update job_kind_info
+    set jk_name = #{jkName,jdbcType=VARCHAR}
+    where jk_id = #{jkId,jdbcType=INTEGER}
+  </update>
+</mapper>
