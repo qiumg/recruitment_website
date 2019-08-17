@@ -185,4 +185,9 @@
       state = #{state,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updatebyId">
+    update user
+    set state = #{newStatu}
+    where id = #{id}
+  </update>
 </mapper>

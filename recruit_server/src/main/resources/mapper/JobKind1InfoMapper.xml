@@ -15,7 +15,11 @@
     from job_kind1_info
     where jk1_id = #{jk1Id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectAll" resultType="com.website.server.pojo.JobKind1Info">
+      select <include refid="Base_Column_List" />
+      from job_kind1_info
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from job_kind1_info
     where jk1_id = #{jk1Id,jdbcType=INTEGER}
   </delete>

@@ -26,6 +26,42 @@
     from company_info
     where c_id = #{cId,jdbcType=INTEGER}
   </select>
+  <select id="selectByStatu" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from company_info
+    where c_static = #{cStatu,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from company_info
+  </select>
+  <select id="selectCompany" resultMap="BaseResultMap" parameterType="com.website.server.pojo.CompanyInfo">
+    select
+    <include refid="Base_Column_List"></include>
+    from company_info
+    <where>
+      <if test="cName!=null and cName!=''">
+        and c_name like '%${cName}%'
+      </if>
+      <if test="cCtype!=null and cCtype!=''">
+        and c_ctype like '%${cCtype}%'
+      </if>
+      <if test="cAddress!=null and cAddress!=''">
+        and c_address = '%${cAddress}%'
+      </if>
+      <if test="cPname!=null and cPname!=''">
+        and c_pname like '%${cPname}%'
+      </if>
+      <if test="beginTime != null">
+        and c_fdate <![CDATA[>=]]> #{beginTime}
+      </if>
+      <if test="endTime != null">
+        and c_fdate <![CDATA[<=]]>#{endTime}
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from company_info
     where c_id = #{cId,jdbcType=INTEGER}
@@ -185,4 +221,10 @@
       c_static = #{cStatic,jdbcType=VARCHAR}
     where c_id = #{cId,jdbcType=INTEGER}
   </update>
+  <update id="updateByCid">
+    update company_info
+    set c_static = #{newStatu}
+    where c_id = #{cId}
+  </update>
+
 </mapper>

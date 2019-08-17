@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!-- classPathEntry:数据库的JDBC驱动的jar包地址 -->
-    <classPathEntry  location="E:\maven3\respoitory\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
+    <classPathEntry  location="E:\maven3\repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
     <context id="MYSQL" targetRuntime="MyBatis3">
         <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
         <commentGenerator>
@@ -31,8 +31,9 @@
             <property name="trimStrings" value="true"/>
         </javaClientGenerator>
 
-
-        <table schema="general" tableName="user_resume" domainObjectName="UserResume" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table schema="general" tableName="u_msg" domainObjectName="UserMsg" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        <table schema="general" tableName="c_msg" domainObjectName="CompanyMsg" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
 
     </context>

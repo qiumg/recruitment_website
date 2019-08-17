@@ -18,4 +18,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    //根据用户id修改状态
+    public void updatebyId(Integer id,String newStatu);
 }

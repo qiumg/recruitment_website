@@ -2,7 +2,10 @@ package com.website.server.dao;
 
 import com.website.server.pojo.JobKind1Info;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @Mapper
@@ -18,4 +21,6 @@ public interface JobKind1InfoMapper {
     int updateByPrimaryKeySelective(JobKind1Info record);
 
     int updateByPrimaryKey(JobKind1Info record);
+    //查询所有
+    public List<JobKind1Info> selectAll();
 }
