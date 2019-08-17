@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE HTML>
-<html xmlns:wb="http://open.weibo.com/wb"><head>
-</script><script type="text/javascript" async="" src="style/js/conversion.js"></script><script src="style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script><style type="text/css"></style>
+<html xmlns:wb="http://open.weibo.com/wb" xmlns:th="http://www.thymeleaf.org"><head>
+</script><script type="text/javascript" async="" src="/style/js/conversion.js"></script>
+<script src="/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script><style type="text/css"></style>
 <meta content="no-siteapp" http-equiv="Cache-Control">
 <link  media="handheld" rel="alternate">
 <!-- end 云适配 -->
@@ -16,28 +17,28 @@
 var ctx = "h";
 console.log(1);
 </script>
-<link href="h/images/favicon.ico" rel="Shortcut Icon">
-<link href="style/css/style.css" type="text/css" rel="stylesheet">
-<link href="style/css/external.min.css" type="text/css" rel="stylesheet">
-<link href="style/css/popup.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="style/js/jquery.1.10.1.min.js"></script>
-<script src="style/js/jquery.lib.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="style/js/ajaxfileupload.js"></script>
-<script src="style/js/additional-methods.js" type="text/javascript"></script>
+<link href="/style/images/favicon.ico" rel="Shortcut Icon">
+<link href="/style/css/style.css" type="text/css" rel="stylesheet">
+<link href="/style/css/external.min.css" type="text/css" rel="stylesheet">
+<link href="/style/css/popup.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/style/js/jquery.1.10.1.min.js"></script>
+<script src="/style/js/jquery.lib.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/style/js/ajaxfileupload.js"></script>
+<script src="/style/js/additional-methods.js" type="text/javascript"></script>
 <!--[if lte IE 8]>
-    <script type="text/javascript" src="style/js/excanvas.js"></script>
+    <script type="text/javascript" src="/style/js/excanvas.js"></script>
 <![endif]-->
 <script type="text/javascript">
 var youdao_conv_id = 271546; 
 </script> 
-<script src="style/js/conv.js" type="text/javascript"></script>
-<script src="style/js/ajaxCross.json" charset="UTF-8"></script></head>
+<script src="/style/js/conv.js" type="text/javascript"></script>
+<script src="/style/js/ajaxCross.json" charset="UTF-8"></script></head>
 <body>
 <div id="body">
 	<div id="header">
     	<div class="wrapper">
     		<a class="logo" href="h/">
-    			<img width="229" height="43" alt="拉勾招聘-专注互联网招聘" src="style/images/logo.png">
+    			<img width="229" height="43" alt="拉勾招聘-专注互联网招聘" src="/style/images/logo.png">
     		</a>
     		<ul id="navheader" class="reset">
     			<li><a href="index.html">首页</a></li>
@@ -72,49 +73,48 @@ var youdao_conv_id = 271546;
             <div class="content_l">
             	<div class="fl" id="resume_name">
 	            	<div class="nameShow fl">
-	            		<h1 title="jason的简历">jason的简历</h1>
-	            		<span class="rename">重命名</span> | <a target="_blank" href="h/resume/preview.html">预览</a>
+	            		<h1 title="jason的简历" th:text="${userResume.getResumeName()}"></h1>
+	            		<span class="rename">重命名</span> | <a target="_blank" href="/preview.html">预览</a>
             		</div>
             		<form class="fl dn" id="resumeNameForm">
-            			<input type="text" value="jason的简历" name="resumeName" class="nameEdit c9">	
-            			<input type="submit" value="保存"> | <a target="_blank" href="h/resume/preview.html">预览</a>
+            			<input type="text" th:value="${userResume.getResumeName()}" name="resumeName" class="nameEdit c9">
+            			<input type="submit" value="保存"> | <a target="_blank" href="/preview.html">预览</a>
             		</form>
             	</div><!--end #resume_name-->
-            	<div class="fr c5" id="lastChangedTime">最后一次更新：<span>2014-07-01 15:14 </span></div><!--end #lastChangedTime-->
+            	<div class="fr c5" id="lastChangedTime">最后一次更新：<span th:text="${userResume.getModifyTime()}"></span></div><!--end #lastChangedTime-->
             	<div id="resumeScore">
             		<div class="score fl">
             			<canvas height="120" width="120" id="doughnutChartCanvas" style="width: 120px; height: 120px;"></canvas>
-           				<div style="" class="scoreVal"><span>15</span>分</div>
+           				<div style="" class="scoreVal"><span>70</span>分</div>
             		</div>	
             		
             		<div class="which fl">
             			<div>工作经历最能体现自己的工作能力，且完善后才可投递简历哦！</div>
-            										<span rel="workExperience"><a>马上去完善</a></span>
-						            		</div>
+						<span rel="workExperience"><a>马上去完善</a></span>
+					</div>
             	</div><!--end #resumeScore-->
 
             	<div class="profile_box" id="basicInfo">
             		<h2>基本信息</h2>
             		<span class="c_edit"></span>
             		<div class="basicShow">
-            			            			<span>jason |  男 |    大专 |  3年工作经验<br>
-            			            			18644444444 | jason@qq.com<br>
-            			</span>
+            			姓名：<span th:text="${userinfo.getName()}">姓名</span > | 年龄：<span th:text="${userinfo.getAge()}">年龄</span>岁 | 性别：<span th:if="${userinfo.getSex()==0}">男</span><span th:if="${userinfo.getSex()==1}">女</span> | <span th:text="${userinfo.getWorkingYears()}">经验</span>年工作经验<br>
+						手机：<span th:text="${userinfo.getPhone()}">手机</span > | 邮箱：<span th:text="${userinfo.getEmail()}">邮箱</span ><br>
             			<div class="m_portrait">
 	                    	<div></div>
-	                    	<img width="120" height="120" alt="jason" src="style/images/default_headpic.png">
+	                    	<img width="120" height="120" alt="jason" src="/style/images/default_headpic.png">
 	                    </div>
             		</div><!--end .basicShow-->
 
             		<div class="basicEdit dn">
-            			<form id="profileForm">
+            			<form id="profileForm" action="/" method="get">
 						  <table>
 						    <tbody><tr>
 						      <td valign="top">
 						        <span class="redstar">*</span>
 						      </td> 
 						      <td>
-						        <input type="text" placeholder="姓名" value="jason" name="name" id="name">
+						        <input type="text" placeholder="姓名" value="123" name="name" id="name">
 						      </td>
 						      <td valign="top"></td> 
 						      <td>
@@ -135,48 +135,48 @@ var youdao_conv_id = 271546;
 						        <span class="redstar">*</span>
 						      </td> 
 						      <td>
-						      	<input type="hidden" id="topDegree" value="大专" name="topDegree">
-						        <input type="button" value="大专" id="select_topDegree" class="profile_select_190 profile_select_normal">
-								<div class="boxUpDown boxUpDown_190 dn" id="box_topDegree" style="display: none;">
-						        	<ul>
-						        								        			<li>大专</li>
-						        								        			<li>本科</li>
-						        								        			<li>硕士</li>
-						        								        			<li>博士</li>
-						        								        			<li>其他</li>
-						        								        	</ul>
-						        </div>  
+						      	<input type="text" id="topDegree" value="18" name="topDegree">
+<!--						        <input type="button" value="大专" id="select_topDegree" class="profile_select_190 profile_select_normal">-->
+<!--								<div class="boxUpDown boxUpDown_190 dn" id="box_topDegree" style="display: none;">-->
+<!--						        	<ul>-->
+<!--						        								        			<li>大专</li>-->
+<!--						        								        			<li>本科</li>-->
+<!--						        								        			<li>硕士</li>-->
+<!--						        								        			<li>博士</li>-->
+<!--						        								        			<li>其他</li>-->
+<!--						        								        	</ul>-->
+<!--						        </div>-->
 						      </td>
 						      <td valign="top">
 						        <span class="redstar">*</span>
-						      </td> 
-						      <td>
-						          <input type="hidden" id="workyear" value="" name="workyear">
-						          <input type="button" value="" id="select_workyear" class="profile_select_190 profile_select_normal">
-								  <div class="boxUpDown boxUpDown_190 dn" id="box_workyear" style="display: none;">
-						          	 <ul>
-						        								        			<li>应届毕业生</li>
-						        								        			<li>1年</li>
-						        								        			<li>2年</li>
-						        								        			<li>3年</li>
-						        								        			<li>4年</li>
-						        								        			<li>5年</li>
-						        								        			<li>6年</li>
-						        								        			<li>7年</li>
-						        								        			<li>8年</li>
-						        								        			<li>9年</li>
-						        								        			<li>10年</li>
-						        								        			<li>10年以上</li>
-						        								        	 </ul>
-						          </div>  
 						      </td>
+<!--						      <td>-->
+<!--						          <input type="hidden" id="workyear" value="" name="workyear">-->
+<!--						          <input type="button" value="" id="select_workyear" class="profile_select_190 profile_select_normal">-->
+<!--								  <div class="boxUpDown boxUpDown_190 dn" id="box_workyear" style="display: none;">-->
+<!--						          	 <ul>-->
+<!--						        								        			<li>应届毕业生</li>-->
+<!--						        								        			<li>1年</li>-->
+<!--						        								        			<li>2年</li>-->
+<!--						        								        			<li>3年</li>-->
+<!--						        								        			<li>4年</li>-->
+<!--						        								        			<li>5年</li>-->
+<!--						        								        			<li>6年</li>-->
+<!--						        								        			<li>7年</li>-->
+<!--						        								        			<li>8年</li>-->
+<!--						        								        			<li>9年</li>-->
+<!--						        								        			<li>10年</li>-->
+<!--						        								        			<li>10年以上</li>-->
+<!--						        								        	 </ul>-->
+<!--						          </div>  -->
+<!--						      </td>-->
 						    </tr>
 						    <tr>
 						      <td valign="top">
 						        <span class="redstar">*</span>
 						      </td> 
 						      <td colspan="3">
-						          <input type="text" placeholder="手机号码" value="18644444444" name="tel" id="tel">
+						          <input type="text" placeholder="手机号码" th:value="${userinfo.getPhone()}" name="tel" id="tel">
 						      </td>
 						   	</tr>
 						   	<tr>
@@ -184,7 +184,7 @@ var youdao_conv_id = 271546;
 						        <span class="redstar">*</span>
 						      </td> 
 						      <td colspan="3">
-						          <input type="text" placeholder="接收面试通知的邮箱" value="jason@qq.com" name="email" id="email">
+						          <input type="text" placeholder="接收面试通知的邮箱" th:value="${userinfo.getEmail()}" name="email" id="email">
 						      </td>
 						    </tr>
 						    <tr>
@@ -228,14 +228,14 @@ var youdao_conv_id = 271546;
 						  	<span style="display:none;" id="headPic_error" class="error"></span>
 						</div><!--end .new_portrait-->
             		</div><!--end .basicEdit-->
-            		<input type="hidden" id="nameVal" value="jason">
+            		<input type="hidden" id="nameVal" th:value="${userinfo.getName()}">
             		<input type="hidden" id="genderVal" value="男">
-            		<input type="hidden" id="topDegreeVal" value="大专">
-            		<input type="hidden" id="workyearVal" value="3年">
+            		<input type="hidden" id="topDegreeVal" th:value="${userinfo.getAge()}">
+<!--            		<input type="hidden" id="workyearVal" value="3年">-->
             		<input type="hidden" id="currentStateVal" value="">
-            		<input type="hidden" id="emailVal" value="jason@qq.com">
-            		<input type="hidden" id="telVal" value="18644444444">
-            		<input type="hidden" id="pageType" value="1"> 
+            		<input type="hidden" id="emailVal" th:value="${userinfo.getEmail()}">
+            		<input type="hidden" id="telVal" th:value="${userinfo.getPhone()}">
+            		<input type="hidden" id="pageType" value="1">
             	</div><!--end #basicInfo-->
 
             	<div class="profile_box" id="expectJob">
@@ -405,7 +405,7 @@ var youdao_conv_id = 271546;
             		<h2>工作经历  <span> （投递简历时必填）</span></h2>
             		            		<span class="c_add dn"></span>
             		<div class="experienceShow dn">
-            		            			<form class="experienceForm borderBtm dn">
+						<form class="experienceForm borderBtm dn">
 	            			<table>
 	            				<tbody><tr>
 							      	<td valign="top">
@@ -572,7 +572,7 @@ var youdao_conv_id = 271546;
             			</form><!--end .experienceForm-->
             			
             			<ul class="wlist clearfix">
-            				            				            			</ul>
+						</ul>
             		</div><!--end .experienceShow-->
             		<div class="experienceEdit dn">
             			<form class="experienceForm">
@@ -1286,7 +1286,7 @@ var youdao_conv_id = 271546;
             		            			
             		</div><!--end .descriptionShow-->
             		<div class="descriptionEdit dn">
-            			<form class="descriptionForm">
+            			<form class="descriptionForm" action="/test" method="get">
 	            			<table>
 	            				<tbody><tr>
 									<td colspan="2">
@@ -1303,8 +1303,8 @@ var youdao_conv_id = 271546;
 	            			</tbody></table>
             			</form><!--end .descriptionForm-->
             		</div><!--end .descriptionEdit-->
-            		            		<div class="descriptionAdd pAdd">
-            		            			描述你的性格、爱好以及吸引人的经历等，<br>
+					<div class="descriptionAdd pAdd">
+						描述你的性格、爱好以及吸引人的经历等，<br>
 						让企业了解多元化的你！
 						<span>添加自我描述</span>
             		</div><!--end .descriptionAdd-->
@@ -1511,8 +1511,8 @@ var youdao_conv_id = 271546;
 </div>
 <!------------------------------------- end ----------------------------------------->  
 
-<script src="style/js/Chart.min.js" type="text/javascript"></script>
-<script src="style/js/profile.min.js" type="text/javascript"></script>
+<script src="/style/js/Chart.min.js" type="text/javascript"></script>
+<script src="/style/js/profile.min.js" type="text/javascript"></script>
 <!-- <div id="profileOverlay"></div> -->
 <div class="" id="qr_cloud_resume" style="display: none;">
 	<div class="cloud">
@@ -1560,8 +1560,8 @@ $(function(){
 		</div>
 	</div>
 
-<script src="style/js/core.min.js" type="text/javascript"></script>
-<script src="style/js/popup.min.js" type="text/javascript"></script>
+<script src="/style/js/core.min.js" type="text/javascript"></script>
+<script src="/style/js/popup.min.js" type="text/javascript"></script>
 
 <!--  -->
 
