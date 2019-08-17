@@ -4,10 +4,7 @@ import com.website.server.dao.CompanyInfoMapper;
 import com.website.server.dao.EmpMapper;
 import com.website.server.dao.JobKindInfoMapper;
 import com.website.server.dao.UserMapper;
-import com.website.server.pojo.CompanyInfo;
-import com.website.server.pojo.Emp;
-import com.website.server.pojo.JobKindInfo;
-import com.website.server.pojo.User;
+import com.website.server.pojo.*;
 import com.website.server.service.IJobKindInfoService;
 import com.website.server.utils.MD5Utils;
 import org.junit.Test;
@@ -23,13 +20,13 @@ import java.util.List;
 @SpringBootTest
 public class RecruitServerApplicationTests {
 	@Autowired
-	private CompanyInfoMapper companyInfoMapper;
+	private IJobKindInfoService jobKindInfoService;
 
 
 	@Test
 	public void contextLoads(){
-		List<CompanyInfo> companyInfos = companyInfoMapper.selectCompanyAndTicket();
-		System.out.println(companyInfos);
+		List<JobInfo> jobInfos = jobKindInfoService.queryJobInfoByCondition(null,7,9,null,null,null,null);
+		System.out.println(jobInfos);
 	}
 
 }

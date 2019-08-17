@@ -9,29 +9,27 @@
     <result column="c_fdate" jdbcType="TIMESTAMP" property="cFdate" />
     <result column="c_address" jdbcType="VARCHAR" property="cAddress" />
     <result column="c_pname" jdbcType="VARCHAR" property="cPname" />
-    <result column="c_phone" jdbcType="INTEGER" property="cPhone" />
+    <result column="c_phone" jdbcType="BIGINT" property="cPhone" />
     <result column="c_fax" jdbcType="VARCHAR" property="cFax" />
     <result column="c_http" jdbcType="VARCHAR" property="cHttp" />
     <result column="c_summary" jdbcType="VARCHAR" property="cSummary" />
     <result column="c_license" jdbcType="VARCHAR" property="cLicense" />
+    <result column="c_logo" jdbcType="VARCHAR" property="cLogo" />
+    <result column="c_scale" jdbcType="INTEGER" property="cScale" />
+    <result column="c_ppost" jdbcType="VARCHAR" property="cPpost" />
+    <result column="c_stage" jdbcType="VARCHAR" property="cStage" />
+    <result column="c_email" jdbcType="VARCHAR" property="cEmail" />
     <result column="c_static" jdbcType="VARCHAR" property="cStatic" />
-    <collection property="ticketInfos" ofType="TicketInfo" select="selectTickets" column="c_id"></collection>
   </resultMap>
   <sql id="Base_Column_List">
     c_id, c_name, c_ctype, c_money, c_fdate, c_address, c_pname, c_phone, c_fax, c_http, 
-    c_summary, c_license, c_static
+    c_summary, c_license, c_logo, c_scale, c_ppost, c_stage, c_email, c_static
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from company_info
     where c_id = #{cId,jdbcType=INTEGER}
-  </select>
-  <select id="selectCompanyAndTicket" resultMap="BaseResultMap">
-        select * from company_info
-  </select>
-  <select id="selectTickets" parameterType="int" resultType="TicketInfo">
-    select tic_name from ticket_info t,company_ticket c where t.tic_id=c.tic_id and c.c_id=#{cId}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from company_info
@@ -42,12 +40,16 @@
       c_money, c_fdate, c_address, 
       c_pname, c_phone, c_fax, 
       c_http, c_summary, c_license, 
-      c_static)
+      c_logo, c_scale, c_ppost, 
+      c_stage, c_email, c_static
+      )
     values (#{cId,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, #{cCtype,jdbcType=VARCHAR}, 
       #{cMoney,jdbcType=DOUBLE}, #{cFdate,jdbcType=TIMESTAMP}, #{cAddress,jdbcType=VARCHAR}, 
-      #{cPname,jdbcType=VARCHAR}, #{cPhone,jdbcType=INTEGER}, #{cFax,jdbcType=VARCHAR}, 
+      #{cPname,jdbcType=VARCHAR}, #{cPhone,jdbcType=BIGINT}, #{cFax,jdbcType=VARCHAR}, 
       #{cHttp,jdbcType=VARCHAR}, #{cSummary,jdbcType=VARCHAR}, #{cLicense,jdbcType=VARCHAR}, 
-      #{cStatic,jdbcType=VARCHAR})
+      #{cLogo,jdbcType=VARCHAR}, #{cScale,jdbcType=INTEGER}, #{cPpost,jdbcType=VARCHAR}, 
+      #{cStage,jdbcType=VARCHAR}, #{cEmail,jdbcType=VARCHAR}, #{cStatic,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.website.server.pojo.CompanyInfo">
     insert into company_info
@@ -88,6 +90,21 @@
       <if test="cLicense != null">
         c_license,
       </if>
+      <if test="cLogo != null">
+        c_logo,
+      </if>
+      <if test="cScale != null">
+        c_scale,
+      </if>
+      <if test="cPpost != null">
+        c_ppost,
+      </if>
+      <if test="cStage != null">
+        c_stage,
+      </if>
+      <if test="cEmail != null">
+        c_email,
+      </if>
       <if test="cStatic != null">
         c_static,
       </if>
@@ -115,7 +132,7 @@
         #{cPname,jdbcType=VARCHAR},
       </if>
       <if test="cPhone != null">
-        #{cPhone,jdbcType=INTEGER},
+        #{cPhone,jdbcType=BIGINT},
       </if>
       <if test="cFax != null">
         #{cFax,jdbcType=VARCHAR},
@@ -128,6 +145,21 @@
       </if>
       <if test="cLicense != null">
         #{cLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="cLogo != null">
+        #{cLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="cScale != null">
+        #{cScale,jdbcType=INTEGER},
+      </if>
+      <if test="cPpost != null">
+        #{cPpost,jdbcType=VARCHAR},
+      </if>
+      <if test="cStage != null">
+        #{cStage,jdbcType=VARCHAR},
+      </if>
+      <if test="cEmail != null">
+        #{cEmail,jdbcType=VARCHAR},
       </if>
       <if test="cStatic != null">
         #{cStatic,jdbcType=VARCHAR},
@@ -156,7 +188,7 @@
         c_pname = #{cPname,jdbcType=VARCHAR},
       </if>
       <if test="cPhone != null">
-        c_phone = #{cPhone,jdbcType=INTEGER},
+        c_phone = #{cPhone,jdbcType=BIGINT},
       </if>
       <if test="cFax != null">
         c_fax = #{cFax,jdbcType=VARCHAR},
@@ -169,6 +201,21 @@
       </if>
       <if test="cLicense != null">
         c_license = #{cLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="cLogo != null">
+        c_logo = #{cLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="cScale != null">
+        c_scale = #{cScale,jdbcType=INTEGER},
+      </if>
+      <if test="cPpost != null">
+        c_ppost = #{cPpost,jdbcType=VARCHAR},
+      </if>
+      <if test="cStage != null">
+        c_stage = #{cStage,jdbcType=VARCHAR},
+      </if>
+      <if test="cEmail != null">
+        c_email = #{cEmail,jdbcType=VARCHAR},
       </if>
       <if test="cStatic != null">
         c_static = #{cStatic,jdbcType=VARCHAR},
@@ -184,11 +231,16 @@
       c_fdate = #{cFdate,jdbcType=TIMESTAMP},
       c_address = #{cAddress,jdbcType=VARCHAR},
       c_pname = #{cPname,jdbcType=VARCHAR},
-      c_phone = #{cPhone,jdbcType=INTEGER},
+      c_phone = #{cPhone,jdbcType=BIGINT},
       c_fax = #{cFax,jdbcType=VARCHAR},
       c_http = #{cHttp,jdbcType=VARCHAR},
       c_summary = #{cSummary,jdbcType=VARCHAR},
       c_license = #{cLicense,jdbcType=VARCHAR},
+      c_logo = #{cLogo,jdbcType=VARCHAR},
+      c_scale = #{cScale,jdbcType=INTEGER},
+      c_ppost = #{cPpost,jdbcType=VARCHAR},
+      c_stage = #{cStage,jdbcType=VARCHAR},
+      c_email = #{cEmail,jdbcType=VARCHAR},
       c_static = #{cStatic,jdbcType=VARCHAR}
     where c_id = #{cId,jdbcType=INTEGER}
   </update>

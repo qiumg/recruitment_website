@@ -31,8 +31,7 @@
             <property name="trimStrings" value="true"/>
         </javaClientGenerator>
 
-
-        <table schema="general" tableName="ticket_info" domainObjectName="TicketInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table schema="general" tableName="company_info" domainObjectName="CompanyInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
 
     </context>

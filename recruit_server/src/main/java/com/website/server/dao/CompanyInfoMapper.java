@@ -1,13 +1,7 @@
 package com.website.server.dao;
 
 import com.website.server.pojo.CompanyInfo;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-@Repository
-@Mapper
 public interface CompanyInfoMapper {
     int deleteByPrimaryKey(Integer cId);
 
@@ -20,6 +14,4 @@ public interface CompanyInfoMapper {
     int updateByPrimaryKeySelective(CompanyInfo record);
 
     int updateByPrimaryKey(CompanyInfo record);
-
-    List<CompanyInfo> selectCompanyAndTicket();
 }

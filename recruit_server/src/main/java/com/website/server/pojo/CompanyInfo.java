@@ -1,5 +1,6 @@
 package com.website.server.pojo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class CompanyInfo {
 
     private String cPname;
 
-    private Integer cPhone;
+    private Long cPhone;
 
     private String cFax;
 
@@ -28,9 +29,19 @@ public class CompanyInfo {
 
     private String cLicense;
 
+    private String cLogo;
+
+    private Integer cScale;
+
+    private String cPpost;
+
+    private String cStage;
+
+    private String cEmail;
+
     private String cStatic;
 
-    private List<TicketInfo> ticketInfos;
+    private List<TicketInfo> ticketInfos = new ArrayList<>();
 
     public List<TicketInfo> getTicketInfos() {
         return ticketInfos;
@@ -96,11 +107,11 @@ public class CompanyInfo {
         this.cPname = cPname == null ? null : cPname.trim();
     }
 
-    public Integer getcPhone() {
+    public Long getcPhone() {
         return cPhone;
     }
 
-    public void setcPhone(Integer cPhone) {
+    public void setcPhone(Long cPhone) {
         this.cPhone = cPhone;
     }
 
@@ -136,6 +147,46 @@ public class CompanyInfo {
         this.cLicense = cLicense == null ? null : cLicense.trim();
     }
 
+    public String getcLogo() {
+        return cLogo;
+    }
+
+    public void setcLogo(String cLogo) {
+        this.cLogo = cLogo == null ? null : cLogo.trim();
+    }
+
+    public Integer getcScale() {
+        return cScale;
+    }
+
+    public void setcScale(Integer cScale) {
+        this.cScale = cScale;
+    }
+
+    public String getcPpost() {
+        return cPpost;
+    }
+
+    public void setcPpost(String cPpost) {
+        this.cPpost = cPpost == null ? null : cPpost.trim();
+    }
+
+    public String getcStage() {
+        return cStage;
+    }
+
+    public void setcStage(String cStage) {
+        this.cStage = cStage == null ? null : cStage.trim();
+    }
+
+    public String getcEmail() {
+        return cEmail;
+    }
+
+    public void setcEmail(String cEmail) {
+        this.cEmail = cEmail == null ? null : cEmail.trim();
+    }
+
     public String getcStatic() {
         return cStatic;
     }
@@ -159,6 +210,11 @@ public class CompanyInfo {
                 ", cHttp='" + cHttp + '\'' +
                 ", cSummary='" + cSummary + '\'' +
                 ", cLicense='" + cLicense + '\'' +
+                ", cLogo='" + cLogo + '\'' +
+                ", cScale=" + cScale +
+                ", cPpost='" + cPpost + '\'' +
+                ", cStage='" + cStage + '\'' +
+                ", cEmail='" + cEmail + '\'' +
                 ", cStatic='" + cStatic + '\'' +
                 ", ticketInfos=" + ticketInfos +
                 '}';

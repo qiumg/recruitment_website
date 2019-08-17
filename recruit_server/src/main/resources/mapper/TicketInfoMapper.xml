@@ -15,6 +15,11 @@
     from ticket_info
     where tic_id = #{ticId,jdbcType=INTEGER}
   </select>
+  <select id="selectTicketInfoBycId" parameterType="int" resultMap="BaseResultMap">
+    select tic_name
+    from ticket_info t,company_ticket c
+    where t.tic_id=c.tic_id and c.c_id=#{cid}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from ticket_info
     where tic_id = #{ticId,jdbcType=INTEGER}

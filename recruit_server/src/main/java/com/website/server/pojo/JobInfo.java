@@ -15,6 +15,8 @@ public class JobInfo {
 
     private Integer jMhigh;
 
+    private String jEducation;
+
     private String jExperience;
 
     private Date jDate;
@@ -30,6 +32,18 @@ public class JobInfo {
     private String jBenefit;
 
     private Integer cId;
+
+    private Integer jClick;
+
+    private CompanyInfo companyInfo;
+
+    public CompanyInfo getCompanyInfo() {
+        return companyInfo;
+    }
+
+    public void setCompanyInfo(CompanyInfo companyInfo) {
+        this.companyInfo = companyInfo;
+    }
 
     public Integer getjId() {
         return jId;
@@ -77,6 +91,14 @@ public class JobInfo {
 
     public void setjMhigh(Integer jMhigh) {
         this.jMhigh = jMhigh;
+    }
+
+    public String getjEducation() {
+        return jEducation;
+    }
+
+    public void setjEducation(String jEducation) {
+        this.jEducation = jEducation == null ? null : jEducation.trim();
     }
 
     public String getjExperience() {
@@ -141,5 +163,36 @@ public class JobInfo {
 
     public void setcId(Integer cId) {
         this.cId = cId;
+    }
+
+    public Integer getjClick() {
+        return jClick;
+    }
+
+    public void setjClick(Integer jClick) {
+        this.jClick = jClick;
+    }
+
+    @Override
+    public String toString() {
+        return "JobInfo{" +
+                "jId=" + jId +
+                ", jName='" + jName + '\'' +
+                ", jCharacter='" + jCharacter + '\'' +
+                ", jk2Name='" + jk2Name + '\'' +
+                ", jMlow=" + jMlow +
+                ", jMhigh=" + jMhigh +
+                ", jEducation='" + jEducation + '\'' +
+                ", jExperience='" + jExperience + '\'' +
+                ", jDate=" + jDate +
+                ", jNum=" + jNum +
+                ", jLoc='" + jLoc + '\'' +
+                ", jReq='" + jReq + '\'' +
+                ", jDes='" + jDes + '\'' +
+                ", jBenefit='" + jBenefit + '\'' +
+                ", cId=" + cId +
+                ", jClick=" + jClick +
+                ", companyInfo=" + companyInfo +
+                '}';
     }
 }

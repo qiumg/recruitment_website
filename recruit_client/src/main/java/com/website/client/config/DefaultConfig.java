@@ -8,5 +8,6 @@ public class DefaultConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/create.html").setViewName("create");
+        registry.addViewController("/login.html").setViewName("login");
     }
 }

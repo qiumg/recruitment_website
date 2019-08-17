@@ -4,6 +4,8 @@ import com.website.server.pojo.TicketInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface TicketInfoMapper {
@@ -18,4 +20,6 @@ public interface TicketInfoMapper {
     int updateByPrimaryKeySelective(TicketInfo record);
 
     int updateByPrimaryKey(TicketInfo record);
+
+    List<TicketInfo> selectTicketInfoBycId(int cid);
 }
