@@ -96,6 +96,9 @@
       <if test="jMhigh != null">
         j_mhigh,
       </if>
+      <if test="jEducation != null">
+        j_education,
+      </if>
       <if test="jExperience != null">
         j_experience,
       </if>
@@ -119,6 +122,9 @@
       </if>
       <if test="cId != null">
         c_id,
+      </if>
+      <if test="jClick != null">
+        j_click,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -184,6 +190,9 @@
       </if>
       <if test="jMhigh != null">
         j_mhigh = #{jMhigh,jdbcType=INTEGER},
+      </if>
+      <if test="jEducation !=null">
+        j_education = #{jEducation,jdbcType=VARCHAR},
       </if>
       <if test="jExperience != null">
         j_experience = #{jExperience,jdbcType=VARCHAR},

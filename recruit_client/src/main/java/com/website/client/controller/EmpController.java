@@ -10,10 +10,10 @@ import org.springframework.web.client.RestTemplate;
 public class EmpController {
     @Autowired
     private RestTemplate restTemplate;
-    @RequestMapping("/emp")
-    public Emp getEmp(Integer id){
-        Emp emp = restTemplate.getForObject("http://PROVIDER-SERVER/emp?id=" + id, Emp.class);
-        System.out.println(emp);
-        return emp;
-    }
+//    @RequestMapping("/emp")
+//    public Emp getEmp(Integer id){
+////        Emp emp = restTemplate.getForObject("http://PROVIDER-SERVER/emp?id=" + id, Emp.class);
+////        System.out.println(emp);
+////        return emp;
+//    }
 }

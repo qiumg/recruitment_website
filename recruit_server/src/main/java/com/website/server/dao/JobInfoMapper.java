@@ -37,124 +37,136 @@ public interface JobInfoMapper {
             @Result(property="jDes",column="j_des",jdbcType= JdbcType.VARCHAR),
             @Result(property="jBenefit",column="j_benefit",jdbcType= JdbcType.VARCHAR),
             @Result(property="cId",column="c_id",jdbcType= JdbcType.INTEGER),
-            @Result(property="jkName",column="jk_name"),
-            @Result(property="jk1Name",column="jk1_name"),
-            @Result(property="jk2Name",column="jk2_name")
+            @Result(property="jkName",column="jk_name",jdbcType= JdbcType.VARCHAR),
+            @Result(property="jk1Name",column="jk1_name",jdbcType= JdbcType.VARCHAR),
+            @Result(property="jk2Name",column="jk2_name",jdbcType= JdbcType.VARCHAR),
+            @Result(property="jEducation",column="j_education",jdbcType= JdbcType.VARCHAR),
+            @Result(property="jClick",column="j_click",jdbcType= JdbcType.VARCHAR)
     })
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
             "j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
-            "j_req,j_des,j_benefit \n" +
+            "j_req,j_des,j_benefit,j_click,j_education \n" +
             "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
-            "where c_id = 1  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id and j_num = 0")
+            "where c_id = #{c_id}  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id and j_num = 0")
     List<JobInfo2> selectHisJobByCid(int c_id);
 
     //企业已发布职位信息
-
+    @ResultMap(value = "jobMap")
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
             "j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
-            "j_req,j_des,j_benefit \n" +
+            "j_req,j_des,j_benefit ,j_click,j_education\n" +
             "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
-            "where c_id = ?  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id and j_num != 0")
+            "where c_id = #{c_id}  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id and j_num != 0")
     List<JobInfo2> selectAllJobByCid(int c_id);
 
     //企业按职位名称搜索职位信息(模糊)
+    @ResultMap(value = "jobMap")
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
             "            j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
-            "            j_req,j_des,j_benefit \n" +
+            "            j_req,j_des,j_benefit ,j_click,j_education\n" +
             "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
-            "where c_id = ?  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
-            "and j_name like '%' ? '%' \n" +
+            "where c_id = #{c_id}  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
+            "and j_name like '%' #{j_name} '%' \n" +
             "and j_num != 0;")
     List<JobInfo2> selectJobByJname(String j_name, int c_id);
 
     //企业按工作性质搜索职位信息
+    @ResultMap(value = "jobMap")
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
             "            j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
-            "            j_req,j_des,j_benefit \n" +
+            "            j_req,j_des,j_benefit ,j_click,j_education\n" +
             "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
-            "where c_id = ?  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
-            "and j_character =? \n" +
+            "where c_id = #{c_id}  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
+            "and j_character =#{j_character} \n" +
             "and j_num != 0;")
     List<JobInfo2> selectJobByJcharacter(String j_character,int c_id);
 
     //企业按职位类别2搜索职位信息
+    @ResultMap(value = "jobMap")
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
             "            j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
-            "            j_req,j_des,j_benefit \n" +
+            "            j_req,j_des,j_benefit ,j_click,j_education\n" +
             "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
-            "where c_id = ?  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
-            "and j.jk2_name=?\n" +
+            "where c_id = #{c_id}  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
+            "and j.jk2_name=#{jk2_name}\n" +
             "and j_num != 0;")
     List<JobInfo2> selectJobByJk2name(String jk2_name,int c_id);
 
     //企业按职位类别1搜索职位信息
+    @ResultMap(value = "jobMap")
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
             "            j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
-            "            j_req,j_des,j_benefit \n" +
+            "            j_req,j_des,j_benefit ,j_click,j_education\n" +
             "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
-            "where c_id = ?  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
-            "and jk1.jk1_name=? \n" +
+            "where c_id = #{c_id}  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
+            "and jk1.jk1_name=#{jk1_name} \n" +
             "and j_num != 0;")
     List<JobInfo2> selectJobByJk1name(String jk1_name,int c_id);
 
     //企业按职位类别搜索职位信息
+    @ResultMap(value = "jobMap")
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
             "            j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
-            "            j_req,j_des,j_benefit \n" +
+            "            j_req,j_des,j_benefit ,j_click,j_education\n" +
             "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
-            "where c_id = ?  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
-            "and jk.jk_name=?\n" +
+            "where c_id = #{c_id}  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
+            "and jk.jk_name=#{jk_name}\n" +
             "and j_num != 0;")
     List<JobInfo2> selectJobByJkname(String jk_name,int c_id);
 
 
     //企业按职位名称搜索职位信息（曾发布职位查询）
+    @ResultMap(value = "jobMap")
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
             "            j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
-            "            j_req,j_des,j_benefit \n" +
+            "            j_req,j_des,j_benefit ,j_click,j_education\n" +
             "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
-            "where c_id = ?  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
-            "and j_name like '%' ? '%' \n" +
+            "where c_id = #{c_id} and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
+            "and j_name like '%' #{j_name} '%' \n" +
             "and j_num = 0;")
     List<JobInfo2> selectJobHisByJname(String j_name,int c_id);
 
     //企业按工作性质搜索职位信息（曾发布职位查询）
+    @ResultMap(value = "jobMap")
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
             "            j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
-            "            j_req,j_des,j_benefit \n" +
+            "            j_req,j_des,j_benefit ,j_click,j_education\n" +
             "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
-            "where c_id = ?  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
-            "and j_character =? \n" +
+            "where c_id = #{c_id}  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
+            "and j_character =#{j_character} \n" +
             "and j_num != 0;")
     List<JobInfo2> selectJobHisByJcharacter(String j_character,int c_id);
 
     //企业按职位类别2搜索职位信息（曾发布职位查询）
+    @ResultMap(value = "jobMap")
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
             "            j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
-            "            j_req,j_des,j_benefit \n" +
+            "            j_req,j_des,j_benefit ,j_click,j_education\n" +
             "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
-            "where c_id = ?  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
-            "and j.jk2_name=?\n" +
+            "where c_id = #{c_id}  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
+            "and j.jk2_name=#{jk2_name}\n" +
             "and j_num = 0;")
     List<JobInfo2> selectJobHisByJk2name(String jk2_name,int c_id);
 
     //企业按职位类别1搜索职位信息（曾发布职位查询）
+    @ResultMap(value = "jobMap")
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
             "            j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
-            "            j_req,j_des,j_benefit \n" +
+            "            j_req,j_des,j_benefit ,j_click,j_education\n" +
             "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
-            "where c_id = ?  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
-            "and jk1.jk1_name=? \n" +
+            "where c_id = #{c_id} and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
+            "and jk1.jk1_name=#{jk1_name} \n" +
             "and j_num = 0;")
     List<JobInfo2> selectJobHisByJk1name(String jk1_name,int c_id);
 
     //企业按职位类别搜索职位信息（曾发布职位查询）
+    @ResultMap(value = "jobMap")
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
             "            j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
-            "            j_req,j_des,j_benefit \n" +
+            "            j_req,j_des,j_benefit ,j_click,j_education\n" +
             "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
-            "where c_id = ?  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
-            "and jk.jk_name=?\n" +
+            "where c_id = #{c_id}  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id \n" +
+            "and jk.jk_name=#{jk_name}\n" +
             "and j_num = 0;")
     List<JobInfo2> selectJobHisByJkname(String jk_name,int c_id);
 

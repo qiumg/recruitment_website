@@ -1,9 +1,6 @@
-package com.website.server.pojo;
+package com.website.client.pojo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -46,9 +43,7 @@ public class JobInfo {
 
     private Integer jClick;    //点击量
 
-    private Set<JobKindInfo>  JKSet=  new HashSet<>();
-    private Set<JobKind1Info> JK1Set=  new HashSet<>();
-    private Set<JobKind2Info> JK2Set=  new HashSet<>();
+
 
     public JobInfo() {
     }
@@ -70,13 +65,14 @@ public class JobInfo {
         this.cId = cId;
     }
 
-    public JobInfo(Integer jId, String jName, String jCharacter, String jk2Name, Integer jMlow, Integer jMhigh, String jExperience, Date jDate, Integer jNum, String jLoc, String jReq, String jDes, String jBenefit, Integer cId, Set<JobKindInfo> JKSet, Set<JobKind1Info> JK1Set, Set<JobKind2Info> JK2Set) {
+    public JobInfo(Integer jId, String jName, String jCharacter, String jk2Name, Integer jMlow, Integer jMhigh, String jEducation, String jExperience, Date jDate, Integer jNum, String jLoc, String jReq, String jDes, String jBenefit, Integer cId, Integer jClick) {
         this.jId = jId;
         this.jName = jName;
         this.jCharacter = jCharacter;
         this.jk2Name = jk2Name;
         this.jMlow = jMlow;
         this.jMhigh = jMhigh;
+        this.jEducation = jEducation;
         this.jExperience = jExperience;
         this.jDate = jDate;
         this.jNum = jNum;
@@ -85,12 +81,8 @@ public class JobInfo {
         this.jDes = jDes;
         this.jBenefit = jBenefit;
         this.cId = cId;
-        this.JKSet = JKSet;
-        this.JK1Set = JK1Set;
-        this.JK2Set = JK2Set;
+        this.jClick = jClick;
     }
-
-
 
     public Integer getjId() {
         return jId;
@@ -221,9 +213,9 @@ public class JobInfo {
                 ", jDes='" + jDes + '\'' +
                 ", jBenefit='" + jBenefit + '\'' +
                 ", cId=" + cId +
-                ", JKSet=" + JKSet +
-                ", JK1Set=" + JK1Set +
-                ", JK2Set=" + JK2Set +
+                ", JKSet="  +
+                ", JK1Set="   +
+                ", JK2Set="   +
                 '}';
     }
 }
