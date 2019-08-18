@@ -14,7 +14,7 @@ public class JobInfoService {
     private JobInfoMapper jobInfoMapper;
 
     //添加职位 用公司id
-    public int addJobInfoService(JobInfo record,int c_id){
+    public Integer addJobInfoService(JobInfo record,int c_id){
         record.setcId(c_id);
         jobInfoMapper.insertSelective(record);
         return 1;

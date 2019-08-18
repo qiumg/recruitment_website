@@ -8,6 +8,7 @@
     <result column="jk2_name" jdbcType="VARCHAR" property="jk2Name" />
     <result column="j_mlow" jdbcType="INTEGER" property="jMlow" />
     <result column="j_mhigh" jdbcType="INTEGER" property="jMhigh" />
+    <result column="j_education" jdbcType="VARCHAR" property="jEducation" />
     <result column="j_experience" jdbcType="VARCHAR" property="jExperience" />
     <result column="j_date" jdbcType="TIMESTAMP" property="jDate" />
     <result column=" j_num" jdbcType="INTEGER" property="jNum" />
@@ -15,7 +16,9 @@
     <result column="j_req" jdbcType="VARCHAR" property="jReq" />
     <result column="j_des" jdbcType="VARCHAR" property="jDes" />
     <result column="j_benefit" jdbcType="VARCHAR" property="jBenefit" />
+    <result column="j_click" jdbcType="INTEGER" property="jClick" />
     <result column="c_id" jdbcType="INTEGER" property="cId" />
+
   </resultMap>
 
   <resultMap id="JobInfoMap"  type="com.website.server.pojo.JobInfo">
@@ -146,6 +149,9 @@
       <if test="jMhigh != null">
         #{jMhigh,jdbcType=INTEGER},
       </if>
+      <if test="jEducation != null">
+        #{jEducation,jdbcType=VARCHAR},
+      </if>
       <if test="jExperience != null">
         #{jExperience,jdbcType=VARCHAR},
       </if>
@@ -169,6 +175,9 @@
       </if>
       <if test="cId != null">
         #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="jClick != null">
+        #{jClick,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

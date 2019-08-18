@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE HTML>
-<html xmlns:wb="http://open.weibo.com/wb" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns:wb="http://open.weibo.com/wb" xmlns:th="http://www.thymeleaf.org"><head>
 <script async="" src="style/js/analytics.js"></script><script type="text/javascript" async="" src="style/js/conversion.js"></script><script src="style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script><style type="text/css"></style>
 <meta content="no-siteapp" http-equiv="Cache-Control">
 <link  media="handheld" rel="alternate">
@@ -91,10 +90,10 @@ var youdao_conv_id = 271546;
 </dl>
 <dl class="company_center_aside">
 		<dt>我发布的职位</dt>
-			<dd class="current">
+			<dd >
 		<a href="http://localhost:8200/JobInfo2/selectAllJob2">有效职位</a>
 	</dd>
-	<dd>
+	<dd class="current">
 		<a href="http://localhost:8200/JobInfo2/selectHisJob2">已下线职位</a>
 	</dd>
 	</dl>
@@ -104,10 +103,10 @@ var youdao_conv_id = 271546;
                     <dt>
                         <h1>
                             <em></em>
-                           有效职位 <span>（共<i style="color:#fff;font-style:normal" id="positionNumber">1</i>个）</span>                        </h1>
+                           已下线职位 <span>（共<i style="color:#fff;font-style:normal" id="positionNumber">1</i>个）</span>                        </h1>
                     </dt>
                     <dd>
-						<form id="searchForm" th:action="@{/JobInfo2/selectAllJob2}">
+						<form id="searchForm" th:action="@{/JobInfo2/selectHisJob2}">
 							<input type="hidden" value="Publish" name="type">
 							<ul class="reset my_jobs">
 								<tr th:each="jobInfo2:${jobInfo2s}">
@@ -120,9 +119,8 @@ var youdao_conv_id = 271546;
 									<span class="receivedResumeNo">招募人数：[[${jobInfo2.jnum}]]</span>
 									<div>[[${jobInfo2.jcharacter}]] / [[${jobInfo2.jmlow}]]K-[[${jobInfo2.jmhigh}]]K / [[${jobInfo2.jexperience}]] / [[${jobInfo2.jeducation}]]</div>
 									<div class="c9">发布时间： [[${jobInfo2.jdate}]]</div>
-
-									<div class="links">@{/emp/}
-									<a target="_blank" class="job_edit" th:href="@{/JobInfo2/updateJobInfo2}+${jobInfo2.jid}" >编辑</a>
+											                                    		                                    <div class="links">
+									<a target="_blank" class="job_edit" th:href="@{/JobInfo2/}+${jobInfo2.jid}">编辑</a>
 									<a class="job_offline" href="javascript:void(0)">下线</a>
 									<a class="job_del" href="javascript:void(0)">删除</a>
 									</div>

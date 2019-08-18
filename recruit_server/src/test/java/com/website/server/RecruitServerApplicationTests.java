@@ -19,6 +19,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -74,6 +75,22 @@ public class RecruitServerApplicationTests {
 //		jobInfos=jobInfoService.selectJobByJnameService("工程师",1);
 //		System.out.println(jobInfos);
 
+	}
+	@Test
+	public void test4(){
+
+//		Map map=new HashMap();
+//		map=jobInfoController.selectHisJobByCid();
+//		System.out.println(map);
+//		List<JobInfo2> jobInfo2s;
+//		jobInfo2s=jobInfoService.selectHisJobByCidService(1);
+//		System.out.println(jobInfo2s);
+	}
+
+	@Test
+	public void test5(){
+		String[] arr = new String[25];
+		System.out.println("asdfasdfasdfasdf"+arr);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.website.server.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.website.server.pojo.JobInfo;
 import com.website.server.pojo.UserResume;
 import com.website.server.pojo.justforeasy.JobInfo2;
@@ -7,6 +8,9 @@ import com.website.server.service.impl.JobInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,70 +38,81 @@ public class JobInfoController {
     private RestTemplate restTemplate;
 
     //添加职位 用公司id
-    @RequestMapping("/addJobInfo.do")
-    public void addJobInfo(@RequestParam("id")int c_id, @RequestParam("positionType") String positionType,
-                           @RequestParam("positionType2") String positionType2,@RequestParam("positionName") String positionName,
-                           @RequestParam("jobNature") String jobNature,@RequestParam("salaryMin") Integer salaryMin,
-                           @RequestParam("salaryMax") Integer salaryMax,@RequestParam("workAddress") String workAddress,
-                           @RequestParam("workYear") String workYear,@RequestParam("education") String education,
-                           @RequestParam("positionAdvantage") String positionAdvantage,@RequestParam("positionDetail") String positionDetail,
-                           @RequestParam("positionDemand") String positionDemand ,@RequestParam("num") Integer num,
-                           HttpServletRequest req,HttpServletResponse resp) throws IOException {
+    @RequestMapping("/addJobInfo")
+//    HttpSession session,  String positionType,
+//    String positionType2,String positionName,
+//    String jobNature, Integer salaryMin,
+//    Integer salaryMax, String workAddress,
+//    String workYear, String education,
+//    String positionAdvantage,String positionDetail,
+//    String positionDemand , Integer num,Date date, Integer c_id
+    public Integer addJobInfo(@RequestBody  ModelMap map ) throws IOException {
         JobInfo jobInfo=new JobInfo();
-        Date date=new Date();
-        jobInfo.setcId(1);
-        jobInfo.setjBenefit(positionAdvantage);
-        jobInfo.setjCharacter(jobNature);
-        jobInfo.setJClick(0);
-        jobInfo.setjDate(date);
-        jobInfo.setJEducation(education);
-        jobInfo.setjExperience(workYear);
-        jobInfo.setjDes(positionDetail);
-        jobInfo.setJk2Name(positionType2);
-        jobInfo.setjLoc(workAddress);
-        jobInfo.setjMhigh(salaryMax);
-        jobInfo.setjMlow(salaryMin);
-        jobInfo.setjReq(positionDemand);
-        jobInfo.setjName(positionName);
-        jobInfo.setjNum(num);
 
 
+//        map.put("c_id",1);
+//        map.put("positionType2",positionType2);
+//        map.put("positionName",positionName);
+//        map.put("jobNature",jobNature);
+//        map.put("salaryMin",salaryMin);
+//        map.put("salaryMax",salaryMax);
+//        map.put("workAddress",workAddress);
+//        map.put("workYear",workYear);
+//        map.put("education",education);
+//        map.put("positionAdvantage",positionAdvantage);
+//        map.put("positionDetail",positionDetail);
+//        map.put("positionDemand",positionDemand);
+//        map.put("num",num);
+//        map.put("date",date);
+//        map.put("jclick",0);
 
-        i=jobInfoService.addJobInfoService(jobInfo,1);
+        ObjectMapper mapper = new ObjectMapper();
 
-        if (i==1){
-            PrintWriter out=resp.getWriter();
-            out.print("<script>alert('添加成功!');window.location.href='create.html'</script>");
-        }else {
-            PrintWriter out=resp.getWriter();
-            out.print("<script>alert('添加失败!');window.location.href='create.html'</script>");
-        }
+        jobInfo.setcId(mapper.convertValue(map.get("c_id"),Integer.class));
+        jobInfo.setjBenefit(mapper.convertValue(map.get("positionAdvantage"),String.class));
+        jobInfo.setjCharacter(mapper.convertValue(map.get("jobNature"),String.class));
+        jobInfo.setJClick(mapper.convertValue(map.get("jclick"),Integer.class));
+        jobInfo.setjDate(mapper.convertValue(map.get("date"),Date.class));
+        jobInfo.setJEducation(mapper.convertValue(map.get("education"),String.class));
+        jobInfo.setjExperience(mapper.convertValue(map.get("workYear"),String.class));
+        jobInfo.setjDes(mapper.convertValue(map.get("positionDetail"),String.class));
+        jobInfo.setJk2Name(mapper.convertValue(map.get("positionType2"),String.class));
+        jobInfo.setjLoc(mapper.convertValue(map.get("workAddress"),String.class));
+        jobInfo.setjMhigh(mapper.convertValue(map.get("salaryMax"),Integer.class));
+        jobInfo.setjMlow(mapper.convertValue(map.get("salaryMin"),Integer.class));
+        jobInfo.setjReq(mapper.convertValue(map.get("positionDemand"),String.class));
+        jobInfo.setjName(mapper.convertValue(map.get("positionName"),String.class));
+        jobInfo.setjNum(mapper.convertValue(map.get("num"),Integer.class));
 
-
+        i=jobInfoService.addJobInfoService(jobInfo,jobInfo.getcId());
+        return i;
 
     }
 
     //删除 by j_id
-    @RequestMapping("delete.do")
+    @RequestMapping("/delete.do")
     public void deleteJob(Integer jId){
         i=jobInfoService.deleteByPrimaryKeyService(jId);
 
     }
-    @RequestMapping("selectHisJob.do")
+    @RequestMapping("/selectHisJob")
     //企业曾发布简历（即招募人数为零）
-    public void selectHisJobByCid(int c_id){
-        jobInfo2s=jobInfoService.selectHisJobByCidService(c_id);
-
+    public Map selectHisJobByCid(HttpSession session){
+        Map m=new HashMap();
+        Integer cID= (Integer) session.getAttribute("c_id");
+        jobInfo2s=jobInfoService.selectHisJobByCidService(1);
+        m.put("jobInfo2s",jobInfo2s);
+        return m;
     }
     //企业已发布职位信息
     @RequestMapping("/selectAllJob")
     public Map selectAllJobByCid(HttpSession session){
         Map m=new HashMap();
         Integer cID= (Integer) session.getAttribute("c_id");
-        jobInfo2s=jobInfoService.selectAllJobByCidService(2);
-        System.out.println("ssssss"+jobInfo2s);
+        jobInfo2s=jobInfoService.selectAllJobByCidService(1);
+
         m.put("jobInfo2s",jobInfo2s);
-        System.out.println("asd"+m);
+//        System.out.println("asd"+m);
         return m;
 
     }
@@ -130,7 +145,7 @@ public class JobInfoController {
     //企业按职位类别搜索职位信息（曾发布职位查询）
 
     //更改职位信息 by j_id
-
+//    @RequestMapping("/updateJobInfo2/{jid}")
 
 
 }
