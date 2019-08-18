@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping("/index")
 public class IndexController {
     @Autowired
     private IJobKindInfoService jobKindInfoService;
