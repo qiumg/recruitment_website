@@ -26,16 +26,32 @@
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    <where>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR} and
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
   <select id="selectByEmail" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user
     <where>
       <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR} and
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="password != null">
+        and password = #{password,jdbcType=VARCHAR}
       </if>
     </where>
   </select>
