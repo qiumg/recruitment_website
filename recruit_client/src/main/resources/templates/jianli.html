@@ -154,6 +154,21 @@ var youdao_conv_id = 271546;
 						          <input type="text" placeholder="接收面试通知的邮箱" th:value="${userinfo.getEmail()}" name="email" id="email">
 						      </td>
 						    </tr>
+<!--						    <tr>-->
+<!--						      <td valign="top"> </td>-->
+<!--						      <td colspan="3">-->
+<!--						          <input type="hidden" id="currentState" value="" name="currentState">-->
+<!--						          <input type="button" value="目前状态" id="select_currentState" class="profile_select_410 profile_select_normal">-->
+<!--								  <div class="boxUpDown boxUpDown_410 dn" id="box_currentState" style="display: none;">-->
+<!--						          	  <ul>-->
+<!--										  <li>我目前已离职，可快速到岗</li>-->
+<!--										  <li>我目前正在职，正考虑换个新环境</li>-->
+<!--										  <li>我暂时不想找工作</li>-->
+<!--										  <li>我是应届毕业生</li>-->
+<!--									  </ul>-->
+<!--						          </div>-->
+<!--						      </td>-->
+<!--						    </tr>-->
 						    <tr>
 						      <td></td> 
 						      <td colspan="3">
@@ -183,6 +198,7 @@ var youdao_conv_id = 271546;
             		<input type="hidden" id="nameVal" th:value="${userinfo.getName()}">
             		<input type="hidden" id="genderVal" th:value="${userinfo.getSex()}">
             		<input type="hidden" id="topDegreeVal" th:value="${userinfo.getAge()}">
+            		<input type="hidden" id="currentStateVal" value="">
             		<input type="hidden" id="emailVal" th:value="${userinfo.getEmail()}">
             		<input type="hidden" id="telVal" th:value="${userinfo.getPhone()}">
             		<input type="hidden" id="pageType" value="1">
@@ -190,142 +206,142 @@ var youdao_conv_id = 271546;
 
             	<div class="profile_box" id="expectJob">
             		<h2>期望工作</h2>
-            		            		<span class="c_edit dn"></span>
+					<span class="c_edit dn"></span>
             		<div class="expectShow dn">
-            		            			<span></span>
+						<span></span>
             		</div><!--end .expectShow-->
             		<div class="expectEdit dn">
-            			<form id="expectForm">
+            			<form id="expectForm" action="/jianli/jobwantcontrol" method="get">
 	            			<table>
 	            				<tbody><tr>
 	            					<td>
-	            						<input type="hidden" id="expectCity" value="" name="expectCity">
-	            													        	<input type="button" value="期望城市，如：北京" id="select_expectCity" class="profile_select_287 profile_select_normal">
-																				<div class="boxUpDown boxUpDown_596 dn" id="box_expectCity" style="display: none;">
-								          									        		<dl>
+	            						<input type="hidden" id="expectCity" th:value="${userJobwant.getPlaceWant()}" name="placeWant" >
+										<input type="button" value="期望城市，如：北京" id="select_expectCity" class="profile_select_287 profile_select_normal">
+										<div class="boxUpDown boxUpDown_596 dn" id="box_expectCity" style="display: none;">
+											<dl>
 								        			<dt>热门城市</dt>
 								        			<dd>
-									        												        				<span>北京</span>
-									        												        				<span>上海</span>
-									        												        				<span>广州</span>
-									        												        				<span>深圳</span>
-									        												        				<span>成都</span>
-									        												        				<span>杭州</span>
-									        											        			</dd>
+														<span>北京</span>
+														<span>上海</span>
+														<span>广州</span>
+														<span>深圳</span>
+														<span>成都</span>
+														<span>杭州</span>
+													</dd>
 								        	  	</dl>
-								        									        		<dl>
+											<dl>
 								        			<dt>ABCDEF</dt>
 								        			<dd>
-									        												        				<span>北京</span>
-									        												        				<span>长春</span>
-									        												        				<span>成都</span>
-									        												        				<span>重庆</span>
-									        												        				<span>长沙</span>
-									        												        				<span>常州</span>
-									        												        				<span>东莞</span>
-									        												        				<span>大连</span>
-									        												        				<span>佛山</span>
-									        												        				<span>福州</span>
-									        											        			</dd>
+														<span>北京</span>
+														<span>长春</span>
+														<span>成都</span>
+														<span>重庆</span>
+														<span>长沙</span>
+														<span>常州</span>
+														<span>东莞</span>
+														<span>大连</span>
+														<span>佛山</span>
+														<span>福州</span>
+													</dd>
 								        	  	</dl>
-								        									        		<dl>
+											<dl>
 								        			<dt>GHIJ</dt>
 								        			<dd>
-									        												        				<span>贵阳</span>
-									        												        				<span>广州</span>
-									        												        				<span>哈尔滨</span>
-									        												        				<span>合肥</span>
-									        												        				<span>海口</span>
-									        												        				<span>杭州</span>
-									        												        				<span>惠州</span>
-									        												        				<span>金华</span>
-									        												        				<span>济南</span>
-									        												        				<span>嘉兴</span>
-									        											        			</dd>
+														<span>贵阳</span>
+														<span>广州</span>
+														<span>哈尔滨</span>
+														<span>合肥</span>
+														<span>海口</span>
+														<span>杭州</span>
+														<span>惠州</span>
+														<span>金华</span>
+														<span>济南</span>
+														<span>嘉兴</span>
+													</dd>
 								        	  	</dl>
-								        									        		<dl>
+											<dl>
 								        			<dt>KLMN</dt>
 								        			<dd>
-									        												        				<span>昆明</span>
-									        												        				<span>廊坊</span>
-									        												        				<span>宁波</span>
-									        												        				<span>南昌</span>
-									        												        				<span>南京</span>
-									        												        				<span>南宁</span>
-									        												        				<span>南通</span>
-									        											        			</dd>
+														<span>昆明</span>
+														<span>廊坊</span>
+														<span>宁波</span>
+														<span>南昌</span>
+														<span>南京</span>
+														<span>南宁</span>
+														<span>南通</span>
+													</dd>
 								        	  	</dl>
-								        									        		<dl>
+											<dl>
 								        			<dt>OPQR</dt>
 								        			<dd>
-									        												        				<span>青岛</span>
-									        												        				<span>泉州</span>
-									        											        			</dd>
+														<span>青岛</span>
+														<span>泉州</span>
+													</dd>
 								        	  	</dl>
-								        									        		<dl>
+											<dl>
 								        			<dt>STUV</dt>
 								        			<dd>
-									        												        				<span>上海</span>
-									        												        				<span>石家庄</span>
-									        												        				<span>绍兴</span>
-									        												        				<span>沈阳</span>
-									        												        				<span>深圳</span>
-									        												        				<span>苏州</span>
-									        												        				<span>天津</span>
-									        												        				<span>太原</span>
-									        												        				<span>台州</span>
-									        											        			</dd>
+														<span>上海</span>
+														<span>石家庄</span>
+														<span>绍兴</span>
+														<span>沈阳</span>
+														<span>深圳</span>
+														<span>苏州</span>
+														<span>天津</span>
+														<span>太原</span>
+														<span>台州</span>
+									        		</dd>
 								        	  	</dl>
-								        									        		<dl>
+												<dl>
 								        			<dt>WXYZ</dt>
 								        			<dd>
-									        												        				<span>武汉</span>
-									        												        				<span>无锡</span>
-									        												        				<span>温州</span>
-									        												        				<span>西安</span>
-									        												        				<span>厦门</span>
-									        												        				<span>烟台</span>
-									        												        				<span>珠海</span>
-									        												        				<span>中山</span>
-									        												        				<span>郑州</span>
-									        											        			</dd>
+														<span>武汉</span>
+														<span>无锡</span>
+														<span>温州</span>
+														<span>西安</span>
+														<span>厦门</span>
+														<span>烟台</span>
+														<span>珠海</span>
+														<span>中山</span>
+														<span>郑州</span>
+													</dd>
 								        	  	</dl>
-								        									        </div>  
+								         </div>
 	            					</td>
 	            					<td>
 	            						<ul class="profile_radio clearfix reset">
-	            								            								<li class="current">
+	            								<li class="current">
 									             	 全职<em></em>
-									              	<input type="radio" checked="" name="type" value="全职"> 
+									              	<input type="radio" checked="" name="workTypes" value="全职">
 									            </li>
 									            <li>
 									              	兼职<em></em>
-									              	<input type="radio" name="type" value="兼职"> 
+									              	<input type="radio" name="workTypes" value="兼职">
 									            </li>
 									            <li>
 									            	  实习<em></em>
-									              	<input type="radio" name="type" value="实习"> 
+									              	<input type="radio" name="workTypes" value="实习">
 									            </li>
-								            								        </ul> 
+										</ul>
 	            					</td>
 	            				</tr>
 	            				<tr>
 	            					<td>
-							        	<input type="text" placeholder="期望职位，如：产品经理" value="" name="expectPosition" id="expectPosition">
+							        	<input type="text" placeholder="期望职位，如：产品经理" th:value="${userJobwant.getPostWant()}" name="postWant" id="expectPosition">
 									</td>
 	            					<td>
-	            						<input type="hidden" id="expectSalary" value="" name="expectSalary">
-	            							            						<input type="button" value="期望月薪" id="select_expectSalary" class="profile_select_287 profile_select_normal">
-	            													        	<div class="boxUpDown boxUpDown_287 dn" id="box_expectSalary" style="display: none;">
+	            						<input type="hidden" id="expectSalary" th:value="${userJobwant.getSalaryWant()}" name="salaryWant">
+										<input type="button" value="期望月薪" id="select_expectSalary" class="profile_select_287 profile_select_normal">
+										<div class="boxUpDown boxUpDown_287 dn" id="box_expectSalary" style="display: none;">
 								          	  <ul>
-								        										        			<li>2k以下</li>
-								        										        			<li>2k-5k</li>
-								        										        			<li>5k-10k</li>
-								        										        			<li>10k-15k</li>
-								        										        			<li>15k-25k</li>
-								        										        			<li>25k-50k</li>
-								        										        			<li>50k以上</li>
-								        										        	  </ul>
+												  <li>2k以下</li>
+												  <li>2k-5k</li>
+												  <li>5k-10k</li>
+												  <li>10k-15k</li>
+												  <li>15k-25k</li>
+												  <li>25k-50k</li>
+												  <li>50k以上</li>
+											  </ul>
 								         </div>  
 	            					</td>
 	            				</tr>
@@ -338,17 +354,22 @@ var youdao_conv_id = 271546;
 	            			</tbody></table>
             			</form><!--end #expectForm-->
             		</div><!--end .expectEdit-->
-            		            		<div class="expectAdd pAdd">
-            		            			填写准确的期望工作能大大提高求职成功率哦…<br>
-						快来添加期望工作吧！
+					<div class="expectAdd pAdd" th:if="${userJobwant}==null">
+						填写准确的期望工作能大大提高求职成功率哦…<br>
+						快来添加期望工作吧!
 						<span>添加期望工作</span>
+					</div><!--end .expectAdd-->
+					<div class="expectAdd pAdd" th:if="${userJobwant}!=null">
+						期望地点：[[${userJobwant.getPlaceWant()}]] | 工作类型：[[${userJobwant.getWorkTypes()}]]<br>
+						期望职位：[[${userJobwant.getPostWant()}]] | 期望薪资：[[${userJobwant.getSalaryWant()}]]
+							<span>修改期望工作</span>
             		</div><!--end .expectAdd-->
-            		
-            		<input type="hidden" id="expectJobVal" value="">
-            		<input type="hidden" id="expectCityVal" value="">
-            		<input type="hidden" id="typeVal" value="">
-            		<input type="hidden" id="expectPositionVal" value="">
-            		<input type="hidden" id="expectSalaryVal" value="">
+<!--            		-->
+<!--            		<input type="hidden" id="expectJobVal" value="">-->
+<!--            		<input type="hidden" id="expectCityVal" value="" th:value="${userJobwant.getPlaceWant()}">-->
+<!--            		<input type="hidden" id="typeVal" value="" th:value="${userJobwant.getWorkTypes()}">-->
+<!--            		<input type="hidden" id="expectPositionVal" value="" th:value="${userJobwant.getPostWant()}">-->
+<!--            		<input type="hidden" id="expectSalaryVal" value="" th:value="${userJobwant.getSalaryWant()}">-->
             	</div><!--end #expectJob-->
             		
             	<div class="profile_box" id="workExperience">

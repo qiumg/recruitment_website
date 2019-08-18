@@ -24,4 +24,13 @@ public class JobWantServiceimpl implements JobWantService {
         }
         return false;
     }
+
+    @Override
+    public boolean alterJobwant(UserJobwant userJobwant) {//修改简历信息
+        int i=userJobwantMapper.updateByPrimaryKeySelective(userJobwant);
+        if(i>0){
+            return true;
+        }
+        return false;
+    }
 }
