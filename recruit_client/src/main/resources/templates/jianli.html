@@ -107,7 +107,7 @@ var youdao_conv_id = 271546;
             		</div><!--end .basicShow-->
 
             		<div class="basicEdit dn">
-            			<form id="profileForm" action="/" method="get">
+            			<form id="profileForm" action="/user/altersimpinfo" method="get">
 						  <table>
 						    <tbody><tr>
 						      <td valign="top">
@@ -121,11 +121,11 @@ var youdao_conv_id = 271546;
 						          <ul class="profile_radio clearfix reset">
 						            <li class="current">
 						           	  	 男<em></em>
-						              	<input type="radio" checked="checked" name="gender" value="男"> 
+						              	<input type="radio" checked="checked" name="sex" value="0">
 						            </li>
 						            <li>
 						            	  女<em></em>
-						              	<input type="radio" name="gender" value="女"> 
+						              	<input type="radio" name="sex" value="1">
 						            </li>
 						          </ul>  
 						      </td>
@@ -135,48 +135,15 @@ var youdao_conv_id = 271546;
 						        <span class="redstar">*</span>
 						      </td> 
 						      <td>
-						      	<input type="text" id="topDegree" value="18" name="topDegree">
-<!--						        <input type="button" value="大专" id="select_topDegree" class="profile_select_190 profile_select_normal">-->
-<!--								<div class="boxUpDown boxUpDown_190 dn" id="box_topDegree" style="display: none;">-->
-<!--						        	<ul>-->
-<!--						        								        			<li>大专</li>-->
-<!--						        								        			<li>本科</li>-->
-<!--						        								        			<li>硕士</li>-->
-<!--						        								        			<li>博士</li>-->
-<!--						        								        			<li>其他</li>-->
-<!--						        								        	</ul>-->
-<!--						        </div>-->
+						      	<input type="text" id="topDegree" value="" name="age">
 						      </td>
-<!--						      <td valign="top">-->
-<!--						        <span class="redstar">*</span>-->
-<!--						      </td>-->
-<!--						      <td>-->
-<!--						          <input type="hidden" id="workyear" value="" name="workyear">-->
-<!--						          <input type="button" value="" id="select_workyear" class="profile_select_190 profile_select_normal">-->
-<!--								  <div class="boxUpDown boxUpDown_190 dn" id="box_workyear" style="display: none;">-->
-<!--						          	 <ul>-->
-<!--						        								        			<li>应届毕业生</li>-->
-<!--						        								        			<li>1年</li>-->
-<!--						        								        			<li>2年</li>-->
-<!--						        								        			<li>3年</li>-->
-<!--						        								        			<li>4年</li>-->
-<!--						        								        			<li>5年</li>-->
-<!--						        								        			<li>6年</li>-->
-<!--						        								        			<li>7年</li>-->
-<!--						        								        			<li>8年</li>-->
-<!--						        								        			<li>9年</li>-->
-<!--						        								        			<li>10年</li>-->
-<!--						        								        			<li>10年以上</li>-->
-<!--						        								        	 </ul>-->
-<!--						          </div>  -->
-<!--						      </td>-->
 						    </tr>
 						    <tr>
 						      <td valign="top">
 						        <span class="redstar">*</span>
 						      </td> 
 						      <td colspan="3">
-						          <input type="text" placeholder="手机号码" th:value="${userinfo.getPhone()}" name="tel" id="tel">
+						          <input type="text" placeholder="手机号码" th:value="${userinfo.getPhone()}" name="phone" id="tel">
 						      </td>
 						   	</tr>
 						   	<tr>
@@ -185,21 +152,6 @@ var youdao_conv_id = 271546;
 						      </td> 
 						      <td colspan="3">
 						          <input type="text" placeholder="接收面试通知的邮箱" th:value="${userinfo.getEmail()}" name="email" id="email">
-						      </td>
-						    </tr>
-						    <tr>
-						      <td valign="top"> </td> 
-						      <td colspan="3">
-						          <input type="hidden" id="currentState" value="" name="currentState">
-						          <input type="button" value="目前状态" id="select_currentState" class="profile_select_410 profile_select_normal">
-								  <div class="boxUpDown boxUpDown_410 dn" id="box_currentState" style="display: none;">
-						          	  <ul>
-						        								        			<li>我目前已离职，可快速到岗</li>
-						        								        			<li>我目前正在职，正考虑换个新环境</li>
-						        								        			<li>我暂时不想找工作</li>
-						        								        			<li>我是应届毕业生</li>
-						        								        	  </ul>
-						          </div>  
 						      </td>
 						    </tr>
 						    <tr>
@@ -229,10 +181,8 @@ var youdao_conv_id = 271546;
 						</div><!--end .new_portrait-->
             		</div><!--end .basicEdit-->
             		<input type="hidden" id="nameVal" th:value="${userinfo.getName()}">
-            		<input type="hidden" id="genderVal" value="男">
+            		<input type="hidden" id="genderVal" th:value="${userinfo.getSex()}">
             		<input type="hidden" id="topDegreeVal" th:value="${userinfo.getAge()}">
-<!--            		<input type="hidden" id="workyearVal" value="3年">-->
-            		<input type="hidden" id="currentStateVal" value="">
             		<input type="hidden" id="emailVal" th:value="${userinfo.getEmail()}">
             		<input type="hidden" id="telVal" th:value="${userinfo.getPhone()}">
             		<input type="hidden" id="pageType" value="1">

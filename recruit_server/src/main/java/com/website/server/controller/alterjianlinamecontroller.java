@@ -15,7 +15,7 @@ public class alterjianlinamecontroller {
     private UserSimpleInfoService userSimpleInfoService;
 
     @RequestMapping("/altername")
-    public boolean altername(HttpSession session, String newname,Integer userid) {
+    public boolean altername(String newname,Integer userid) {
         UserResume userResume=new UserResume();
         userResume.setUserId(userid);
         userResume.setResumeName(newname);
