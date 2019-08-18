@@ -76,7 +76,7 @@ var youdao_conv_id = 271546;
 	            		<h1 title="jason的简历" th:text="${userResume.getResumeName()}"></h1>
 	            		<span class="rename">重命名</span> | <a target="_blank" href="/preview.html">预览</a>
             		</div>
-            		<form class="fl dn" id="resumeNameForm">
+            		<form class="fl dn" id="resumeNameForm" action="/user/altername" method="get">
             			<input type="text" th:value="${userResume.getResumeName()}" name="resumeName" class="nameEdit c9">
             			<input type="submit" value="保存"> | <a target="_blank" href="/preview.html">预览</a>
             		</form>

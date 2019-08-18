@@ -8,12 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/user")
@@ -29,5 +27,18 @@ public class UserController {
         mm.addAttribute("userResume",userResume);
         mm.addAttribute("userinfo",userinfo);
         return "jianli";
+    }
+
+    @RequestMapping("/altername")
+    public String altername(HttpServletRequest request){
+        // Integer userId= (Integer) session.getAttribute("userid");
+        String newname=request.getParameter("resumeName");
+        Map mapInfo=new HashMap();
+        mapInfo.put("newname",newname);
+        mapInfo.put("userid",1001);
+        Boolean s =restTemplate.getForObject("http://PROVIDER-SERVER/user/altername?newname={newname}&userid={userid}",Boolean.class,mapInfo);
+        if(s){
+            return "redirect:/user/jianli";
+        }else return "index";
     }
 }
