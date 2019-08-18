@@ -1,6 +1,8 @@
 package com.website.client.controller;
 
 
+import com.github.pagehelper.PageInfo;
+import com.website.client.pojo.JobInfo;
 import com.website.client.pojo.JobKindInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,14 +24,14 @@ public class IndexController {
     }
 
     @RequestMapping("/hotjob.do")
-    public String getHotJob() {
-
-        return null;
+    public PageInfo<JobInfo> getHotJob() {
+        PageInfo<JobInfo> object = restTemplate.getForObject("http://PROVIDER-SERVER/index/hotjob.do", PageInfo.class);
+        return object;
     }
 
     @RequestMapping("/newjob.do")
-    public String getNewJob() {
-
-        return null;
+    public PageInfo<JobInfo> getNewJob() {
+        PageInfo<JobInfo> object = restTemplate.getForObject("http://PROVIDER-SERVER/index/newjob.do", PageInfo.class);
+        return object;
     }
 }

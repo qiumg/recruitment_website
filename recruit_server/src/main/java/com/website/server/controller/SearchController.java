@@ -5,43 +5,37 @@ import com.github.pagehelper.PageInfo;
 import com.website.server.pojo.JobInfo;
 import com.website.server.service.IJobKindInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/search")
 public class SearchController {
     @Autowired
     private IJobKindInfoService jobKindInfoService;
-    @RequestMapping("jobname")
-    public Map<String,Object> searchByJobName(String jobName){
+    @RequestMapping("/jobname")
+    public PageInfo<JobInfo> searchByJobName(String jobName){
         PageHelper.startPage(1,10);
         List<JobInfo> jobInfos = jobKindInfoService.queryJobInfoLiKeName(jobName);
         PageInfo<JobInfo> page = new PageInfo<>(jobInfos);
-        Map<String,Object> map = new HashMap<>();
-        map.put("page",page);
-        return map;
+        return page;
     }
     @RequestMapping("/companyName")
-    public  Map<String,Object> searchByCompanyName(String companyName){
+    public  PageInfo<JobInfo> searchByCompanyName(String companyName){
         PageHelper.startPage(1,10);
         List<JobInfo> jobInfos = jobKindInfoService.queryJobInfoLikeCompany(companyName);
         PageInfo<JobInfo> page = new PageInfo<>(jobInfos);
-        Map<String,Object> map = new HashMap<>();
-        map.put("page",page);
-        return map;
+        return page;
     }
     @RequestMapping("/condition")
-    public Map<String,Object> searchByCondition(String addr, Integer low, Integer high, String exp, String education, String nature, Integer date){
+    public PageInfo<JobInfo> searchByCondition(String addr, Integer low, Integer high, String exp, String education, String nature, Integer date){
         PageHelper.startPage(1,10);
         List<JobInfo> jobInfos = jobKindInfoService.queryJobInfoByCondition(addr, low, high, exp, education, nature, date);
         PageInfo<JobInfo> page = new PageInfo<>(jobInfos);
-        Map<String,Object> map = new HashMap<>();
-        map.put("page",page);
-        return map;
+        return page;
     }
 }
