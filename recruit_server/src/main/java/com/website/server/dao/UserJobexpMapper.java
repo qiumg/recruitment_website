@@ -18,4 +18,6 @@ public interface UserJobexpMapper {
     int updateByPrimaryKeySelective(UserJobexp record);
 
     int updateByPrimaryKey(UserJobexp record);
+
+    UserJobexp selectByjianliname(String resumeName);
 }
