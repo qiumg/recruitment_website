@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -28,12 +28,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-		<!--		<dependency>-->
-		<!--			<groupId>org.apache.commons</groupId>-->
-		<!--			<artifactId>commons-dbcp2</artifactId>-->
-		<!--			<version>2.6.0</version>-->
-		<!--		</dependency>-->
-		<!--		数据库连接池的配置-->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.commons</groupId>-->
+<!--			<artifactId>commons-dbcp2</artifactId>-->
+<!--			<version>2.6.0</version>-->
+<!--		</dependency>-->
+<!--		数据库连接池的配置-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
@@ -45,10 +45,10 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-		<!--		<dependency>-->
-		<!--			<groupId>org.springframework.boot</groupId>-->
-		<!--			<artifactId>spring-boot-starter-security</artifactId>-->
-		<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -99,6 +99,11 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.58</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -110,7 +115,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<!--			文件上传模块的依赖-->
+<!--			文件上传模块的依赖-->
 			<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 			<dependency>
 				<groupId>commons-fileupload</groupId>

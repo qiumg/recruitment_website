@@ -1,7 +1,9 @@
 package com.website.server.pojo;
 
-import java.util.Date;
+import lombok.Data;
 
+import java.util.Date;
+@Data
 public class User {
     private Integer id;
 
@@ -28,6 +30,14 @@ public class User {
     private Date modifyTime;
 
     private String state;
+
+    public User() {
+    }
+
+    public User(String email , String password) {
+        this.password = password;
+        this.email = email;
+    }
 
     public Integer getId() {
         return id;
