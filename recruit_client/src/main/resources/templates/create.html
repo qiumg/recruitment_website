@@ -55,8 +55,8 @@ var youdao_conv_id = 271546;
                     <span class="red dn" id="noticeDot-1"></span>
                     <i></i>
                 </dt>
-                <dd style="display: none;"><a href="positions.html">我发布的职位</a></dd>
-                <dd style="display: none;"><a href="positions.html">我收到的简历</a></dd>
+                <dd style="display: none;"><a href="positions3.html">我发布的职位</a></dd>
+                <dd style="display: none;"><a href="positions3.html">我收到的简历</a></dd>
                 <dd class="btm" style="display: none;"><a href="myhome.html">我的公司主页</a></dd>
                 <dd style="display: none;"><a href="jianli.html">我要找工作</a></dd>
                 <dd style="display: none;"><a href="accountBind.html">帐号设置</a></dd>
@@ -92,7 +92,7 @@ var youdao_conv_id = 271546;
                     <a href="http://localhost:8200/JobInfo2/selectAllJob2">有效职位</a>
                 </dd>
                 <dd>
-                    <a href="positions.html">已下线职位</a>
+                    <a href="http://localhost:8200/JobInfo2/selectHisJob2">已下线职位</a>
                 </dd>
             </dl>
             <div class="subscribe_side mt20">
@@ -125,9 +125,10 @@ var youdao_conv_id = 271546;
                             <td width="85">职位类别</td>
                             <td>
                                 <input type="hidden" id="positionType" value="" name="positionType">
-                                <input type="button" value="请选择职位类别" id="select_category" class="selectr selectr_380">
+                                <input type="button" value="请选择职位类别" id="select_category"
+                                       class="selectr selectr_380">
                                 <div class="dn" id="box_job" style="display: none;">
-                                                                                    <dl>
+                                    <dl>
                                             <dt>技术</dt>
                                             <dd>
                                                 <ul class="reset job_main">
@@ -637,15 +638,6 @@ var youdao_conv_id = 271546;
 <!--                        </tr>-->
                     </tbody></table>
 
-                    <table>
-                        <tbody><tr>
-                            <td width="25"><span class="redstar">*</span></td>
-                            <td colspan="2">
-                                接收简历邮箱： <span id="receiveEmailVal">admin@admin.com</span>
-                                <input type="hidden" value="admin@admin.com" id="receiveEmail" name="email">
-                            </td>
-                        </tr>
-                    </tbody></table>
 <!--                    <tr>-->
 <!--                        <td width="25"></td>-->
 <!--                        <td colspan="2">-->
@@ -659,22 +651,6 @@ var youdao_conv_id = 271546;
     </div>
         <script type="text/javascript">
             function add(){
-                //console.log($("jobForm").serialize());
-                // var data = {
-                //     'positionType' : $('input[name="positionType"]').val(),
-                //     'positionType2' : $('input[name="positionType2"]').val(),
-                //     'positionName' : $('input[name="positionName"]').val(),
-                //     'jobNature' : $('input[name="jobNature"]').val(),
-                //     'salaryMin' : $('input[name="salaryMin"]').val(),
-                //     'salaryMax' : $('input[name="salaryMax"]').val(),
-                //     'positiworkAddressonType' : $('input[name="positionworkAddressType"]').val(),
-                //     'workYear' : $('input[name="workYear"]').val(),
-                //     'education' : $('input[name="education"]').val(),
-                //     'positionAdvantage' : $('input[name="positionAdvantage"]').val(),
-                //     'positionDetail' : $('textarea[name="positionDetail"]').val(),
-                //     'positionDemand' : $('textarea[name="positionDemand"]').val(),
-                //     'num' : $('input[name="num"]').val()
-                // };
                 var data = $("#jobForm");
                 console.log(JSON.stringify(data));// json转化为字符串
                 $.ajax({
@@ -773,7 +749,7 @@ $(function(){
 </script> -->
 
 <!-- old -->
-<script src="style/js/jquery.tinymce.js" type="text/javascript"></script>
+<script src="../static/style/js/jquery.tinymce.js" type="text/javascript"></script>
 <script>
 $(function(){
 		
@@ -834,7 +810,7 @@ $(function(){
 </script>
 <!-- end old -->
 
-<script src="style/js/jobs.min.js" type="text/javascript"></script>
+<script src="../static/style/js/jobs.min.js" type="text/javascript"></script>
 <script src="http://api.map.baidu.com/api?v=2.0&amp;ak=A2c1a1ff1fe0750e3290660295aac602" type="text/javascript"></script><script src="http://api.map.baidu.com/getscript?v=2.0&amp;ak=A2c1a1ff1fe0750e3290660295aac602&amp;services=&amp;t=20140617153133" type="text/javascript"></script>
 <script type="text/javascript">
 //百度地图API功能
@@ -944,8 +920,8 @@ $(function(){
 		</div>
 	</div>
 
-<script src="style/js/core.min.js" type="text/javascript"></script>
-<script src="style/js/popup.min.js" type="text/javascript"></script>
+<script src="../static/style/js/core.min.js" type="text/javascript"></script>
+<script src="../static/style/js/popup.min.js" type="text/javascript"></script>
 
 <!--  -->
 

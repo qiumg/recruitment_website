@@ -46,9 +46,6 @@ public class JobInfo {
 
     private Integer jClick;    //点击量
 
-    private Set<JobKindInfo>  JKSet=  new HashSet<>();
-    private Set<JobKind1Info> JK1Set=  new HashSet<>();
-    private Set<JobKind2Info> JK2Set=  new HashSet<>();
 
     public JobInfo() {
     }
@@ -70,25 +67,7 @@ public class JobInfo {
         this.cId = cId;
     }
 
-    public JobInfo(Integer jId, String jName, String jCharacter, String jk2Name, Integer jMlow, Integer jMhigh, String jExperience, Date jDate, Integer jNum, String jLoc, String jReq, String jDes, String jBenefit, Integer cId, Set<JobKindInfo> JKSet, Set<JobKind1Info> JK1Set, Set<JobKind2Info> JK2Set) {
-        this.jId = jId;
-        this.jName = jName;
-        this.jCharacter = jCharacter;
-        this.jk2Name = jk2Name;
-        this.jMlow = jMlow;
-        this.jMhigh = jMhigh;
-        this.jExperience = jExperience;
-        this.jDate = jDate;
-        this.jNum = jNum;
-        this.jLoc = jLoc;
-        this.jReq = jReq;
-        this.jDes = jDes;
-        this.jBenefit = jBenefit;
-        this.cId = cId;
-        this.JKSet = JKSet;
-        this.JK1Set = JK1Set;
-        this.JK2Set = JK2Set;
-    }
+
 
 
 
@@ -213,6 +192,7 @@ public class JobInfo {
                 ", jk2Name='" + jk2Name + '\'' +
                 ", jMlow=" + jMlow +
                 ", jMhigh=" + jMhigh +
+                ", jEducation='" + jEducation + '\'' +
                 ", jExperience='" + jExperience + '\'' +
                 ", jDate=" + jDate +
                 ", jNum=" + jNum +
@@ -221,9 +201,7 @@ public class JobInfo {
                 ", jDes='" + jDes + '\'' +
                 ", jBenefit='" + jBenefit + '\'' +
                 ", cId=" + cId +
-                ", JKSet=" + JKSet +
-                ", JK1Set=" + JK1Set +
-                ", JK2Set=" + JK2Set +
+                ", jClick=" + jClick +
                 '}';
     }
 }

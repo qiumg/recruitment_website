@@ -21,36 +21,6 @@
 
   </resultMap>
 
-  <resultMap id="JobInfoMap"  type="com.website.server.pojo.JobInfo">
-    <id column="j_id" jdbcType="INTEGER" property="jId" />
-    <result column="j_name" jdbcType="VARCHAR" property="jName" />
-    <result column="j_character" jdbcType="VARCHAR" property="jCharacter" />
-    <result column="jk2_name" jdbcType="VARCHAR" property="jk2Name" />
-    <result column="j_mlow" jdbcType="INTEGER" property="jMlow" />
-    <result column="j_mhigh" jdbcType="INTEGER" property="jMhigh" />
-    <result column="j_experience" jdbcType="VARCHAR" property="jExperience" />
-    <result column="j_date" jdbcType="TIMESTAMP" property="jDate" />
-    <result column=" j_num" jdbcType="INTEGER" property="jNum" />
-    <result column="j_loc" jdbcType="VARCHAR" property="jLoc" />
-    <result column="j_req" jdbcType="VARCHAR" property="jReq" />
-    <result column="j_des" jdbcType="VARCHAR" property="jDes" />
-    <result column="j_benefit" jdbcType="VARCHAR" property="jBenefit" />
-    <result column="c_id" jdbcType="INTEGER" property="cId" />
-    <collection property="JK2Set" ofType="com.website.server.pojo.JobKind2Info">
-<!--      <id column="jk2_id" property="jk2Id"></id>-->
-      <result column="jk2_name" property="jk2Name"></result>
-<!--      <result column="jk1_id" property="jk1Id"></result>-->
-    </collection>
-    <collection property="JK1Set" ofType="com.website.server.pojo.JobKind1Info">
-<!--      <id column="jk1_id" property="jk1Id"></id>-->
-      <result column="jk1_name" property="jk1Name"></result>
-<!--      <result column="jk_id" property="jkId"></result>-->
-    </collection>
-    <collection property="JKSet" ofType="com.website.server.pojo.JobKindInfo">
-<!--      <id column="jk_id" property="jkId"></id>-->
-      <result column="jk_name" property="jkName"></result>
-    </collection>
-  </resultMap>
 
   <sql id="Base_Column_List">
     j_id, j_name, j_character, jk2_name, j_mlow, j_mhigh, j_experience, j_date, " j_num", 
@@ -210,7 +180,7 @@
         j_date = #{jDate,jdbcType=TIMESTAMP},
       </if>
       <if test="jNum != null">
-        " j_num" = #{jNum,jdbcType=INTEGER},
+        j_num = #{jNum,jdbcType=INTEGER},
       </if>
       <if test="jLoc != null">
         j_loc = #{jLoc,jdbcType=VARCHAR},
@@ -227,6 +197,9 @@
       <if test="cId != null">
         c_id = #{cId,jdbcType=INTEGER},
       </if>
+      <if test="jClick != null">
+        j_click= #{jClick,jdbcType=INTEGER},
+      </if>
     </set>
     where j_id = #{jId,jdbcType=INTEGER}
   </update>
@@ -239,7 +212,7 @@
       j_mhigh = #{jMhigh,jdbcType=INTEGER},
       j_experience = #{jExperience,jdbcType=VARCHAR},
       j_date = #{jDate,jdbcType=TIMESTAMP},
-      " j_num" = #{jNum,jdbcType=INTEGER},
+      j_num = #{jNum,jdbcType=INTEGER},
       j_loc = #{jLoc,jdbcType=VARCHAR},
       j_req = #{jReq,jdbcType=VARCHAR},
       j_des = #{jDes,jdbcType=VARCHAR},

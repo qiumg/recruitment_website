@@ -114,22 +114,67 @@ var youdao_conv_id = 271546;
 <!--									[[#{jobInfo2.jName}]]-->
 									<h3>
 										<a target="_blank" title="" href="http://www.lagou.com/jobs/149594.html" th:text="${jobInfo2.jname}"></a>
+										<span th:text="${jobInfo2.jkName}"></span>
+										<span th:text="${jobInfo2.jk1Name}"></span>
+										<span th:text="${jobInfo2.jk2Name}"></span>
 										<span th:text="${jobInfo2.jloc}"></span>
 									</h3>
 									<span class="receivedResumeNo">招募人数：[[${jobInfo2.jnum}]]</span>
 									<div>[[${jobInfo2.jcharacter}]] / [[${jobInfo2.jmlow}]]K-[[${jobInfo2.jmhigh}]]K / [[${jobInfo2.jexperience}]] / [[${jobInfo2.jeducation}]]</div>
 									<div class="c9">发布时间： [[${jobInfo2.jdate}]]</div>
-											                                    		                                    <div class="links">
+									<div class="links">
 									<a target="_blank" class="job_edit" th:href="@{/JobInfo2/}+${jobInfo2.jid}">编辑</a>
-									<a class="job_offline" href="javascript:void(0)">下线</a>
-									<a class="job_del" href="javascript:void(0)">删除</a>
+									<a class="job_offline" th:onclick="'javascript:up('+${jobInfo2.jid}+')'">上线</a>
+									<a class="job_del" th:onclick="'javascript:deleteJob('+${jobInfo2.jid}+')'">删除</a>
 									</div>
 								</li>
 							</ul>
 						</form>
+
 					</dd>
                 </dl>
             </div><!-- end .content -->
+		<script type="text/javascript">
+			function up(jid) {
+				$.ajax({
+						url: "/JobInfo2/upJob2",
+						type: "post",
+						data: {'jid': jid},
+						success: function (data) {
+							if (data.msg == 'success') {
+								alert('上线成功！')
+								window.location.href = 'http://localhost:8200/JobInfo2/selectHisJob2';
+							}
+							if (data.msg == 'fail') {
+								alert('上线失败！')
+								window.location.href = 'http://localhost:8200/JobInfo2/selectHisJob2';
+							}
+						}
+						}
+				);
+
+			}
+
+			function deleteJob(jid){
+				$.ajax({
+							url: "/JobInfo2/deleteJob2",
+							type: "post",
+							data: {'jid': jid},
+							success: function (data) {
+								if (data.msg == 'success') {
+									alert('删除成功！')
+									window.location.href = 'http://localhost:8200/JobInfo2/selectHisJob2';
+								}
+								if (data.msg == 'fail') {
+									alert('删除失败！')
+									window.location.href = 'http://localhost:8200/JobInfo2/selectHisJob2';
+								}
+							}
+						}
+				);
+			}
+
+		</script>
 <script src="style/js/job_list.min.js" type="text/javascript"></script> 
 			<div class="clear"></div>
 			<input type="hidden" value="74fb1ce14ebf4e2495270b0fbad64704" id="resubmitToken">

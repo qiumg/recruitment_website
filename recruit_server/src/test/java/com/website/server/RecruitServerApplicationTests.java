@@ -89,8 +89,10 @@ public class RecruitServerApplicationTests {
 
 	@Test
 	public void test5(){
-		String[] arr = new String[25];
-		System.out.println("asdfasdfasdfasdf"+arr);
+		JobInfo jobInfo=new JobInfo();
+		jobInfo.setjId(1);
+		jobInfo.setjMhigh(10);
+		jobInfoService.updateByPrimaryKeySelectiveService(jobInfo);
 	}
 
 }

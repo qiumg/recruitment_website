@@ -93,6 +93,32 @@ public class JobInfoService {
         return 1;
     }
 
+    //下线职位（将招募人数设为0）
+
+    public int downJobInfo(int j_id){
+        jobInfoMapper.downJobInfo(j_id);
+        return 1;
+    }
+
+    //下线职位（将招募人数设为0）
+
+    public int upJobInfo(int j_id){
+        jobInfoMapper.upJobInfo(j_id);
+        return 1;
+    }
+
+    //更新职位
+    public  int updateJobInfo(JobInfo jobInfo){
+        jobInfoMapper.updateByPrimaryKeySelective(jobInfo);
+        return 1;
+    }
+
+    //检索职位信息（所有） 按j_id
+    public  JobInfo2 selectAllByJId(int j_id){
+        JobInfo2 jobInfo2 = new JobInfo2();
+        jobInfo2=jobInfoMapper.selectByJId(j_id);
+        return jobInfo2;
+    }
 
 
 

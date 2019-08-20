@@ -1,6 +1,9 @@
 package com.website.server.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.website.server.pojo.JobInfo;
 import com.website.server.pojo.UserResume;
 import com.website.server.pojo.justforeasy.JobInfo2;
@@ -90,9 +93,13 @@ public class JobInfoController {
     }
 
     //删除 by j_id
-    @RequestMapping("/delete.do")
-    public void deleteJob(Integer jId){
-        i=jobInfoService.deleteByPrimaryKeyService(jId);
+    @RequestMapping("/deleteJob")
+    public Integer deleteJob(@RequestBody  ModelMap map){
+        ObjectMapper mapper = new ObjectMapper();
+        int j_id=mapper.convertValue(map.get("jid"),Integer.class);
+        i=jobInfoService.deleteByPrimaryKeyService(j_id);
+        return i;
+
 
     }
     @RequestMapping("/selectHisJob")
@@ -101,17 +108,26 @@ public class JobInfoController {
         Map m=new HashMap();
         Integer cID= (Integer) session.getAttribute("c_id");
         jobInfo2s=jobInfoService.selectHisJobByCidService(1);
+
         m.put("jobInfo2s",jobInfo2s);
         return m;
     }
     //企业已发布职位信息
     @RequestMapping("/selectAllJob")
     public Map selectAllJobByCid(HttpSession session){
+        PageHelper.startPage(1,4);
+        PageHelper.orderBy("name DESC");
         Map m=new HashMap();
-        Integer cID= (Integer) session.getAttribute("c_id");
-        jobInfo2s=jobInfoService.selectAllJobByCidService(1);
+//        Integer cID= (Integer) session.getAttribute("c_id");
 
-        m.put("jobInfo2s",jobInfo2s);
+        jobInfo2s=jobInfoService.selectAllJobByCidService(1);
+        PageInfo<JobInfo2> pageInfo=new PageInfo<JobInfo2>(jobInfo2s);
+
+//        pageInfo.setPageNum(1);
+//        pageInfo.setPageSize(4);
+//        System.out.println(pageInfo);
+        m.put("pageInfo",pageInfo);
+//        m.put("jobInfo2s",jobInfo2s);
 //        System.out.println("asd"+m);
         return m;
 
@@ -145,7 +161,58 @@ public class JobInfoController {
     //企业按职位类别搜索职位信息（曾发布职位查询）
 
     //更改职位信息 by j_id
-//    @RequestMapping("/updateJobInfo2/{jid}")
+    @RequestMapping("/updateJobInfo")
+    public Integer updateJobInfo(@RequestBody  ModelMap map){
+        JobInfo jobInfo = new JobInfo();
+        ObjectMapper mapper = new ObjectMapper();
+        jobInfo.setjId(mapper.convertValue(map.get("jid"),Integer.class));
+        jobInfo.setcId(mapper.convertValue(map.get("c_id"),Integer.class));
+        jobInfo.setjBenefit(mapper.convertValue(map.get("positionAdvantage"),String.class));
+        jobInfo.setjCharacter(mapper.convertValue(map.get("jobNature"),String.class));
+        jobInfo.setJClick(mapper.convertValue(map.get("jclick"),Integer.class));
+        jobInfo.setjDate(mapper.convertValue(map.get("date"),Date.class));
+        jobInfo.setJEducation(mapper.convertValue(map.get("education"),String.class));
+        jobInfo.setjExperience(mapper.convertValue(map.get("workYear"),String.class));
+        jobInfo.setjDes(mapper.convertValue(map.get("positionDetail"),String.class));
+        jobInfo.setJk2Name(mapper.convertValue(map.get("positionType2"),String.class));
+        jobInfo.setjLoc(mapper.convertValue(map.get("workAddress"),String.class));
+        jobInfo.setjMhigh(mapper.convertValue(map.get("salaryMax"),Integer.class));
+        jobInfo.setjMlow(mapper.convertValue(map.get("salaryMin"),Integer.class));
+        jobInfo.setjReq(mapper.convertValue(map.get("positionDemand"),String.class));
+        jobInfo.setjName(mapper.convertValue(map.get("positionName"),String.class));
+        jobInfo.setjNum(mapper.convertValue(map.get("num"),Integer.class));
+        i=jobInfoService.updateByPrimaryKeySelectiveService(jobInfo);
+        return i;
 
+    }
+
+    //下线职位
+    @RequestMapping("/downJob")
+    public Integer downJobIndo(@RequestBody  ModelMap map){
+        ObjectMapper mapper = new ObjectMapper();
+        int j_id=mapper.convertValue(map.get("jid"),Integer.class);
+        i=jobInfoService.downJobInfo(j_id);
+        return i;
+    }
+
+    //上线职位
+    @RequestMapping("/upJob")
+    public Integer upJobIndo(@RequestBody  ModelMap map){
+        ObjectMapper mapper = new ObjectMapper();
+        int j_id=mapper.convertValue(map.get("jid"),Integer.class);
+        i=jobInfoService.upJobInfo(j_id);
+        return i;
+    }
+
+    //查询职位 by j_id
+    @RequestMapping("/selectAllJobByJid")
+    public Map selectAllJobInfoByJId(@RequestBody  ModelMap map){
+        Map map1 = new HashMap();
+        ObjectMapper mapper = new ObjectMapper();
+        int j_id=mapper.convertValue(map.get("jid"),Integer.class);
+        JobInfo2 jobInfo2=jobInfoService.selectAllByJId(j_id);
+        map1.put("jobInfo2",jobInfo2);
+        return map1;
+    }
 
 }

@@ -50,6 +50,15 @@ public interface JobInfoMapper {
             "where c_id = #{c_id}  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id and j_num = 0")
     List<JobInfo2> selectHisJobByCid(int c_id);
 
+    //查询职位信息by j_id
+    @ResultMap(value = "jobMap")
+    @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
+            "j_mlow,j_mhigh,j_experience,j_date,j_num,j_loc,\n" +
+            "j_req,j_des,j_benefit ,j_click,j_education\n" +
+            "from job_info j,job_kind1_info jk1,job_kind2_info jk2 ,job_kind_info jk\n" +
+            "where j_id = #{j_id}  and j.jk2_name=jk2.jk2_name  and jk2.jk1_id=jk1.jk1_id and jk1.jk_id=jk.jk_id ")
+    JobInfo2 selectByJId(Integer j_id);
+
     //企业已发布职位信息
     @ResultMap(value = "jobMap")
     @Select("select j_id,j_name,j_character,jk2.jk2_name,jk1.jk1_name,jk.jk_name,\n" +
@@ -174,7 +183,16 @@ public interface JobInfoMapper {
     //更改职位信息 by j_id
     int updateByPrimaryKeySelective(JobInfo record);
 
-
-
     int updateByPrimaryKey(JobInfo record);
+
+    //下线职位（将招募人数设为0/1）
+    @Update("update job_info set j_num = 0 where j_id = #{j_id}")
+    int downJobInfo(int j_id);
+
+    //上线职位（将招募人数设为0/1）
+    @Update("update job_info set j_num = 1 where j_id = #{j_id}")
+    int upJobInfo(int j_id);
+
+
+
 }
