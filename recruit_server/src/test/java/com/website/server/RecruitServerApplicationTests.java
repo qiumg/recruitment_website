@@ -25,8 +25,8 @@ public class RecruitServerApplicationTests {
 
 	@Test
 	public void contextLoads(){
-		List<JobInfo> jobInfos = jobKindInfoService.queryJobInfoByCondition(null,7,9,null,null,null,null);
-		System.out.println(jobInfos);
+//		List<JobInfo> jobInfos = jobKindInfoService.queryJobInfoByCondition(null,7,9,null,null,null,null);
+//		System.out.println(jobInfos);
 	}
 
 }

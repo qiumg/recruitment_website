@@ -31,5 +31,5 @@ public interface JobInfoMapper {
     //根据公司的名称对职位进行模糊查询
     List<JobInfo> selectJobInfoLikeCompanyName(String companyName);
     //根据条件查询对工作进行查询
-    List<JobInfo> selectJobInfoByCondition(@Param("addr") String addr, @Param("low") Integer low, @Param("high") Integer high, @Param("exp") String exp, @Param("education") String education, @Param("nature") String nature, @Param("date") Integer date);
+    List<JobInfo> selectJobInfoByCondition(@Param("companyName") String companyName,@Param("jobName") String jobName,@Param("addr") String addr, @Param("low") Integer low, @Param("high") Integer high, @Param("exp") String exp, @Param("education") String education, @Param("nature") String nature, @Param("date") Integer date);
 }

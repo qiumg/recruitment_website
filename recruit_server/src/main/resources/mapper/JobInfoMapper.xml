@@ -48,33 +48,48 @@
         select
         <include refid="Base_Column_List"/>
         from job_info
-        where j_name like concat('%',#{jobName},'%')
+        <where>
+            <if test="jobName != null and jobName !=''">
+                and j_name like concat('%',#{jobName},'%')
+            </if>
+        </where>
     </select>
     <select id="selectJobInfoLikeCompanyName" parameterType="string" resultMap="BaseResultMap">
      select j_id, j_name, j_character, jk2_name, j_mlow, j_mhigh, j_education, j_experience,
             j_date, j_num, j_loc, j_req, j_des, j_benefit, j.c_id, j_click
      from job_info j,company_info c
-     where j.c_id=c.c_id and c.c_name like concat('%',#{companyName},'%')
+     <where>
+         <if test="companyName !=null and companyName !=''">
+            and j.c_id=c.c_id and c.c_name like concat('%',#{companyName},'%')
+         </if>
+     </where>
   </select>
     <select id="selectJobInfoByCondition" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from job_info
+        select j_id, j_name, j_character, jk2_name, j_mlow, j_mhigh, j_education, j_experience,
+        j_date, j_num, j_loc, j_req, j_des, j_benefit, j.c_id, j_click
+        from job_info j,company_info c
         <where>
-            <if test="addr !=null">
+            j.c_id=c.c_id
+            <if test="jobName != null and jobName !=''">
+                and j_name like concat('%',#{jobName},'%')
+            </if>
+            <if test="companyName != null and companyName !=''">
+                and j.c_id=c.c_id and c.c_name like concat('%',#{companyName},'%')
+            </if>
+            <if test="addr !=null and addr !=''">
                 and j_loc=#{addr}
             </if>
             <if test="low != null and high != null">
                 and j_mlow>=#{low} and j_mhigh &lt;= #{high}
             </if>
-            <if test="education != null">
-                and
+            <if test="education != null and education != ''">
+                and j_education=#{education}
             </if>
-            <if test="exp != null">
-                j_experience = #{exp}
+            <if test="exp != null and exp !=''">
+                and j_experience = #{exp}
             </if>
-            <if test="nature != null">
-                j_character = #{nature}
+            <if test="nature != null and nature !=''">
+                and j_character = #{nature}
             </if>
             <if test="date != null">
                 and j_date>= DATE_SUB(NOW(),INTERVAL #{date} DAY)

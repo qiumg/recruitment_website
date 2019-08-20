@@ -80,8 +80,8 @@ public class JobKindInfoServiceImpl implements IJobKindInfoService {
     }
 
     @Override
-    public List<JobInfo> queryJobInfoByCondition(String addr, Integer low, Integer high, String exp, String education, String nature, Integer date) {
-        List<JobInfo> jobInfos = jobInfoMapper.selectJobInfoByCondition(addr, low, high, exp, education, nature, date);
+    public List<JobInfo> queryJobInfoByCondition(String companyName,String jobName,String addr, Integer low, Integer high, String exp, String education, String nature, Integer date) {
+        List<JobInfo> jobInfos = jobInfoMapper.selectJobInfoByCondition(companyName,jobName,addr, low, high, exp, education, nature, date);
         System.out.println(jobInfos);
         if (jobInfos != null) {
             for (int i = 0; i < jobInfos.size(); i++) {

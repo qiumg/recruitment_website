@@ -17,5 +17,5 @@ public interface IJobKindInfoService {
     //根据公司名进行模糊查询
     List<JobInfo> queryJobInfoLikeCompany(String companyName);
     //根据工作地点、月薪范围、工作经验、最低学历、工作性质、发布时间进行多条件查询
-    List<JobInfo> queryJobInfoByCondition(String addr,Integer low,Integer high,String exp,String education,String nature,Integer date);
+    List<JobInfo> queryJobInfoByCondition(String companyName,String jobName,String addr,Integer low,Integer high,String exp,String education,String nature,Integer date);
 }

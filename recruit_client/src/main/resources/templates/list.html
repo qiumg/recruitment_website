@@ -1,6 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <script id="allmobilize" charset="utf-8" src="style/js/allmobilize.min.js"></script>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="alternate" media="handheld"/>
@@ -24,14 +28,13 @@
     <!--[if lte IE 8]>
     <script type="text/javascript" src="/style/js/excanvas.js"></script>
     <![endif]-->
-
     <script type="text/javascript" src="/style/js/conv.js"></script>
 </head>
 <body>
 <div id="body">
     <div id="header">
         <div class="wrapper">
-            <a href="index.html" class="logo">
+            <a href="/index.html" class="logo">
                 <img src="/style/images/logo.png" width="229" height="60" alt="启职者"/>
             </a>
             <ul class="reset" id="navheader">
@@ -52,19 +55,19 @@
             <div id="options" class="greybg">
                 <dl>
                     <dt>月薪范围 <em></em></dt>
-                    <dd>
-                        <div>2k以下</div>
-                        <div>2k-5k</div>
-                        <div>5k-10k</div>
-                        <div>10k-15k</div>
-                        <div>15k-25k</div>
-                        <div>25k-50k</div>
-                        <div>50k以上</div>
+                    <dd id="money">
+                        <div min="0" max="2">2k以下</div>
+                        <div min="2" max="5">2k-5k</div>
+                        <div min="5" max="10">5k-10k</div>
+                        <div min="10" max="15">10k-15k</div>
+                        <div min="15" max="25">15k-25k</div>
+                        <div min="25" max="50">25k-50k</div>
+                        <div min="50" max="100">50k以上</div>
                     </dd>
                 </dl>
                 <dl>
                     <dt>工作经验 <em></em></dt>
-                    <dd>
+                    <dd id="experience">
                         <div>不限</div>
                         <div>应届毕业生</div>
                         <div>1年以下</div>
@@ -76,7 +79,7 @@
                 </dl>
                 <dl>
                     <dt>最低学历 <em></em></dt>
-                    <dd>
+                    <dd id="education">
                         <div>不限</div>
                         <div>大专</div>
                         <div>本科</div>
@@ -86,7 +89,7 @@
                 </dl>
                 <dl>
                     <dt>工作性质 <em></em></dt>
-                    <dd>
+                    <dd id="nature">
                         <div>全职</div>
                         <div>兼职</div>
                         <div>实习</div>
@@ -94,11 +97,11 @@
                 </dl>
                 <dl>
                     <dt>发布时间 <em></em></dt>
-                    <dd>
-                        <div>今天</div>
-                        <div>3天内</div>
-                        <div>一周内</div>
-                        <div>一月内</div>
+                    <dd id="date">
+                        <div date="1">今天</div>
+                        <div date="3">3天内</div>
+                        <div date="7">一周内</div>
+                        <div date="30">一月内</div>
                     </dd>
                 </dl>
             </div>
@@ -135,13 +138,13 @@
 
         <div class="content">
             <div id="search_box">
-                <form id="searchForm" name="searchForm" action="list.html" method="get">
+<!--                <form id="searchForm" name="searchForm" action="/condition" method="get">-->
                     <ul id="searchType">
                         <li data-searchtype="1" class="type_selected">职位</li>
                         <li data-searchtype="4">公司</li>
                     </ul>
                     <div class="searchtype_arrow"></div>
-                    <input type="text" id="search_input" name="kd" tabindex="1" value="前端开发"
+                    <input type="text" id="search_input" name="kd" tabindex="1" th:value="${kd}"
                            placeholder="请输入职位名称，如：产品经理"/>
                     <input type="hidden" name="spc" id="spcInput" value="1"/>
                     <input type="hidden" name="pl" id="plInput" value=""/>
@@ -154,8 +157,8 @@
                     <input type="hidden" name="lc" id="lc" value=""/>
                     <input type="hidden" name="workAddress" id="workAddress" value=""/>
                     <input type="hidden" name="city" id="cityInput" value="全国"/>
-                    <input type="submit" id="search_button" value="搜索"/>
-                </form>
+                    <input onclick="search()" id="search_button" value="           搜索"/>
+<!--                </form>-->
             </div>
             <style>
                 .ui-autocomplete {
@@ -194,56 +197,63 @@
                 }
             </style>
             <script type="text/javascript" src="style/js/search.min.js"></script>
+            <script type="text/javascript">
+                function search() {
+                    var choose = $(".type_selected").attr("data-searchtype");
+                    var kd = $("#search_input").val()
+                    window.location.href="/search?kd="+kd+"&choose="+choose;
+                }
+            </script>
             <dl class="hotSearch">
                 <dt>热门搜索：</dt>
-                <dd><a href="list.htmlJava?labelWords=label&city=全国">Java</a></dd>
-                <dd><a href="list.htmlPHP?labelWords=label&city=全国">PHP</a></dd>
-                <dd><a href="list.htmlAndroid?labelWords=label&city=全国">Android</a></dd>
-                <dd><a href="list.htmliOS?labelWords=label&city=全国">iOS</a></dd>
-                <dd><a href="list.html前端?labelWords=label&city=全国">前端</a></dd>
-                <dd><a href="list.html产品经理?labelWords=label&city=全国">产品经理</a></dd>
-                <dd><a href="list.htmlUI?labelWords=label&city=全国">UI</a></dd>
-                <dd><a href="list.html运营?labelWords=label&city=全国">运营</a></dd>
-                <dd><a href="list.htmlBD?labelWords=label&city=全国">BD</a></dd>
-                <dd><a href="list.html?gx=实习&city=全国">实习</a></dd>
+                <dd><a href="/search?kd=java&choose=1">Java</a></dd>
+                <dd><a href="/search?kd=PHP&choose=1">PHP</a></dd>
+                <dd><a href="/search?kd=Android&choose=1">Android</a></dd>
+                <dd><a href="/search?kd=iOS&choose=1">iOS</a></dd>
+                <dd><a href="/search?kd=前端&choose=1">前端</a></dd>
+                <dd><a href="/search?kd=产品经理&choose=1">产品经理</a></dd>
+                <dd><a href="/search?kd=UI&choose=1">UI</a></dd>
+                <dd><a href="/search?kd=运营&choose=1">运营</a></dd>
+                <dd><a href="/search?kd=BD&choose=1">BD</a></dd>
+                <dd><a href="/search?kd=实习&choose=1">实习</a></dd>
             </dl>
             <div class="breakline"></div>
             <dl class="workplace" id="workplaceSelect">
                 <dt class="fl">工作地点：</dt>
                 <dd>
-                    <a href="javascript:;" class="current">全国</a>
+                    <a id="sel">全国</a>
                     |
                 </dd>
                 <dd>
-                    <a href="javascript:;">北京</a>
+                    <a>北京</a>
                     |
                 </dd>
                 <dd>
-                    <a href="javascript:;">上海</a>
+                    <a>上海</a>
                     |
                 </dd>
                 <dd>
-                    <a href="javascript:;">广州</a>
+                    <a>广州</a>
                     |
                 </dd>
                 <dd>
-                    <a href="javascript:;">深圳</a>
+                    <a>深圳</a>
                     |
                 </dd>
                 <dd>
-                    <a href="javascript:;">成都</a>
+                    <a>成都</a>
                     |
                 </dd>
                 <dd>
-                    <a href="javascript:;">杭州</a>
+                    <a>杭州</a>
                     |
                 </dd>
                 <dd>
-                    <a href="javascript:;">武汉</a>
+                    <a>武汉</a>
                     |
                 </dd>
                 <dd>
-                    <a href="javascript:;">南京</a>
+                    <a>南京</a>
                     |
                 </dd>
                 <dd class="more">
@@ -337,7 +347,7 @@
                 <span>亲，“嘀嘀打车”已更名为“滴滴打车”了哦，我们已帮您自动跳转~</span>
                 <a href="javascript:;">我知道了</a>
             </div>
-
+            <div id="result">
             <ul class="hot_pos reset" th:each="job:${page.list}">
                 <li class="odd clearfix">
                     <div class="hot_pos_l">
@@ -352,7 +362,7 @@
                         <br/>
                         <span><em class="c7">职位诱惑：</em>[[${job.jBenefit}]]</span>
                         <br/>
-                        <span>[[${job.jDate}]]发布</span>
+                        <span>[[${#strings.substring(job.jDate,0,10)}]]发布</span>
                     </div>
                     <div class="hot_pos_r">
                         <div class="apply">
@@ -364,128 +374,286 @@
                         <br/>
                         <span><em class="c7">阶段： </em>[[${job.companyInfo.cStage}]]</span>
                         <span><em class="c7">规模： </em>[[${job.companyInfo.cScale}]]</span>
-                        <ul class="companyTags reset">
-                            <li>五险一金</li>
-                            <li>股票期权</li>
-                            <li>年度旅游</li>
+                        <ul class="companyTags reset" th:each="ticket:${job.companyInfo.ticketInfos}">
+                            <li th:text="${ticket.ticName}"></li>
                         </ul>
                     </div>
                 </li>
 
             </ul>
-            <div class="Pagination"></div>
+            </div>
+            <div id="page">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-lg">
+                        <li>
+                            <a th:href="@{/search?kd=${kd}&choose=${choose}&pageNum=${i-1}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li th:each="i:${#numbers.sequence(1,page.pages)}"><a th:href="@{/search?kd=${kd}&choose=${choose}&pageNum=${i}">[[${i}]]</a></li>
+
+                        <li>
+                            <a th:href="@{/search?kd=${kd}&choose=${choose}&pageNum=${i+1}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
 
         <script>
             $(function () {
-                /***************************
-                 * 分页
-                 */
-                $('.Pagination').pager({
-                    currPage: 1,
-                    pageNOName: "pn",
-                    form: "searchForm",
-                    pageCount: 30,
-                    pageSize: 5
-                });
-
-                $(".workplace dd").not('.more').children('a').click(function () {
-                    $('#lc').val(1);
-                    editForm("cityInput", $(this).html());
-                });
-
-                $("#box_expectCity dd span").click(function () {
-                    $('#lc').val(1);
-                    editForm("cityInput", $(this).html());
-                });
-
-                $('#options dd div').click(function () {
-                    var firstName = $(this).parents('dl').children('dt').text();
-                    var fn = $.trim(firstName);
-                    if (fn == "月薪范围") {
-                        editForm("yxInput", $(this).html());
-                    } else if (fn == "工作经验") {
-                        editForm("gjInput", $(this).html());
-                    } else if (fn == "最低学历") {
-                        editForm("xlInput", $(this).html());
-                    } else if (fn == "工作性质") {
-                        editForm("gxInput", $(this).html());
-                    } else if (fn == "发布时间") {
-                        editForm("stInput", $(this).html());
+                $("#workplaceSelect dd a").click(function () {
+                    var addr = $(this).text();
+                    $.ajax({
+                        url:"/condition",
+                        type:"get",
+                        data:{"addr":addr},
+                        success:function (data) {
+                            reload(data);
+                            $("#sel").text(addr)
+                        }
+                    })
+                })
+                $("#workplaceSelect dd dl span").click(function () {
+                    var addr = $(this).text()
+                    $.ajax({
+                        url:"/condition",
+                        type:"get",
+                        data:{"addr":addr},
+                        success:function (data) {
+                            reload(data);
+                            $("#sel").text(addr)
+                        }
+                    })
+                })
+                $('#money div').click(function (){
+                    var low = $(this).attr('min');
+                    var high = $(this).attr('max');
+                    $.ajax({
+                        url:"/condition",
+                        type:"get",
+                        data:{"low":low,high:high},
+                        success:function (data) {
+                            reload(data);
+                            $(this).css("color","green");
+                        }
+                    })
+                })
+                $('#experience div').click(function(){
+                    var exp = $(this).text()
+                    $.ajax({
+                        url:"/condition",
+                        type:"get",
+                        data:{"exp":exp},
+                        success:function (data) {
+                            reload(data);
+                        }
+                    })
+                })
+                $('#education div').click(function(){
+                    var education = $(this).text();
+                    $.ajax({
+                        url:"/condition",
+                        type:"get",
+                        data:{"education":education},
+                        success:function (data) {
+                            reload(data);
+                        }
+                    })
+                })
+                $('#nature div').click(function(){
+                    var nature = $(this).text();
+                    alert(nature)
+                    $.ajax({
+                        url:"/condition",
+                        type:"get",
+                        data:{"nature":nature},
+                        success:function (data) {
+                            reload(data);
+                            //$(this).parent().children()
+                        }
+                    })
+                })
+                $('#date div').click(function(){
+                    var date = $(this).attr("date");
+                    $.ajax({
+                        url:"/condition",
+                        type:"get",
+                        data:{"date":date},
+                        success:function (data) {
+                            reload(data);
+                        }
+                    })
+                })
+            })
+            function reload(data){
+                $("#result").empty();
+                var list = data.list;
+                for (var i=0;i<list.length;i++) {
+                    $("#result").append("<ul  class=\"hot_pos reset\"><li class=\"odd clearfix\">\n" +
+                        "                    <div class=\"hot_pos_l\">\n" +
+                        "                        <div class=\"mb10\">\n" +
+                        "                            <a href=\"h/jobs/86989.html\" title=\"前端开发\" target=\"_blank\">"+list[i].jName+"</a>\n" +
+                        "                            &nbsp;\n" +
+                        "                            <span class=\"c9\" >"+list[i].jLoc+"</span>\n" +
+                        "                        </div>\n" +
+                        "                        <span><em class=\"c7\">月薪：</em>"+list[i].jMlow+"k-"+list[i].jMhigh+"k</span>\n" +
+                        "                        <span><em class=\"c7\">经验：</em> "+list[i].jExperience+"</span>\n" +
+                        "                        <span><em class=\"c7\">最低学历： </em>"+list[i].jEducation+"</span>\n" +
+                        "                        <br/>\n" +
+                        "                        <span><em class=\"c7\">职位诱惑：</em>"+list[i].jBenefit+"</span>\n" +
+                        "                        <br/>\n" +
+                        "                        <span>"+new Date(list[i].jDate).Format("yyyy-MM-dd")+"发布</span>\n" +
+                        "                    </div>\n" +
+                        "                    <div class=\"hot_pos_r\">\n" +
+                        "                        <div class=\"apply\">\n" +
+                        "                            <a href=\"toudi.html\" target=\"_blank\">投个简历</a>\n" +
+                        "                        </div>\n" +
+                        "                        <div class=\"mb10\"><a href=\"h/c/1712.html\" title=\"紫色医疗\" target=\"_blank\" >"+list[i].companyInfo.cName+"</a></div>\n" +
+                        "                        <span><em class=\"c7\">性质： </em>"+list[i].companyInfo.cCtype+"</span>\n" +
+                        "                        <span><em class=\"c7\">创始人：</em> "+list[i].companyInfo.cPname+"</span>\n" +
+                        "                        <br/>\n" +
+                        "                        <span><em class=\"c7\">阶段： </em>"+list[i].companyInfo.cStage+"</span>\n" +
+                        "                        <span><em class=\"c7\">规模： </em>"+list[i].companyInfo.cScale+"</span>\n" +
+                        "                        <ul class=\"companyTags reset\" >\n" +
+                        "                        </ul>\n" +
+                        "                    </div>\n" +
+                        "                </li></ul>");
+                    var ticketInfo = list[i].companyInfo.ticketInfos;
+                    for (var j = 0; j < ticketInfo.length; j++) {
+                        $(".companyTags.reset").eq(i).append("<li>"+ticketInfo[j].ticName+"</li>")
                     }
-                });
-
-                $('#selected ul').delegate('li span.select_remove', 'click', function (event) {
-                    var firstName = $(this).parent('li').find('strong').text();
-                    var fn = $.trim(firstName);
-                    if (fn == "月薪范围")
-                        editForm("yxInput", "");
-                    else if (fn == "工作经验")
-                        editForm("gjInput", "");
-                    else if (fn == "最低学历")
-                        editForm("xlInput", "");
-                    else if (fn == "工作性质")
-                        editForm("gxInput", "");
-                    else if (fn == "发布时间")
-                        editForm("stInput", "");
-                });
-
-                /* search结果飘绿	*/
-                (function ($) {
-                    var searchVal = $('#search_input').val();
-                    var reg = /\s/g;
-                    searchVal = searchVal.replace(reg, "").split("");
-
-                    var resultL = '';
-                    var resultR = '';
-                    $('.hot_pos li').each(function () {
-                        resultL = $('.hot_pos_l a', this).text().split("");
-                        $.each(resultL, function (i, v) {
-                            if ($.inArray(v.toLowerCase(), searchVal) != -1 || $.inArray(v.toUpperCase(), searchVal) != -1) {
-                                resultL[i] = '<span>' + v + '</span>';
-                            }
-                        });
-                        $('.hot_pos_l a', this).html(resultL.join(''));
-
-                        resultR = $('.hot_pos_r .mb10 a', this).text().split("");
-                        $.each(resultR, function (i, v) {
-                            if ($.inArray(v.toLowerCase(), searchVal) != -1 || $.inArray(v.toUpperCase(), searchVal) != -1) {
-                                resultR[i] = '<span>' + v + '</span>';
-                            }
-                        });
-                        $('.hot_pos_r .mb10 a', this).html(resultR.join(''));
-                    });
-
-                })(jQuery);
-
-                //didi tip
-                if ($.cookie('didiTip') != 1 && false) {
-                    $('#tip_didi').show();
                 }
-                $('#tip_didi a').click(function () {
-                    $(this).parent().remove();
-                    $.cookie('didiTip', 1, {expires: 30, path: '/'});
-                });
-
-            });
-
-            function editForm(inputId, inputValue) {
-                $("#" + inputId).val(inputValue);
-                var keyword = $.trim($('#search_input').val());
-                var reg = /[`~!@\$%\^\&\*\(\)_<>\?:"\{\},\\\/;'\[\]]/ig;
-                var re = /#/g;
-                var r = /\./g;
-                var kw = keyword.replace(reg, " ");
-
-                if (kw == '') {
-                    $('#searchForm').attr('action', 'list.html所有职位').submit();
-                } else {
-                    kw = kw.replace(re, '井');
-                    kw = kw.replace(r, '。');
-                    $('#searchForm').attr('action', 'list.html' + kw).submit();
-                }
-                //$("#searchForm").submit();
             }
+            Date.prototype.Format = function(fmt)
+            { //author: meizz
+                var o = {
+                    "M+" : this.getMonth()+1,                 //月份
+                    "d+" : this.getDate(),                    //日
+                    "h+" : this.getHours(),                   //小时
+                    "m+" : this.getMinutes(),                 //分
+                    "s+" : this.getSeconds(),                 //秒
+                    "q+" : Math.floor((this.getMonth()+3)/3), //季度
+                    "S"  : this.getMilliseconds()             //毫秒
+                };
+                if(/(y+)/.test(fmt))
+                    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+                for(var k in o)
+                    if(new RegExp("("+ k +")").test(fmt))
+                        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+                return fmt;
+            }
+            // $(function () {
+            //     /***************************
+            //      * 分页
+            //      */
+            //     $('.Pagination').pager({
+            //         currPage: 1,
+            //         pageNOName: "pn",
+            //         form: "searchForm",
+            //         pageCount: 30,
+            //         pageSize: 5
+            //     });
+            //
+            //     $(".workplace dd").not('.more').children('a').click(function () {
+            //         $('#lc').val(1);
+            //         editForm("cityInput", $(this).html());
+            //     });
+            //
+            //     $("#box_expectCity dd span").click(function () {
+            //         $('#lc').val(1);
+            //         editForm("cityInput", $(this).html());
+            //     });
+            //
+            //     $('#options dd div').click(function () {
+            //         var firstName = $(this).parents('dl').children('dt').text();
+            //         var fn = $.trim(firstName);
+            //         if (fn == "月薪范围") {
+            //             editForm("yxInput", $(this).html());
+            //         } else if (fn == "工作经验") {
+            //             editForm("gjInput", $(this).html());
+            //         } else if (fn == "最低学历") {
+            //             editForm("xlInput", $(this).html());
+            //         } else if (fn == "工作性质") {
+            //             editForm("gxInput", $(this).html());
+            //         } else if (fn == "发布时间") {
+            //             editForm("stInput", $(this).html());
+            //         }
+            //     });
+            //
+            //     $('#selected ul').delegate('li span.select_remove', 'click', function (event) {
+            //         var firstName = $(this).parent('li').find('strong').text();
+            //         var fn = $.trim(firstName);
+            //         if (fn == "月薪范围")
+            //             editForm("yxInput", "");
+            //         else if (fn == "工作经验")
+            //             editForm("gjInput", "");
+            //         else if (fn == "最低学历")
+            //             editForm("xlInput", "");
+            //         else if (fn == "工作性质")
+            //             editForm("gxInput", "");
+            //         else if (fn == "发布时间")
+            //             editForm("stInput", "");
+            //     });
+            //
+            //     /* search结果飘绿	*/
+            //     (function ($) {
+            //         var searchVal = $('#search_input').val();
+            //         var reg = /\s/g;
+            //         searchVal = searchVal.replace(reg, "").split("");
+            //
+            //         var resultL = '';
+            //         var resultR = '';
+            //         $('.hot_pos li').each(function () {
+            //             resultL = $('.hot_pos_l a', this).text().split("");
+            //             $.each(resultL, function (i, v) {
+            //                 if ($.inArray(v.toLowerCase(), searchVal) != -1 || $.inArray(v.toUpperCase(), searchVal) != -1) {
+            //                     resultL[i] = '<span>' + v + '</span>';
+            //                 }
+            //             });
+            //             $('.hot_pos_l a', this).html(resultL.join(''));
+            //
+            //             resultR = $('.hot_pos_r .mb10 a', this).text().split("");
+            //             $.each(resultR, function (i, v) {
+            //                 if ($.inArray(v.toLowerCase(), searchVal) != -1 || $.inArray(v.toUpperCase(), searchVal) != -1) {
+            //                     resultR[i] = '<span>' + v + '</span>';
+            //                 }
+            //             });
+            //             $('.hot_pos_r .mb10 a', this).html(resultR.join(''));
+            //         });
+            //
+            //     })(jQuery);
+            //
+            //     //didi tip
+            //     if ($.cookie('didiTip') != 1 && false) {
+            //         $('#tip_didi').show();
+            //     }
+            //     $('#tip_didi a').click(function () {
+            //         $(this).parent().remove();
+            //         $.cookie('didiTip', 1, {expires: 30, path: '/'});
+            //     });
+            //
+            // });
+            //
+            // function editForm(inputId, inputValue) {
+            //     $("#" + inputId).val(inputValue);
+            //     var keyword = $.trim($('#search_input').val());
+            //     var reg = /[`~!@\$%\^\&\*\(\)_<>\?:"\{\},\\\/;'\[\]]/ig;
+            //     var re = /#/g;
+            //     var r = /\./g;
+            //     var kw = keyword.replace(reg, " ");
+            //
+            //     if (kw == '') {
+            //         $('#searchForm').attr('action', 'list.html所有职位').submit();
+            //     } else {
+            //         kw = kw.replace(re, '井');
+            //         kw = kw.replace(r, '。');
+            //         $('#searchForm').attr('action', 'list.html' + kw).submit();
+            //     }
+            //     //$("#searchForm").submit();
+            // }
         </script>
 
         <div class="clear"></div>

@@ -35,5 +35,4 @@ public class IndexController {
         PageInfo<JobInfo> page = new PageInfo<>(jobInfos);
         return page;
     }
-
 }
