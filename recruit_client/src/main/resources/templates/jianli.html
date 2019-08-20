@@ -73,15 +73,16 @@ var youdao_conv_id = 271546;
             <div class="content_l">
             	<div class="fl" id="resume_name">
 	            	<div class="nameShow fl">
-	            		<h1 title="jason的简历" th:text="${userResume.getResumeName()}"></h1>
-	            		<span class="rename">重命名</span> | <a target="_blank" href="/preview.html">预览</a>
+						<h1 title="jason的简历" th:if="${userResume}==null"></h1><h1 title="jason的简历" th:text="${userResume.getResumeName()}" th:if="${userResume}!=null"></h1>
+	            		<span class="rename" th:if="${userResume}!=null">重命名</span> <span class="rename" th:if="${userResume}==null">创建简历</span>| <a target="_blank" href="/preview.html">预览</a>
             		</div>
             		<form class="fl dn" id="resumeNameForm" action="/user/altername" method="get">
-            			<input type="text" th:value="${userResume.getResumeName()}" name="resumeName" class="nameEdit c9">
+            			<input type="text" th:value="${userResume.getResumeName()}" name="resumeName" class="nameEdit c9" th:if="${userResume}!=null">
+						<input type="text"  name="resumeName" class="nameEdit c9" th:if="${userResume}==null">
             			<input type="submit" value="保存"> | <a target="_blank" href="/preview.html">预览</a>
             		</form>
             	</div><!--end #resume_name-->
-            	<div class="fr c5" id="lastChangedTime">最后一次更新：<span th:text="${userResume.getModifyTime()}"></span></div><!--end #lastChangedTime-->
+            	<div class="fr c5" id="lastChangedTime">最后一次更新：<span th:text="${lasttime}" th:if="${userResume}!=null"></span><span  th:if="${userResume}==null"></span></div><!--end #lastChangedTime-->
             	<div id="resumeScore">
             		<div class="score fl">
             			<canvas height="120" width="120" id="doughnutChartCanvas" style="width: 120px; height: 120px;"></canvas>
@@ -97,14 +98,23 @@ var youdao_conv_id = 271546;
             	<div class="profile_box" id="basicInfo">
             		<h2>基本信息</h2>
             		<span class="c_edit"></span>
-            		<div class="basicShow">
+            		<div class="basicShow" th:if="${userinfo}!=null">
             			姓名：<span th:text="${userinfo.getName()}">姓名</span > | 年龄：<span th:text="${userinfo.getAge()}">年龄</span>岁 | 性别：<span th:if="${userinfo.getSex()==0}">男</span><span th:if="${userinfo.getSex()==1}">女</span> | <span th:text="${userinfo.getWorkingYears()}">经验</span>年工作经验<br>
 						手机：<span th:text="${userinfo.getPhone()}">手机</span > | 邮箱：<span th:text="${userinfo.getEmail()}">邮箱</span ><br>
             			<div class="m_portrait">
 	                    	<div></div>
-	                    	<img width="120" height="120" alt="jason" src="/style/images/default_headpic.png">
+							<img width="120" height="120" alt="jason" src="/style/images/default_headpic.png" th:if="${showurl}==null">
+	                    	<img width="120" height="120" alt="jason" th:src="${showurl}" th:if="${showurl}!=null">
 	                    </div>
             		</div><!--end .basicShow-->
+					<div class="basicShow" th:if="${userinfo}==null">
+						姓名：<span >姓名</span > | 年龄：<span >年龄</span>岁 | 性别：<span >男</span><span >女</span> | <span >经验</span>年工作经验<br>
+						手机：<span >手机</span > | 邮箱：<span >邮箱</span ><br>
+						<div class="m_portrait">
+							<div></div>
+							<img width="120" height="120" alt="jason" src="/style/images/default_headpic.png">
+						</div>
+					</div><!--end .basicShow-->
 
             		<div class="basicEdit dn">
             			<form id="profileForm" action="/user/altersimpinfo" method="get">
@@ -143,7 +153,7 @@ var youdao_conv_id = 271546;
 						        <span class="redstar">*</span>
 						      </td> 
 						      <td colspan="3">
-						          <input type="text" placeholder="手机号码" th:value="${userinfo.getPhone()}" name="phone" id="tel">
+						          <input type="text" placeholder="手机号码"  name="phone" id="tel">
 						      </td>
 						   	</tr>
 						   	<tr>
@@ -151,7 +161,7 @@ var youdao_conv_id = 271546;
 						        <span class="redstar">*</span>
 						      </td> 
 						      <td colspan="3">
-						          <input type="text" placeholder="接收面试通知的邮箱" th:value="${userinfo.getEmail()}" name="email" id="email">
+						          <input type="text" placeholder="接收面试通知的邮箱"  name="email" id="email">
 						      </td>
 						    </tr>
 <!--						    <tr>-->
@@ -186,21 +196,24 @@ var youdao_conv_id = 271546;
 						    <img width="120" height="120" src="">
 						    <span>更换头像</span>
 						  </div>
-						  <input type="file" value="" title="支持jpg、jpeg、gif、png格式，文件小于5M" onchange="img_check(this,'h/resume/uploadPhoto.json','headPic');" name="headPic" id="headPic" class="myfiles">
+							<form action="/user/uploadhead" method="post" enctype="multipart/form-data">
+							<input type="file" value="" title="支持jpg、jpeg、gif、png格式，文件小于5M"  name="headPortrait" id="headPic" class="myfiles">
 							<!-- <input type="hidden" id="headPicHidden" /> -->
 						  	<em>
-						                  尺寸：120*120px <br>   
-						                  大小：小于5M
+								尺寸：120*120px <br>
+								大小：小于5M
+							<input type="submit" value="提交"  class="btn_profile_save">
 						  	</em>
 						  	<span style="display:none;" id="headPic_error" class="error"></span>
+							</form>
 						</div><!--end .new_portrait-->
             		</div><!--end .basicEdit-->
-            		<input type="hidden" id="nameVal" th:value="${userinfo.getName()}">
-            		<input type="hidden" id="genderVal" th:value="${userinfo.getSex()}">
-            		<input type="hidden" id="topDegreeVal" th:value="${userinfo.getAge()}">
+            		<input type="hidden" id="nameVal" th:value="${userinfo.getName()}" th:if="${userinfo}!=null">
+            		<input type="hidden" id="genderVal" th:value="${userinfo.getSex()}" th:if="${userinfo}!=null">
+            		<input type="hidden" id="topDegreeVal" th:value="${userinfo.getAge()}" th:if="${userinfo}!=null">
             		<input type="hidden" id="currentStateVal" value="">
-            		<input type="hidden" id="emailVal" th:value="${userinfo.getEmail()}">
-            		<input type="hidden" id="telVal" th:value="${userinfo.getPhone()}">
+            		<input type="hidden" id="emailVal" th:value="${userinfo.getEmail()}" th:if="${userinfo}!=null">
+            		<input type="hidden" id="telVal" th:value="${userinfo.getPhone()}" th:if="${userinfo}!=null">
             		<input type="hidden" id="pageType" value="1">
             	</div><!--end #basicInfo-->
 
@@ -215,7 +228,7 @@ var youdao_conv_id = 271546;
 	            			<table>
 	            				<tbody><tr>
 	            					<td>
-	            						<input type="hidden" id="expectCity" th:value="${userJobwant.getPlaceWant()}" name="placeWant" >
+	            						<input type="hidden" id="expectCity"  name="placeWant" >
 										<input type="button" value="期望城市，如：北京" id="select_expectCity" class="profile_select_287 profile_select_normal">
 										<div class="boxUpDown boxUpDown_596 dn" id="box_expectCity" style="display: none;">
 											<dl>
@@ -327,10 +340,10 @@ var youdao_conv_id = 271546;
 	            				</tr>
 	            				<tr>
 	            					<td>
-							        	<input type="text" placeholder="期望职位，如：产品经理" th:value="${userJobwant.getPostWant()}" name="postWant" id="expectPosition">
+							        	<input type="text" placeholder="期望职位，如：产品经理"  name="postWant" id="expectPosition">
 									</td>
 	            					<td>
-	            						<input type="hidden" id="expectSalary" th:value="${userJobwant.getSalaryWant()}" name="salaryWant">
+	            						<input type="hidden" id="expectSalary"  name="salaryWant">
 										<input type="button" value="期望月薪" id="select_expectSalary" class="profile_select_287 profile_select_normal">
 										<div class="boxUpDown boxUpDown_287 dn" id="box_expectSalary" style="display: none;">
 								          	  <ul>
@@ -374,22 +387,22 @@ var youdao_conv_id = 271546;
             		
             	<div class="profile_box" id="workExperience">
             		<h2>工作经历  <span> （投递简历时必填）</span></h2>
-            		            		<span class="c_add dn"></span>
+					<span class="c_add dn"></span>
             		<div class="experienceShow dn">
-						<form class="experienceForm borderBtm dn">
+						<form class="experienceForm borderBtm dn" action="/" method="get">
 	            			<table>
 	            				<tbody><tr>
 							      	<td valign="top">
 							        	<span class="redstar">*</span>
 							      	</td> 
 							      	<td>
-							        	<input type="text" placeholder="公司名称" name="companyName" class="companyName">
+							        	<input type="text" placeholder="公司名称" name="companyName1" class="companyName">
 							      	</td>
 							      	<td valign="top">
 							        	<span class="redstar">*</span>
 							      	</td> 
 							      	<td>
-							          	<input type="text" placeholder="职位名称，如：产品经理" name="positionName" class="positionName">
+							          	<input type="text" placeholder="职位名称，如：产品经理" name="positionName1" class="positionName">
 							      	</td>
 							    </tr>
 	            				<tr>
@@ -398,7 +411,7 @@ var youdao_conv_id = 271546;
 							      	</td> 
 	            					<td>
 		            					<div class="fl">
-		            						<input type="hidden" class="companyYearStart" value="" name="companyYearStart">
+		            						<input type="hidden" class="companyYearStart" value="" name="companyYearStart1">
 								        	<input type="button" value="开始年份" class="profile_select_139 profile_select_normal select_companyYearStart">
 											<div class="box_companyYearStart boxUpDown boxUpDown_139 dn" style="display: none;">
 									            <ul>
@@ -451,7 +464,7 @@ var youdao_conv_id = 271546;
 									        </div>
 										</div>
 										<div class="fl">
-									        <input type="hidden" class="companyMonthStart" value="" name="companyMonthStart">
+									        <input type="hidden" class="companyMonthStart" value="" name="companyMonthStart1">
 								        	<input type="button" value="开始月份" class="profile_select_139 profile_select_normal select_companyMonthStart">
 											<div style="display: none;" class="box_companyMonthStart boxUpDown boxUpDown_139 dn">
 									            <ul>
@@ -466,7 +479,7 @@ var youdao_conv_id = 271546;
 							      	</td> 
 	            					<td>
 		            					<div class="fl">
-		            						<input type="hidden" class="companyYearEnd" value="" name="companyYearEnd">
+		            						<input type="hidden" class="companyYearEnd" value="" name="companyYearEnd1">
 								        	<input type="button" value="结束年份" class="profile_select_139 profile_select_normal select_companyYearEnd">
 											<div class="box_companyYearEnd  boxUpDown boxUpDown_139 dn" style="display: none;">
 									            <ul>
@@ -520,7 +533,7 @@ var youdao_conv_id = 271546;
 									        </div>
 										</div>
 										<div class="fl">
-									        <input type="hidden" class="companyMonthEnd" value="" name="companyMonthEnd">
+									        <input type="hidden" class="companyMonthEnd" value="" name="companyMonthEnd1">
 								        	<input type="button" value="结束月份" class="profile_select_139 profile_select_normal select_companyMonthEnd">
 											<div style="display: none;" class="box_companyMonthEnd boxUpDown boxUpDown_139 dn">
 									            <ul>
@@ -541,25 +554,25 @@ var youdao_conv_id = 271546;
 	            			</tbody></table>
 	            			<input type="hidden" class="expId" value="">
             			</form><!--end .experienceForm-->
-            			
             			<ul class="wlist clearfix">
 						</ul>
             		</div><!--end .experienceShow-->
-            		<div class="experienceEdit dn">
-            			<form class="experienceForm">
+
+					<div class="experienceEdit dn">
+            			<form class="experienceForm" action="/jianli/jobexpcontrol">
 	            			<table>
 	            				<tbody><tr>
 							      	<td valign="top">
 							        	<span class="redstar">*</span>
 							      	</td> 
 							      	<td>
-							        	<input type="text" placeholder="公司名称" name="companyName" class="companyName">
+							        	<input type="text" placeholder="公司名称" name="companyName" class="companyName" value="蓝桥">
 							      	</td>
 							      	<td valign="top">
 							        	<span class="redstar">*</span>
 							      	</td> 
 							      	<td>
-							          	<input type="text" placeholder="职位名称，如：产品经理" name="positionName" class="positionName">
+							          	<input type="text" placeholder="职位名称，如：产品经理" name="postName" class="positionName" value="开发">
 							      	</td>
 							    </tr>
 	            				<tr>
@@ -568,137 +581,16 @@ var youdao_conv_id = 271546;
 							      	</td> 
 	            					<td>
 		            					<div class="fl">
-		            						<input type="hidden" class="companyYearStart" value="" name="companyYearStart">
-								        	<input type="button" value="开始年份" class="profile_select_139 profile_select_normal select_companyYearStart">
-											<div class="box_companyYearStart boxUpDown boxUpDown_139 dn" style="display: none;">
-									            <ul>
-									        											        			<li>2014</li>
-									        											        			<li>2013</li>
-									        											        			<li>2012</li>
-									        											        			<li>2011</li>
-									        											        			<li>2010</li>
-									        											        			<li>2009</li>
-									        											        			<li>2008</li>
-									        											        			<li>2007</li>
-									        											        			<li>2006</li>
-									        											        			<li>2005</li>
-									        											        			<li>2004</li>
-									        											        			<li>2003</li>
-									        											        			<li>2002</li>
-									        											        			<li>2001</li>
-									        											        			<li>2000</li>
-									        											        			<li>1999</li>
-									        											        			<li>1998</li>
-									        											        			<li>1997</li>
-									        											        			<li>1996</li>
-									        											        			<li>1995</li>
-									        											        			<li>1994</li>
-									        											        			<li>1993</li>
-									        											        			<li>1992</li>
-									        											        			<li>1991</li>
-									        											        			<li>1990</li>
-									        											        			<li>1989</li>
-									        											        			<li>1988</li>
-									        											        			<li>1987</li>
-									        											        			<li>1986</li>
-									        											        			<li>1985</li>
-									        											        			<li>1984</li>
-									        											        			<li>1983</li>
-									        											        			<li>1982</li>
-									        											        			<li>1981</li>
-									        											        			<li>1980</li>
-									        											        			<li>1979</li>
-									        											        			<li>1978</li>
-									        											        			<li>1977</li>
-									        											        			<li>1976</li>
-									        											        			<li>1975</li>
-									        											        			<li>1974</li>
-									        											        			<li>1973</li>
-									        											        			<li>1972</li>
-									        											        			<li>1971</li>
-									        											        			<li>1970</li>
-									        											        	</ul>
-									        </div>
+		            						开始时间&nbsp;&nbsp;<input type="date" class="companyYearStart" value="" name="stratTime" style="width: 200px;height: 40px" >
 										</div>
-										<div class="fl">
-									        <input type="hidden" class="companyMonthStart" value="" name="companyMonthStart">
-								        	<input type="button" value="开始月份" class="profile_select_139 profile_select_normal select_companyMonthStart">
-											<div style="display: none;" class="box_companyMonthStart boxUpDown boxUpDown_139 dn">
-									            <ul>
-									        		<li>01</li><li>02</li><li>03</li><li>04</li><li>05</li><li>06</li><li>07</li><li>08</li><li>09</li><li>10</li><li>11</li><li>12</li>
-									        	</ul>
-									        </div>
-									    </div>
-									    <div class="clear"></div>
 	            					</td>
 	            					<td valign="top">
 							        	<span class="redstar">*</span>
 							      	</td> 
 	            					<td>
 		            					<div class="fl">
-		            						<input type="hidden" class="companyYearEnd" value="" name="companyYearEnd">
-								        	<input type="button" value="结束年份" class="profile_select_139 profile_select_normal select_companyYearEnd">
-											<div class="box_companyYearEnd  boxUpDown boxUpDown_139 dn" style="display: none;">
-									            <ul>
-									            	<li>至今</li>
-									        											        			<li>2014</li>
-									        											        			<li>2013</li>
-									        											        			<li>2012</li>
-									        											        			<li>2011</li>
-									        											        			<li>2010</li>
-									        											        			<li>2009</li>
-									        											        			<li>2008</li>
-									        											        			<li>2007</li>
-									        											        			<li>2006</li>
-									        											        			<li>2005</li>
-									        											        			<li>2004</li>
-									        											        			<li>2003</li>
-									        											        			<li>2002</li>
-									        											        			<li>2001</li>
-									        											        			<li>2000</li>
-									        											        			<li>1999</li>
-									        											        			<li>1998</li>
-									        											        			<li>1997</li>
-									        											        			<li>1996</li>
-									        											        			<li>1995</li>
-									        											        			<li>1994</li>
-									        											        			<li>1993</li>
-									        											        			<li>1992</li>
-									        											        			<li>1991</li>
-									        											        			<li>1990</li>
-									        											        			<li>1989</li>
-									        											        			<li>1988</li>
-									        											        			<li>1987</li>
-									        											        			<li>1986</li>
-									        											        			<li>1985</li>
-									        											        			<li>1984</li>
-									        											        			<li>1983</li>
-									        											        			<li>1982</li>
-									        											        			<li>1981</li>
-									        											        			<li>1980</li>
-									        											        			<li>1979</li>
-									        											        			<li>1978</li>
-									        											        			<li>1977</li>
-									        											        			<li>1976</li>
-									        											        			<li>1975</li>
-									        											        			<li>1974</li>
-									        											        			<li>1973</li>
-									        											        			<li>1972</li>
-									        											        			<li>1971</li>
-									        											        			<li>1970</li>
-									        											        	</ul>
-									        </div>
+		            						结束时间&nbsp;&nbsp;<input type="date" class="companyYearEnd" value="" name="stopTime" style="width: 200px;height: 40px" >
 										</div>
-										<div class="fl">
-									        <input type="hidden" class="companyMonthEnd" value="" name="companyMonthEnd">
-								        	<input type="button" value="结束月份" class="profile_select_139 profile_select_normal select_companyMonthEnd">
-											<div style="display: none;" class="box_companyMonthEnd boxUpDown boxUpDown_139 dn">
-									            <ul>
-									        		<li>01</li><li>02</li><li>03</li><li>04</li><li>05</li><li>06</li><li>07</li><li>08</li><li>09</li><li>10</li><li>11</li><li>12</li>
-									        	</ul>
-									        </div>
-								        </div>
-								        <div class="clear"></div>
 	            					</td>
 	            				</tr>
 	            				<tr>
@@ -709,26 +601,30 @@ var youdao_conv_id = 271546;
 	            					</td>
 	            				</tr>
 	            			</tbody></table>
-	            			<input type="hidden" class="expId" value="">
+<!--	            			<input type="hidden" class="expId" value="">-->
             			</form><!--end .experienceForm-->
             		</div><!--end .experienceEdit-->
-            		
-            		            		<div class="experienceAdd pAdd">
-            		            			工作经历最能体现自己的工作能力，<br>
+					<div class="experienceAdd pAdd" th:if="${userJobexp}==null">
+						工作经历最能体现自己的工作能力，<br>
 						且完善后才可投递简历哦！
 						<span>添加工作经历</span>
             		</div><!--end .experienceAdd-->
+					<div class="experienceAdd pAdd" th:if="${userJobexp}!=null">
+						公司名称：[[${userJobexp.getCompanyName()}]] | 工作岗位：[[${userJobexp.getPostName()}]]<br>
+						开始时间：[[${jobstarttime}]] | 结束时间：[[${jobstoptime}]]
+						<span>修改工作经历</span>
+					</div><!--end .experienceAdd-->
             	</div><!--end #workExperience-->
 
             	<div class="profile_box" id="projectExperience">
             		<h2>项目经验</h2>
-            		            		<span class="c_add dn"></span>
+					<span class="c_add dn"></span>
             		<div class="projectShow dn">
-            		            			<ul class="plist clearfix">
-	            			            			</ul>
+						<ul class="plist clearfix">
+						</ul>
             		</div><!--end .projectShow-->
             		<div class="projectEdit dn">
-            			<form class="projectForm">
+            			<form class="projectForm" action="/jianli/Projectexpcontrol" method="get">
 	            			<table>
 	            				<tbody><tr>
 	            					<td valign="top">
@@ -741,7 +637,7 @@ var youdao_conv_id = 271546;
 							        	<span class="redstar">*</span>
 							      	</td> 
 							      	<td>
-							          	<input type="text" placeholder="担任职务，如：产品负责人" name="thePost" class="thePost">
+							          	<input type="text" placeholder="担任职务，如：产品负责人" name="postName" class="thePost">
 							      	</td>
 							    </tr>
 	            				<tr>
@@ -750,67 +646,8 @@ var youdao_conv_id = 271546;
 							      	</td> 
 	            					<td>
 		            					<div class="fl">
-		            						<input type="hidden" class="projectYearStart" value="" name="projectYearStart">
-								        	<input type="button" value="开始年份" class="profile_select_139 profile_select_normal select_projectYearStart">
-											<div class="box_projectYearStart  boxUpDown boxUpDown_139 dn" style="display: none;">
-									            <ul>
-									        											        			<li>2014</li>
-									        											        			<li>2013</li>
-									        											        			<li>2012</li>
-									        											        			<li>2011</li>
-									        											        			<li>2010</li>
-									        											        			<li>2009</li>
-									        											        			<li>2008</li>
-									        											        			<li>2007</li>
-									        											        			<li>2006</li>
-									        											        			<li>2005</li>
-									        											        			<li>2004</li>
-									        											        			<li>2003</li>
-									        											        			<li>2002</li>
-									        											        			<li>2001</li>
-									        											        			<li>2000</li>
-									        											        			<li>1999</li>
-									        											        			<li>1998</li>
-									        											        			<li>1997</li>
-									        											        			<li>1996</li>
-									        											        			<li>1995</li>
-									        											        			<li>1994</li>
-									        											        			<li>1993</li>
-									        											        			<li>1992</li>
-									        											        			<li>1991</li>
-									        											        			<li>1990</li>
-									        											        			<li>1989</li>
-									        											        			<li>1988</li>
-									        											        			<li>1987</li>
-									        											        			<li>1986</li>
-									        											        			<li>1985</li>
-									        											        			<li>1984</li>
-									        											        			<li>1983</li>
-									        											        			<li>1982</li>
-									        											        			<li>1981</li>
-									        											        			<li>1980</li>
-									        											        			<li>1979</li>
-									        											        			<li>1978</li>
-									        											        			<li>1977</li>
-									        											        			<li>1976</li>
-									        											        			<li>1975</li>
-									        											        			<li>1974</li>
-									        											        			<li>1973</li>
-									        											        			<li>1972</li>
-									        											        			<li>1971</li>
-									        											        			<li>1970</li>
-									        											        	</ul>
-									        </div>
+		            						开始时间&nbsp;&nbsp;<input type="date" class="projectYearStart" value="" name="stratTime" style="width: 200px;height: 40px">
 										</div>
-										<div class="fl">
-									        <input type="hidden" class="projectMonthStart" value="" name="projectMonthStart">
-								        	<input type="button" value="开始月份" class="profile_select_139 profile_select_normal select_projectMonthStart">
-											<div style="display: none;" class="box_projectMonthStart boxUpDown boxUpDown_139 dn">
-									            <ul>
-									        		<li>01</li><li>02</li><li>03</li><li>04</li><li>05</li><li>06</li><li>07</li><li>08</li><li>09</li><li>10</li><li>11</li><li>12</li>
-									        	</ul>
-									        </div>
-								        </div>
 								        <div class="clear"></div>
 	            					</td>
 	            					<td valign="top">
@@ -818,84 +655,18 @@ var youdao_conv_id = 271546;
 							      	</td> 
 	            					<td>
 	            						<div class="fl">
-		            						<input type="hidden" class="projectYearEnd" value="" name="projectYearEnd">
-								        	<input type="button" value="结束年份" class="profile_select_139 profile_select_normal select_projectYearEnd">
-											<div class="box_projectYearEnd  boxUpDown boxUpDown_139 dn" style="display: none;">
-									            <ul>
-									            	<li>至今</li>
-									        											        			<li>2014</li>
-									        											        			<li>2013</li>
-									        											        			<li>2012</li>
-									        											        			<li>2011</li>
-									        											        			<li>2010</li>
-									        											        			<li>2009</li>
-									        											        			<li>2008</li>
-									        											        			<li>2007</li>
-									        											        			<li>2006</li>
-									        											        			<li>2005</li>
-									        											        			<li>2004</li>
-									        											        			<li>2003</li>
-									        											        			<li>2002</li>
-									        											        			<li>2001</li>
-									        											        			<li>2000</li>
-									        											        			<li>1999</li>
-									        											        			<li>1998</li>
-									        											        			<li>1997</li>
-									        											        			<li>1996</li>
-									        											        			<li>1995</li>
-									        											        			<li>1994</li>
-									        											        			<li>1993</li>
-									        											        			<li>1992</li>
-									        											        			<li>1991</li>
-									        											        			<li>1990</li>
-									        											        			<li>1989</li>
-									        											        			<li>1988</li>
-									        											        			<li>1987</li>
-									        											        			<li>1986</li>
-									        											        			<li>1985</li>
-									        											        			<li>1984</li>
-									        											        			<li>1983</li>
-									        											        			<li>1982</li>
-									        											        			<li>1981</li>
-									        											        			<li>1980</li>
-									        											        			<li>1979</li>
-									        											        			<li>1978</li>
-									        											        			<li>1977</li>
-									        											        			<li>1976</li>
-									        											        			<li>1975</li>
-									        											        			<li>1974</li>
-									        											        			<li>1973</li>
-									        											        			<li>1972</li>
-									        											        			<li>1971</li>
-									        											        			<li>1970</li>
-									        											        	</ul>
-									        </div>
+		            						结束时间&nbsp;&nbsp;<input type="date" class="projectYearEnd" value="" name="stopTime" style="width: 200px;height: 40px">
 										</div>
-										<div class="fl">
-									        <input type="hidden" class="projectMonthEnd" value="" name="projectMonthEnd">
-								        	<input type="button" value="结束月份" class="profile_select_139 profile_select_normal select_projectMonthEnd">
-											<div style="display: none;" class="box_projectMonthEnd boxUpDown boxUpDown_139 dn">
-									            <ul>
-									        		<li>01</li><li>02</li><li>03</li><li>04</li><li>05</li><li>06</li><li>07</li><li>08</li><li>09</li><li>10</li><li>11</li><li>12</li>
-									        	</ul>
-									        </div>
-								        </div>
 								        <div class="clear"></div>
 	            					</td>
 	            				</tr>
 	            				<tr>
 	            					<td valign="top"></td> 
 									<td colspan="3">
-										<textarea class="projectDescription s_textarea" name="projectDescription" placeholder="项目描述"></textarea>
+										<textarea class="projectDescription s_textarea" name="describe1" placeholder="项目描述"></textarea>
 										<div class="word_count">你还可以输入 <span>500</span> 字</div>
 									</td>
 	            				</tr>
-	            				<!-- <tr>
-									<td colspan="2">
-										<textarea placeholder="职责描述" name="ResponsDescription" class="ResponsDescription s_textarea"></textarea>
-										<div class="word_count">你还可以输入 <span>500</span> 字</div>
-									</td>
-	            				</tr> -->
 	            				<tr>
 	            					<td valign="top"></td> 
 	            					<td colspan="3">
@@ -907,40 +678,45 @@ var youdao_conv_id = 271546;
 			            	<input type="hidden" value="" class="projectId">
             			</form><!--end .projectForm-->
             		</div><!--end .projectEdit-->
-            		            		<div class="projectAdd pAdd">
-            		            			项目经验是用人单位衡量人才能力的重要指标哦！<br>
+					<div class="projectAdd pAdd" th:if="${userProjectexp}==null">
+						项目经验是用人单位衡量人才能力的重要指标哦！<br>
 						来说说让你难忘的项目吧！
 						<span>添加项目经验</span>
             		</div><!--end .projectAdd-->
+					<div class="projectAdd pAdd" th:if="${userProjectexp}!=null">
+						项目名称：[[${userProjectexp.getProjectName()}]] | 担任岗位：[[${userProjectexp.getPostName()}]]<br>
+						开始时间：[[${Projectstarttime}]] | 结束时间：[[${Projectstoptime}]]
+						<span>修改项目经验</span>
+					</div><!--end .projectAdd-->
             	</div><!--end #projectExperience-->
 
             	<div class="profile_box" id="educationalBackground">
             		<h2>教育背景<span>（投递简历时必填）</span></h2>
-            							<span class="c_add dn"></span>
+					<span class="c_add dn"></span>
             		<div class="educationalShow dn">
-            		            			<form class="educationalForm borderBtm dn">
+						<form class="educationalForm borderBtm dn" action="/" method="get">
 	            			<table>
 	            				<tbody><tr>
 							      	<td valign="top">
 							        	<span class="redstar">*</span>
 							      	</td> 
 							      	<td>
-							        	<input type="text" placeholder="学校名称" name="schoolName" class="schoolName">
+							        	<input type="text" placeholder="学校名称" name="university" class="schoolName">
 							      	</td>
 							      	<td valign="top">
 							        	<span class="redstar">*</span>
 							      	</td> 
 							      	<td>
-							      		<input type="hidden" class="degree" value="" name="degree">
+							      		<input type="hidden" class="degree" value="" name="education">
 							        	<input type="button" value="学历" class="profile_select_287 profile_select_normal select_degree">
 										<div class="box_degree boxUpDown boxUpDown_287 dn" style="display: none;">
 								            <ul>
-								        										        			<li>大专</li>
-								        										        			<li>本科</li>
-								        										        			<li>硕士</li>
-								        										        			<li>博士</li>
-								        										        			<li>其他</li>
-								        										        	</ul>
+												<li>大专</li>
+												<li>本科</li>
+												<li>硕士</li>
+												<li>博士</li>
+												<li>其他</li>
+											</ul>
 								        </div>
 							        </td>
 							    </tr>
@@ -949,7 +725,7 @@ var youdao_conv_id = 271546;
 							        	<span class="redstar">*</span>
 							      	</td> 
 	            					<td>
-	            						<input type="text" placeholder="专业名称" name="professionalName" class="professionalName">
+	            						<input type="text" placeholder="专业名称" name="major" class="professionalName">
 	            					</td>
 	            					<td valign="top">
 							        	<span class="redstar">*</span>
@@ -1065,7 +841,7 @@ var youdao_conv_id = 271546;
 									        											        			<li>1972</li>
 									        											        			<li>1971</li>
 									        											        			<li>1970</li>
-									        											        	</ul>
+												</ul>
 									        </div>
 	            						</div>
 	            						<div class="clear"></div>
@@ -1083,32 +859,32 @@ var youdao_conv_id = 271546;
             			</form><!--end .educationalForm-->
 
             			<ul class="elist clearfix">
-            					            			            			</ul>
+						</ul>
             		</div><!--end .educationalShow-->
             		<div class="educationalEdit dn">
-            			<form class="educationalForm">
+            			<form class="educationalForm" action="/jianli/Educationcontrol">
 	            			<table>
 	            				<tbody><tr>
 							      	<td valign="top">
 							        	<span class="redstar">*</span>
 							      	</td> 
 							      	<td>
-							        	<input type="text" placeholder="学校名称" name="schoolName" class="schoolName">
+							        	<input type="text" placeholder="学校名称" name="university" class="schoolName">
 							      	</td>
 							      	<td valign="top">
 							        	<span class="redstar">*</span>
 							      	</td> 
 							      	<td>
-							      		<input type="hidden" class="degree" value="" name="degree">
+							      		<input type="hidden" class="degree" value="" name="education">
 							        	<input type="button" value="学历" class="profile_select_287 profile_select_normal select_degree">
 										<div class="box_degree boxUpDown boxUpDown_287 dn" style="display: none;">
 								            <ul>
-								        										        			<li>大专</li>
-								        										        			<li>本科</li>
-								        										        			<li>硕士</li>
-								        										        			<li>博士</li>
-								        										        			<li>其他</li>
-								        										        	</ul>
+												<li>大专</li>
+												<li>本科</li>
+												<li>硕士</li>
+												<li>博士</li>
+												<li>其他</li>
+											</ul>
 								        </div>
 							        </td>
 							    </tr>
@@ -1117,117 +893,24 @@ var youdao_conv_id = 271546;
 							        	<span class="redstar">*</span>
 							      	</td> 
 	            					<td>
-	            						<input type="text" placeholder="专业名称" name="professionalName" class="professionalName">
+	            						<input type="text" placeholder="专业名称" name="major" class="professionalName">
 	            					</td>
+								</tr>
+								<tr>
 	            					<td valign="top">
 							        	<span class="redstar">*</span>
-							      	</td> 
+							      	</td>
 	            					<td>
 		            					<div class="fl">
-		            						<input type="hidden" class="schoolYearStart" value="" name="schoolYearStart">
-								        	<input type="button" value="开始年份" class="profile_select_139 profile_select_normal select_schoolYearStart">
-											<div class="box_schoolYearStart boxUpDown boxUpDown_139 dn" style="display: none;">
-									            <ul>
-									        											        			<li>2014</li>
-									        											        			<li>2013</li>
-									        											        			<li>2012</li>
-									        											        			<li>2011</li>
-									        											        			<li>2010</li>
-									        											        			<li>2009</li>
-									        											        			<li>2008</li>
-									        											        			<li>2007</li>
-									        											        			<li>2006</li>
-									        											        			<li>2005</li>
-									        											        			<li>2004</li>
-									        											        			<li>2003</li>
-									        											        			<li>2002</li>
-									        											        			<li>2001</li>
-									        											        			<li>2000</li>
-									        											        			<li>1999</li>
-									        											        			<li>1998</li>
-									        											        			<li>1997</li>
-									        											        			<li>1996</li>
-									        											        			<li>1995</li>
-									        											        			<li>1994</li>
-									        											        			<li>1993</li>
-									        											        			<li>1992</li>
-									        											        			<li>1991</li>
-									        											        			<li>1990</li>
-									        											        			<li>1989</li>
-									        											        			<li>1988</li>
-									        											        			<li>1987</li>
-									        											        			<li>1986</li>
-									        											        			<li>1985</li>
-									        											        			<li>1984</li>
-									        											        			<li>1983</li>
-									        											        			<li>1982</li>
-									        											        			<li>1981</li>
-									        											        			<li>1980</li>
-									        											        			<li>1979</li>
-									        											        			<li>1978</li>
-									        											        			<li>1977</li>
-									        											        			<li>1976</li>
-									        											        			<li>1975</li>
-									        											        			<li>1974</li>
-									        											        			<li>1973</li>
-									        											        			<li>1972</li>
-									        											        			<li>1971</li>
-									        											        			<li>1970</li>
-									        											        	</ul>
-									        </div>
+		            						开始时间&nbsp;&nbsp;<input type="date" class="schoolYearStart" value="" name="stratTime" style="width: 200px;height: 40px">
 										</div>
+									</td>
+									<td valign="top">
+										<span class="redstar">*</span>
+									</td>
+									<td>
 										<div class="fl">
-		            						<input type="hidden" class="schoolYearEnd" value="" name="schoolYearEnd">
-								        	<input type="button" value="结束年份" class="profile_select_139 profile_select_normal select_schoolYearEnd">
-											<div class="box_schoolYearEnd  boxUpDown boxUpDown_139 dn" style="display: none;">
-									            <ul>
-									        											        			<li>2014</li>
-									        											        			<li>2013</li>
-									        											        			<li>2012</li>
-									        											        			<li>2011</li>
-									        											        			<li>2010</li>
-									        											        			<li>2009</li>
-									        											        			<li>2008</li>
-									        											        			<li>2007</li>
-									        											        			<li>2006</li>
-									        											        			<li>2005</li>
-									        											        			<li>2004</li>
-									        											        			<li>2003</li>
-									        											        			<li>2002</li>
-									        											        			<li>2001</li>
-									        											        			<li>2000</li>
-									        											        			<li>1999</li>
-									        											        			<li>1998</li>
-									        											        			<li>1997</li>
-									        											        			<li>1996</li>
-									        											        			<li>1995</li>
-									        											        			<li>1994</li>
-									        											        			<li>1993</li>
-									        											        			<li>1992</li>
-									        											        			<li>1991</li>
-									        											        			<li>1990</li>
-									        											        			<li>1989</li>
-									        											        			<li>1988</li>
-									        											        			<li>1987</li>
-									        											        			<li>1986</li>
-									        											        			<li>1985</li>
-									        											        			<li>1984</li>
-									        											        			<li>1983</li>
-									        											        			<li>1982</li>
-									        											        			<li>1981</li>
-									        											        			<li>1980</li>
-									        											        			<li>1979</li>
-									        											        			<li>1978</li>
-									        											        			<li>1977</li>
-									        											        			<li>1976</li>
-									        											        			<li>1975</li>
-									        											        			<li>1974</li>
-									        											        			<li>1973</li>
-									        											        			<li>1972</li>
-									        											        			<li>1971</li>
-									        											        			<li>1970</li>
-									        											        	</ul>
-									        </div>
+		            						结束时间&nbsp;&nbsp;<input type="date" class="schoolYearEnd" value="" name="stopTime" style="width: 200px;height: 40px">
 	            						</div>
 	            						<div class="clear"></div>
 	            					</td>
@@ -1243,25 +926,30 @@ var youdao_conv_id = 271546;
 	            			<input type="hidden" class="eduId" value="">
             			</form><!--end .educationalForm-->
             		</div><!--end .educationalEdit-->
-            		            		<div class="educationalAdd pAdd">
-            		            			教育背景可以充分体现你的学习和专业能力，<br>
+					<div class="educationalAdd pAdd" th:if="${userEducation}==null">
+						教育背景可以充分体现你的学习和专业能力，<br>
 						且完善后才可投递简历哦！
 						<span>添加教育经历</span>
+					</div><!--end .educationalAdd-->
+					<div class="educationalAdd pAdd" th:if="${userEducation}!=null">
+							学校名称：[[${userEducation.getUniversity()}]] | [[${userEducation.getEducation()}]]<br>
+							专&nbsp;&nbsp;&nbsp;&nbsp;业：[[${userEducation.getMajor()}]]
+							<span>修改教育经历</span>
             		</div><!--end .educationalAdd-->
             	</div><!--end #educationalBackground-->
 
             	<div class="profile_box" id="selfDescription">
             		<h2>自我描述</h2>
-            		            		<span class="c_edit dn"></span>
+					<span class="c_edit dn"></span>
             		<div class="descriptionShow dn">
             		            			
             		</div><!--end .descriptionShow-->
             		<div class="descriptionEdit dn">
-            			<form class="descriptionForm" action="/test" method="get">
+            			<form class="descriptionForm" action="/user/alterintroduction" method="get">
 	            			<table>
 	            				<tbody><tr>
 									<td colspan="2">
-										<textarea class="selfDescription s_textarea" name="selfDescription" placeholder=""></textarea>
+										<textarea class="selfDescription s_textarea" name="selfIntroduction" placeholder=""></textarea>
 										<div class="word_count">你还可以输入 <span>500</span> 字</div>
 									</td>
 	            				</tr>
@@ -1274,31 +962,36 @@ var youdao_conv_id = 271546;
 	            			</tbody></table>
             			</form><!--end .descriptionForm-->
             		</div><!--end .descriptionEdit-->
-					<div class="descriptionAdd pAdd">
+					<div class="descriptionAdd pAdd" th:if="${selfIntroduction}==null">
 						描述你的性格、爱好以及吸引人的经历等，<br>
 						让企业了解多元化的你！
-						<span>添加自我描述</span>
+						<span>添加自我描述(不少于10个字)</span>
             		</div><!--end .descriptionAdd-->
+					<div class="descriptionAdd pAdd" th:if="${selfIntroduction}!=null">
+						简介：[[${selfIntroduction}]]。。。等<br>
+						点击下方修改
+						<span>修改自我描述</span>
+					</div><!--end .descriptionAdd-->
             	</div><!--end #selfDescription-->
 
             	<div class="profile_box" id="worksShow">
             		<h2>作品展示</h2>
-            		            		<span class="c_add dn"></span>
+					<span class="c_add dn"></span>
             		<div class="workShow dn">
-            		            			<ul class="slist clearfix">
-            				            			</ul>
+						<ul class="slist clearfix">
+						</ul>
             		</div><!--end .workShow-->
             		<div class="workEdit dn">
-            			<form class="workForm">
+            			<form class="workForm" action="/jianli/Workscontrol" method="get">
 	            			<table>
 	            				<tbody><tr>
 							      	<td>
-							        	<input type="text" placeholder="请输入作品链接" name="workLink" class="workLink">
+							        	<input type="text" placeholder="请输入作品链接" name="link" class="workLink">
 							      	</td>
 							    </tr>
 	            				<tr>
 									<td>
-										<textarea maxlength="100" class="workDescription s_textarea" name="workDescription" placeholder="请输入说明文字"></textarea>
+										<textarea maxlength="100" class="workDescription s_textarea" name="describe1" placeholder="请输入说明文字"></textarea>
 										<div class="word_count">你还可以输入 <span>100</span> 字</div>
 									</td>
 	            				</tr>
@@ -1312,11 +1005,16 @@ var youdao_conv_id = 271546;
 	            			<input type="hidden" class="showId" value="">
             			</form><!--end .workForm-->
             		</div><!--end .workEdit-->
-            		            		<div class="workAdd pAdd">
-            		            			好作品会说话！<br>
+					<div class="workAdd pAdd" th:if="${userWorks}==null">
+						好作品会说话！<br>
 						快来秀出你的作品打动企业吧！
 						<span>添加作品展示</span>
             		</div><!--end .workAdd-->
+					<div class="workAdd pAdd" th:if="${userWorks}!=null">
+						我的作品：[[${userWorks.getLink()}]]<br>
+						点击下方修改
+						<span>修改作品展示</span>
+					</div><!--end .workAdd-->
             	</div><!--end #worksShow-->
 				<input type="hidden" id="resumeId" value="268472">
             </div><!--end .content_l-->
@@ -1325,25 +1023,25 @@ var youdao_conv_id = 271546;
             		<h2>我的信息</h2>
             		<a target="_blank" href="collections.html">我收藏的职位</a>
             		<br>
-            		            		            		<a target="_blank" href="subscribe.html">我订阅的职位</a>
+					<a target="_blank" href="subscribe.html">我订阅的职位</a>
             	</div><!--end #myInfo-->
 
 				<div class="mycenterR" id="myResume">
             		<h2>我的附件简历 
-            			            			<a title="上传附件简历" href="#uploadFile" class="inline cboxElement">上传简历</a>
-            			            		</h2>
+						<a title="上传附件简历" href="#uploadFile" class="inline cboxElement">上传简历</a>
+					</h2>
             		<div class="resumeUploadDiv">
-	            			            		暂无附件简历
-	            		            		</div>
+						暂无附件简历
+					</div>
             	</div><!--end #myResume-->
 
             	<div class="mycenterR" id="resumeSet">
             		<h2>投递简历设置  <span>修改设置</span></h2>
             		<!-- -1 (0=附件， 1=在线， 其他=未设置) -->
-            		            		            			<div class="noSet set0 dn">默认使用<span>附件简历</span>进行投递</div>
+					<div class="noSet set0 dn">默认使用<span>附件简历</span>进行投递</div>
             			<div class="noSet set1 dn">默认使用<span>在线简历</span>进行投递</div>
 						<div class="noSet">暂未设置默认投递简历</div>
-            		            		<input type="hidden" class="defaultResume" value="-1">
+					<input type="hidden" class="defaultResume" value="-1">
             		<form class="dn" id="resumeSetForm">
 	            		<label><input type="radio" value="1" class="resume1" name="resume">默认使用<span>在线简历</span>进行投递</label>
 	            		<label><input type="radio" value="0" class="resume0" name="resume">默认使用<span>附件简历</span>进行投递</label>

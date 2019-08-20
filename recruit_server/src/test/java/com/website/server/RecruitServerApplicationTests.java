@@ -28,7 +28,7 @@ public class RecruitServerApplicationTests {
 
 	@Test
 	public void contextLoads(){
-		UserWorks userWorks=worksService.showUserworks("我的简历");
+		UserWorks userWorks=worksService.showUserworks(1);
 		System.out.println(userWorks);
 	}
 

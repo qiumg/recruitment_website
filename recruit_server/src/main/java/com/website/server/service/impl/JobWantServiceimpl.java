@@ -11,8 +11,8 @@ public class JobWantServiceimpl implements JobWantService {
     @Autowired
     private UserJobwantMapper userJobwantMapper;
     @Override
-    public UserJobwant showJobwant(String resumeName) {//根据简历名获取期望表信息
-        UserJobwant userJobwant=userJobwantMapper.selectByjianliname(resumeName);
+    public UserJobwant showJobwant(Integer resumeId) {//根据简历名获取期望表信息
+        UserJobwant userJobwant=userJobwantMapper.selectByjianliname(resumeId);
         return userJobwant;
     }
 

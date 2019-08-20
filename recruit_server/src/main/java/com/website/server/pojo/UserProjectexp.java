@@ -38,7 +38,7 @@ public class UserProjectexp {
     }
 
     public void setProjectName(String projectName) {
-        this.projectName = projectName == null ? null : projectName.trim();
+        this.projectName = projectName;
     }
 
     public String getPostName() {
@@ -46,15 +46,15 @@ public class UserProjectexp {
     }
 
     public void setPostName(String postName) {
-        this.postName = postName == null ? null : postName.trim();
+        this.postName = postName;
     }
 
-    public String getDescribe() {
+    public String getDescribe1() {
         return describe1;
     }
 
-    public void setDescribe(String describe) {
-        this.describe1 = describe == null ? null : describe.trim();
+    public void setDescribe1(String describe1) {
+        this.describe1 = describe1;
     }
 
     public Date getStratTime() {
@@ -80,7 +80,7 @@ public class UserProjectexp {
                 ", resumeId=" + resumeId +
                 ", projectName='" + projectName + '\'' +
                 ", postName='" + postName + '\'' +
-                ", describe='" + describe1 + '\'' +
+                ", describe1='" + describe1 + '\'' +
                 ", stratTime=" + stratTime +
                 ", stopTime=" + stopTime +
                 '}';

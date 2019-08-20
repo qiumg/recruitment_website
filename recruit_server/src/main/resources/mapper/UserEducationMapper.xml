@@ -13,11 +13,11 @@
   <sql id="Base_Column_List">
     id, resume_id, university, education, major, strat_time, stop_time
   </sql>
-  <select id="selectByjianliname" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByjianliname" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user_education
-    where resume_id = (select id from user_resume WHERE resume_name=#{resumeName,jdbcType=VARCHAR})
+    where resume_id = #{resumeId,jdbcType=INTEGER}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -108,7 +108,7 @@
         stop_time = #{stopTime,jdbcType=DATE},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where resume_id = #{resumeId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.UserEducation">
     update user_education

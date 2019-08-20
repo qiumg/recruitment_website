@@ -10,11 +10,11 @@
   <sql id="Base_Column_List">
     id, resume_id, link, describe1
   </sql>
-  <select id="selectByjianliname" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByjianliname" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user_works
-    where resume_id = (select id from user_resume WHERE resume_name=#{resumeName,jdbcType=VARCHAR})
+    where resume_id = #{resumeId,jdbcType=INTEGER}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -58,7 +58,7 @@
       <if test="link != null">
         #{link,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
+      <if test="describe1 != null">
         #{describe1,jdbcType=VARCHAR},
       </if>
     </trim>
@@ -72,11 +72,11 @@
       <if test="link != null">
         link = #{link,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
+      <if test="describe1 != null">
         describe1 = #{describe1,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where resume_id = #{resumeId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.UserWorks">
     update user_works

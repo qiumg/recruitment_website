@@ -33,9 +33,30 @@ public class UserSimpleInfoServiceimpl implements UserSimpleInfoService {
         }
         return false;
     }
+    @Override
+    public boolean addresumename(UserResume userResume) {//增加简历
+        Date date=new Date();
+        userResume.setModifyTime(date);//更改最后修改时间
+        int i=resumeMapper.insertSelective(userResume);
+        if(i>0){
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public boolean setintroduction(UserResume userResume) {//修改自我介绍
+        Date date=new Date();
+        userResume.setModifyTime(date);//更改最后修改时间
+        int i=resumeMapper.updateintroductionByUserId(userResume);
+        if(i>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addintroduction(UserResume userResume) {
         Date date=new Date();
         userResume.setModifyTime(date);//更改最后修改时间
         int i=resumeMapper.updateintroductionByUserId(userResume);
@@ -63,4 +84,5 @@ public class UserSimpleInfoServiceimpl implements UserSimpleInfoService {
         }
         return false;
     }
+
 }

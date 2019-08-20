@@ -19,5 +19,5 @@ public interface UserJobexpMapper {
 
     int updateByPrimaryKey(UserJobexp record);
 
-    UserJobexp selectByjianliname(String resumeName);
+    UserJobexp selectByjianliname(Integer resumeId);
 }

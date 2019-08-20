@@ -18,7 +18,7 @@ public class JobWantController {
     private RestTemplate restTemplate;
 
     @RequestMapping("/jobwantcontrol")
-    public String altersimpinfo(HttpServletRequest request, HttpSession session){
+    public String alterjobwant(HttpServletRequest request, HttpSession session){
         UserJobwant userJobwant= (UserJobwant) session.getAttribute("userJobwant");
             Integer resumeId = (Integer) session.getAttribute("resumeId");
             String placeWant = request.getParameter("placeWant");

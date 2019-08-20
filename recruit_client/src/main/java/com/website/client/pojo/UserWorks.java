@@ -30,15 +30,15 @@ public class UserWorks {
     }
 
     public void setLink(String link) {
-        this.link = link == null ? null : link.trim();
+        this.link = link;
     }
 
-    public String getDescribe() {
+    public String getDescribe1() {
         return describe1;
     }
 
-    public void setDescribe(String describe) {
-        this.describe1 = describe == null ? null : describe.trim();
+    public void setDescribe1(String describe1) {
+        this.describe1 = describe1;
     }
 
     @Override

@@ -19,5 +19,5 @@ public interface UserEducationMapper {
 
     int updateByPrimaryKey(UserEducation record);
 
-    UserEducation selectByjianliname(String resumeName);
+    UserEducation selectByjianliname(Integer resumeId);
 }

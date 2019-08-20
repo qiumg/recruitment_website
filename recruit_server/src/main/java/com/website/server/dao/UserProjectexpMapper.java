@@ -19,5 +19,5 @@ public interface UserProjectexpMapper {
 
     int updateByPrimaryKey(UserProjectexp record);
 
-    UserProjectexp selectByjianliname(String resumeName);
+    UserProjectexp selectByjianliname(Integer resumeId);
 }

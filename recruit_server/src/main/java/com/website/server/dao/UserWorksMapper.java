@@ -19,5 +19,5 @@ public interface UserWorksMapper {
 
     int updateByPrimaryKey(UserWorks record);
 
-    UserWorks selectByjianliname(String resumeName);
+    UserWorks selectByjianliname(Integer resumeId);
 }

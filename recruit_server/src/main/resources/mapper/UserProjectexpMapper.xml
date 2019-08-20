@@ -13,11 +13,11 @@
   <sql id="Base_Column_List">
     id, resume_id, project_name, post_name, describe1, strat_time, stop_time
   </sql>
-  <select id="selectByjianliname" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByjianliname" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user_projectexp
-    where resume_id = (select id from user_resume WHERE resume_name=#{resumeName,jdbcType=VARCHAR})
+    where resume_id = #{resumeId,jdbcType=INTEGER}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -52,7 +52,7 @@
       <if test="postName != null">
         post_name,
       </if>
-      <if test="describe != null">
+      <if test="describe1 != null">
         describe1,
       </if>
       <if test="stratTime != null">
@@ -75,7 +75,7 @@
       <if test="postName != null">
         #{postName,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
+      <if test="describe1 != null">
         #{describe1,jdbcType=VARCHAR},
       </if>
       <if test="stratTime != null">
@@ -98,7 +98,7 @@
       <if test="postName != null">
         post_name = #{postName,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
+      <if test="describe1 != null">
         describe1 = #{describe1,jdbcType=VARCHAR},
       </if>
       <if test="stratTime != null">
@@ -108,7 +108,7 @@
         stop_time = #{stopTime,jdbcType=DATE},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where resume_id = #{resumeId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.UserProjectexp">
     update user_projectexp
