@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,8 +22,8 @@ public class RecruitServerApplicationTests {
 
 	@Test
 	public void contextLoads(){
-		User user = new User("34977146@qq.com","123456");
-		loginService.insertUserByEmail(user);
+		Date date = new Date();
+		System.out.println(date);
 
 	}
 
