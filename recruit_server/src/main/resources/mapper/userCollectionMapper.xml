@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.website.server.dao.userCollectionMapper">
+  <resultMap id="BaseResultMap" type="com.website.server.pojo.userCollection">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="job_id" jdbcType="INTEGER" property="jobId" />
+    <result column="collect_time" jdbcType="DATE" property="collectTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, job_id, collect_time
+  </sql>
+  <select id="selectByuserid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    job_id
+    from user_collection
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_collection
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_collection
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.website.server.pojo.userCollection">
+    insert into user_collection (id, user_id, job_id, 
+      collect_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{jobId,jdbcType=INTEGER}, 
+      #{collectTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.server.pojo.userCollection">
+    insert into user_collection
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="jobId != null">
+        job_id,
+      </if>
+      <if test="collectTime != null">
+        collect_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null">
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null">
+        #{collectTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.userCollection">
+    update user_collection
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null">
+        job_id = #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null">
+        collect_time = #{collectTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.userCollection">
+    update user_collection
+    set user_id = #{userId,jdbcType=INTEGER},
+      job_id = #{jobId,jdbcType=INTEGER},
+      collect_time = #{collectTime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
