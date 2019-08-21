@@ -94,5 +94,9 @@ public class RecruitServerApplicationTests {
 		jobInfo.setjMhigh(10);
 		jobInfoService.updateByPrimaryKeySelectiveService(jobInfo);
 	}
+	@Test
+	public void test6(){
+		System.out.println(jobInfoService.selectCStaticByCIdService(1));
+	}
 
 }

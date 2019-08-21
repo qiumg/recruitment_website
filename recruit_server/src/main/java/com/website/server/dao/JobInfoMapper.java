@@ -193,6 +193,12 @@ public interface JobInfoMapper {
     @Update("update job_info set j_num = 1 where j_id = #{j_id}")
     int upJobInfo(int j_id);
 
+    //查询职位所属企业id
+    @Select("select c_id from job_info where j_id=#{j_id}")
+    int selectCIdByJId(int j_id);
+    //根据c_id查询c_static
+    @Select("select c_static from company_info where c_id=#{c_id}")
+    String selectCStaticByCId(int c_id);
 
 
 }

@@ -3,6 +3,7 @@ package com.website.server.service.impl;
 import com.website.server.dao.JobInfoMapper;
 import com.website.server.pojo.JobInfo;
 import com.website.server.pojo.justforeasy.JobInfo2;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -119,6 +120,20 @@ public class JobInfoService {
         jobInfo2=jobInfoMapper.selectByJId(j_id);
         return jobInfo2;
     }
+
+    //查询职位所属企业id
+    public int selectCIdByJIdService(int j_id){
+        int c_id=jobInfoMapper.selectCIdByJId(j_id);
+        return c_id;
+    }
+    //根据c_id查询c_static
+    public String selectCStaticByCIdService(int c_id){
+        String c_static=jobInfoMapper.selectCStaticByCId(c_id);
+        return c_static;
+    }
+
+    //查询所有企业信息
+
 
 
 

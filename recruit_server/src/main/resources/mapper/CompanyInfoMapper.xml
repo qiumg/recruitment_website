@@ -14,6 +14,11 @@
     <result column="c_http" jdbcType="VARCHAR" property="cHttp" />
     <result column="c_summary" jdbcType="VARCHAR" property="cSummary" />
     <result column="c_license" jdbcType="VARCHAR" property="cLicense" />
+    <result column="c_logo" jdbcType="VARCHAR" property="cLogo" />
+    <result column="c_scale" jdbcType="VARCHAR" property="cScale" />
+    <result column="c_ppost" jdbcType="VARCHAR" property="cPpost" />
+    <result column="c_stage" jdbcType="VARCHAR" property="cStage" />
+    <result column="c_email" jdbcType="VARCHAR" property="cEmail" />
     <result column="c_static" jdbcType="VARCHAR" property="cStatic" />
   </resultMap>
   <sql id="Base_Column_List">

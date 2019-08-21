@@ -107,10 +107,10 @@ var youdao_conv_id = 271546;
                             <em></em>
                            已发布职位
 
-							<span >（共<i style="color:#fff;font-style:normal" id="positionNumber">[[${page.getSize()}]]</i>个）</span>                        </h1>
+							<span >（本页显示<i style="color:#fff;font-style:normal" id="positionNumber">[[${page.getSize()}]]</i>个）</span>                        </h1>
                     </dt>
                     <dd>
-						<form id="searchForm" th:action="@{/JobInfo2/selectHisJob2}">
+						<tr id="searchForm" th:action="@{/JobInfo2/selectHisJob2}">
 							<input type="hidden" value="Publish" name="type">
 							<ul class="reset my_jobs">
 								<tr th:each="page:${page.list}">
@@ -133,24 +133,40 @@ var youdao_conv_id = 271546;
 									<a class="job_offline" th:onclick="'javascript:down('+${page.jid}+')'">下线</a>
 									<a class="job_del" th:onclick="'javascript:deleteJob('+${page.jid}+')'">删除</a>
 									</div>
+								</li>
+					</tr>
 
 <!--									th:step="1"&ndash;&gt;-->
-								<tr th:each="pages:${page.pages}" >
-									<div class="pagination">
-										<ul>
-											<li><a href="#">[[${pages}]]</a></li>
-										</ul>
-									</div>
-								</tr>
+
+
+<!--								<tr th:each="pages:${page.pages}" >-->
+<!--									<div class="pagination">-->
+<!--										<ul>-->
+<!--											<li><a href="#">[[${pages}]]</a></li>-->
+<!--										</ul>-->
+<!--									</div>-->
+<!--								</tr>-->
 							</ul>
+
 						</form>
+
 					</dd>
                 </dl>
+				<div style="overflow:hidden;">
+				<div class="turnPage center fr">
+					<a th:href="@{/JobInfo2/selectAllJob2(pageNum=1)}">首页</a>
+					<a th:if="${not page.isIsFirstPage()}" th:href="@{/JobInfo2/selectAllJob2(pageNum=${page.getPageNum()-1})}">上页</a>
+					<a th:if="${not page.isIsLastPage()}" th:href="@{/JobInfo2/selectAllJob2(pageNum=${page.getPageNum()+1})}">下页</a>
+					<a th:href="@{/JobInfo2/selectAllJob2(pageNum=${page.getPageSize()})}">末页</a>
+					第<span th:text="${page.getPageNum()}"></span>页
+					共<span th:text="${page.getPages()}" ></span>页
+				</div>
+			</div>
             </div><!-- end .content -->
 
 		<script type="text/javascript">
 			function down(jid) {
-					$.ajax({
+				if (confirm('确认下线吗?')){$.ajax({
 							url: "/JobInfo2/downJob2",
 							type: "post",
 							data: {'jid': jid},
@@ -164,11 +180,12 @@ var youdao_conv_id = 271546;
 									window.location.href = 'http://localhost:8200/JobInfo2/selectAllJob2';
 								}
 							}
-							}
-					);
-			}
+						}
+				);
+				}}
+
 			function deleteJob(jid){
-				$.ajax({
+				if (confirm('确认删除吗?')){$.ajax({
 							url: "/JobInfo2/deleteJob2",
 							type: "post",
 							data: {'jid': jid},
@@ -183,7 +200,8 @@ var youdao_conv_id = 271546;
 								}
 							}
 						}
-				);
+				);}
+
 			}
 
 			// function updateJob(jid){

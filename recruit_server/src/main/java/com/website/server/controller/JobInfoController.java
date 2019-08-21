@@ -92,6 +92,21 @@ public class JobInfoController {
 
     }
 
+    //查询公司状态
+    @RequestMapping("/selectCStatic")
+    public Integer selectCStatic(@RequestBody  ModelMap map){
+        ObjectMapper mapper = new ObjectMapper();
+        int c_id=mapper.convertValue(map.get("c_id"),Integer.class);
+        String c_static=jobInfoService.selectCStaticByCIdService(c_id);
+        if (c_static.equals("审核通过")){
+            i=1;
+        }else {
+            i=2;
+        }
+
+        return i;
+    }
+
     //删除 by j_id
     @RequestMapping("/deleteJob")
     public Integer deleteJob(@RequestBody  ModelMap map){
@@ -114,22 +129,18 @@ public class JobInfoController {
     }
     //企业已发布职位信息
     @RequestMapping("/selectAllJob")
-    public Map selectAllJobByCid(HttpSession session){
-        PageHelper.startPage(1,4);
-        PageHelper.orderBy("name DESC");
+    public PageInfo<JobInfo2> selectAllJobByCid(HttpSession session,@RequestBody ModelMap modelMap){
+        ObjectMapper mapper = new ObjectMapper();
         Map m=new HashMap();
-//        Integer cID= (Integer) session.getAttribute("c_id");
-
-        jobInfo2s=jobInfoService.selectAllJobByCidService(1);
-        PageInfo<JobInfo2> pageInfo=new PageInfo<JobInfo2>(jobInfo2s);
-
-//        pageInfo.setPageNum(1);
-//        pageInfo.setPageSize(4);
+        Integer cID= (Integer) session.getAttribute("c_id");
+        int pageNum=mapper.convertValue(modelMap.get("pageNum"),Integer.class);
+        PageHelper.startPage(pageNum,4);
+        List<JobInfo2> jobInfo2List=jobInfoService.selectAllJobByCidService(1);
+        PageInfo<JobInfo2> pageInfo=new PageInfo(jobInfo2List);
 //        System.out.println(pageInfo);
-        m.put("pageInfo",pageInfo);
 //        m.put("jobInfo2s",jobInfo2s);
 //        System.out.println("asd"+m);
-        return m;
+        return pageInfo;
 
     }
     //企业按职位名称搜索职位信息(模糊)
@@ -214,5 +225,7 @@ public class JobInfoController {
         map1.put("jobInfo2",jobInfo2);
         return map1;
     }
+
+
 
 }

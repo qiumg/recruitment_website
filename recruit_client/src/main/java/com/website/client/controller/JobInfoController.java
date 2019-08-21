@@ -47,14 +47,13 @@ public class JobInfoController {
                                         @RequestParam("positionAdvantage") String positionAdvantage, @RequestParam("positionDetail") String positionDetail,
                                         @RequestParam("positionDemand") String positionDemand , @RequestParam("num") Integer num) throws IOException {
 
-//        MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
         String url = "http://PROVIDER-SERVER/jobInfo/addJobInfo";
-//        MultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<String, Object>();
+        String url1="http://PROVIDER-SERVER/jobInfo/selectCStatic";
 
         Date date=new Date();
         Map map = new HashMap();
         Map result = new HashMap();
-        map.put("c_id",1);
+        map.put("c_id",3);
         map.put("positionType2",positionType2);
         map.put("positionName",positionName);
         map.put("jobNature",jobNature);
@@ -71,15 +70,19 @@ public class JobInfoController {
         map.put("jclick",0);
 //        HttpEntity<Map> request1 = new HttpEntity<>(map, headers);//包装到HttpEntit
         JSONArray jsonArray=new JSONArray();
-        i=restTemplate.postForObject(url,map,Integer.class);
 
-        if (i==1){
-            result.put("msg","success");
+        Integer static1=restTemplate.postForObject(url1,map,Integer.class);
+        if (static1==2){
+            result.put("static","no");
         }else {
-            result.put("msg","fail");
+            i=restTemplate.postForObject(url,map,Integer.class);
+            if (i==1){
+                result.put("msg","success");
+            }else {
+                result.put("msg","fail");
+            }
         }
         return result;
-
     }
 
     //删除 by j_id
@@ -115,15 +118,18 @@ public class JobInfoController {
 
     }
     //企业已发布职位信息
-    @RequestMapping("/selectAllJob2")
-    public String selectAllJobByCid(HttpServletRequest request,ModelMap map){
+    @GetMapping("/selectAllJob2")
+    public String selectAllJobByCid(HttpServletRequest request,ModelMap map,@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum){
         PageInfo<JobInfo2> pageInfo;
-        Map m =restTemplate.getForObject("http://PROVIDER-SERVER/jobInfo/selectAllJob",HashMap.class);
+        Map map1=new HashMap();
+        map1.put("pageNum",pageNum);
+        PageInfo<JobInfo2> jobInfo2PageInfo =restTemplate.postForObject("http://PROVIDER-SERVER/jobInfo/selectAllJob",map1,PageInfo.class);
         ObjectMapper mapper = new ObjectMapper();
-        jobInfo2s=mapper.convertValue(m.get("jobInfo2s"),List.class);
-        pageInfo=mapper.convertValue(m.get("pageInfo"), PageInfo.class);
+//        jobInfo2s=mapper.convertValue(m.get("jobInfo2s"),List.class);
+//        pageInfo=mapper.convertValue(m.get("pageInfo"), PageInfo.class);
 //        map.addAttribute("jobInfo2s",jobInfo2s);
-        map.addAttribute("page",pageInfo);
+//        System.out.println(pageInfo);
+        map.addAttribute("page",jobInfo2PageInfo);
         return "positions";
     }
     //企业按职位名称搜索职位信息(模糊)
@@ -166,7 +172,7 @@ public class JobInfoController {
         modelMap.addAttribute("jobInfo2",jobInfo2);
         return "updateJob";
     }
-    @RequestMapping(value = "/updateJobInfo2b" )
+    @RequestMapping(value = "/updateJobInfob" )
     @ResponseBody
     public Map updateJobInfo(HttpServletResponse resp, @RequestParam("positionType") String positionType,@RequestParam("jId") String jId,
                                 @RequestParam("positionType2") String positionType2, @RequestParam("positionName") String positionName,
@@ -242,7 +248,7 @@ public class JobInfoController {
     }
     //下线职位
     @RequestMapping(value = "/upJob2" )
-
+    @ResponseBody
     public Map<String,Object> upJobIndo(@RequestParam("jid") String jid){
         String url = "http://PROVIDER-SERVER/jobInfo/upJob";
         Map map = new HashMap();
