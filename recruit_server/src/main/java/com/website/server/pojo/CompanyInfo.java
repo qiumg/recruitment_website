@@ -31,7 +31,7 @@ public class CompanyInfo {
 
     private String cLogo;
 
-    private Integer cScale;
+    private String cScale;
 
     private String cPpost;
 
@@ -155,12 +155,12 @@ public class CompanyInfo {
         this.cLogo = cLogo == null ? null : cLogo.trim();
     }
 
-    public Integer getcScale() {
+    public String getcScale() {
         return cScale;
     }
 
-    public void setcScale(Integer cScale) {
-        this.cScale = cScale;
+    public void setcScale(String cScale) {
+        this.cScale = cScale == null ? null : cScale.trim();
     }
 
     public String getcPpost() {
@@ -193,30 +193,5 @@ public class CompanyInfo {
 
     public void setcStatic(String cStatic) {
         this.cStatic = cStatic == null ? null : cStatic.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "CompanyInfo{" +
-                "cId=" + cId +
-                ", cName='" + cName + '\'' +
-                ", cCtype='" + cCtype + '\'' +
-                ", cMoney=" + cMoney +
-                ", cFdate=" + cFdate +
-                ", cAddress='" + cAddress + '\'' +
-                ", cPname='" + cPname + '\'' +
-                ", cPhone=" + cPhone +
-                ", cFax='" + cFax + '\'' +
-                ", cHttp='" + cHttp + '\'' +
-                ", cSummary='" + cSummary + '\'' +
-                ", cLicense='" + cLicense + '\'' +
-                ", cLogo='" + cLogo + '\'' +
-                ", cScale=" + cScale +
-                ", cPpost='" + cPpost + '\'' +
-                ", cStage='" + cStage + '\'' +
-                ", cEmail='" + cEmail + '\'' +
-                ", cStatic='" + cStatic + '\'' +
-                ", ticketInfos=" + ticketInfos +
-                '}';
     }
 }
