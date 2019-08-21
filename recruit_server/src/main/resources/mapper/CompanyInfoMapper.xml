@@ -185,4 +185,22 @@
       c_static = #{cStatic,jdbcType=VARCHAR}
     where c_id = #{cId,jdbcType=INTEGER}
   </update>
+
+    <select id="selectAll"  parameterType="com.website.server.pojo.CompanyInfo">
+        select c_name,c_ctype,c_money,c_fdate,c_address,c_pname,c_phone,c_fax,c_http,c_summary,c_license,c_static from company_info
+    </select>
+
+    <select id="selectByCstatic"  parameterType="String">
+        select c_name,c_ctype,c_money,c_fdate,c_address,c_pname,c_phone,c_fax,c_http,c_summary,c_license,c_static from company_info
+        where  c_static = #{cStatic,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateCompanyInfoById" >
+        update company_info set c_static = #{cStatic,jdbcType=VARCHAR}
+        where  c_id = #{cId,jdbcType=INTEGER}
+    </update>
+
+
+
+
 </mapper>

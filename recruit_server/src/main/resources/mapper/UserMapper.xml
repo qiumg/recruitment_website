@@ -7,6 +7,8 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="age" jdbcType="INTEGER" property="age" />
+<!--    <result column="beginAge" jdbcType="INTEGER" property="beginAge"/>-->
+<!--      <result column="endAge" jdbcType="INTEGER" property="endAge"/>-->
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="head_portrait" jdbcType="VARCHAR" property="headPortrait" />
@@ -185,4 +187,47 @@
       state = #{state,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectAll"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select id,name,password,sex,age,phone,email,head_portrait,living,working_years,creation_time,modify_time,state from user
+    </select>
+
+  <update id="updateUserStaticById" parameterType="com.website.server.pojo.User">
+    update user
+    <set>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectUsers"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select  id,name,password,sex,age,phone,email,head_portrait,living,working_years,creation_time,modify_time,state
+
+    from user
+    <where>
+    <if test="name!=null and name!=''">
+       and name like '%${name}%'
+    </if>
+      <if test="sex!=null and sex!=''">
+        and sex = #{sex}
+      </if>
+    <if test="beginAge!=null and beginAge!=''">
+      and  age <![CDATA[>=]]> #{beginAge}
+    </if>
+    <if test="endAge !=null and endAge!=''">
+        and age <![CDATA[<=]]> #{endAge}
+    </if>
+    <if test="beginWorkingYears!=null and beginWorkingYears!=''">
+      and  working_years <![CDATA[>=]]> #{beginWorkingYears}
+    </if>
+    <if test="endWorkingYears!=null and endWorkingYears!=''">
+      and  working_years <![CDATA[<=]]> #{endWorkingYears}
+    </if>
+    <if test="state!=null">
+      and state = '%${state}%'
+    </if>
+  </where>
+  </select>
 </mapper>
