@@ -15,7 +15,7 @@
     <result column="c_summary" jdbcType="VARCHAR" property="cSummary" />
     <result column="c_license" jdbcType="VARCHAR" property="cLicense" />
     <result column="c_logo" jdbcType="VARCHAR" property="cLogo" />
-    <result column="c_scale" jdbcType="INTEGER" property="cScale" />
+    <result column="c_scale" jdbcType="VARCHAR" property="cScale" />
     <result column="c_ppost" jdbcType="VARCHAR" property="cPpost" />
     <result column="c_stage" jdbcType="VARCHAR" property="cStage" />
     <result column="c_email" jdbcType="VARCHAR" property="cEmail" />
@@ -47,7 +47,7 @@
       #{cMoney,jdbcType=DOUBLE}, #{cFdate,jdbcType=TIMESTAMP}, #{cAddress,jdbcType=VARCHAR}, 
       #{cPname,jdbcType=VARCHAR}, #{cPhone,jdbcType=BIGINT}, #{cFax,jdbcType=VARCHAR}, 
       #{cHttp,jdbcType=VARCHAR}, #{cSummary,jdbcType=VARCHAR}, #{cLicense,jdbcType=VARCHAR}, 
-      #{cLogo,jdbcType=VARCHAR}, #{cScale,jdbcType=INTEGER}, #{cPpost,jdbcType=VARCHAR}, 
+      #{cLogo,jdbcType=VARCHAR}, #{cScale,jdbcType=VARCHAR}, #{cPpost,jdbcType=VARCHAR}, 
       #{cStage,jdbcType=VARCHAR}, #{cEmail,jdbcType=VARCHAR}, #{cStatic,jdbcType=VARCHAR}
       )
   </insert>
@@ -150,7 +150,7 @@
         #{cLogo,jdbcType=VARCHAR},
       </if>
       <if test="cScale != null">
-        #{cScale,jdbcType=INTEGER},
+        #{cScale,jdbcType=VARCHAR},
       </if>
       <if test="cPpost != null">
         #{cPpost,jdbcType=VARCHAR},
@@ -206,7 +206,7 @@
         c_logo = #{cLogo,jdbcType=VARCHAR},
       </if>
       <if test="cScale != null">
-        c_scale = #{cScale,jdbcType=INTEGER},
+        c_scale = #{cScale,jdbcType=VARCHAR},
       </if>
       <if test="cPpost != null">
         c_ppost = #{cPpost,jdbcType=VARCHAR},
@@ -237,7 +237,7 @@
       c_summary = #{cSummary,jdbcType=VARCHAR},
       c_license = #{cLicense,jdbcType=VARCHAR},
       c_logo = #{cLogo,jdbcType=VARCHAR},
-      c_scale = #{cScale,jdbcType=INTEGER},
+      c_scale = #{cScale,jdbcType=VARCHAR},
       c_ppost = #{cPpost,jdbcType=VARCHAR},
       c_stage = #{cStage,jdbcType=VARCHAR},
       c_email = #{cEmail,jdbcType=VARCHAR},
