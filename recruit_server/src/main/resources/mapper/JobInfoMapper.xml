@@ -34,7 +34,7 @@
         select
         <include refid="Base_Column_List"/>
         from job_info
-        order by j_click desc;
+        order by j_click desc
     </select>
     <select id="selectCompany" parameterType="int" resultType="CompanyInfo">
     select * from company_info where c_id=#{cId}

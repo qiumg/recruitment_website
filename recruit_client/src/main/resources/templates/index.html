@@ -68,10 +68,10 @@
 							$("#mainNavs").append("<div class=\"menu_box\">\n" +
 									"\t\t\t\t\t<div class=\"menu_main\">\n" +
 									"\t\t\t\t\t\t<h2>"+data[i].jkName+"<span></span></h2>\n" +
-									"\t\t\t\t\t\t<a>"+jobkind2[0].jk2Name+"</a>\n" +
-									"\t\t\t\t\t\t<a>"+jobkind2[1].jk2Name+"</a>\n" +
-									"\t\t\t\t\t\t<a>"+jobkind2[2].jk2Name+"</a>\n" +
-									"\t\t\t\t\t\t<a>"+jobkind2[3].jk2Name+"</a>\n" +
+									"\t\t\t\t\t\t<a href='/search?kd="+jobkind2[0].jk2Name+"&choose=1'>"+jobkind2[0].jk2Name+"</a>\n" +
+									"\t\t\t\t\t\t<a href='/search?kd="+jobkind2[1].jk2Name+"&choose=1'>"+jobkind2[1].jk2Name+"</a>\n" +
+									"\t\t\t\t\t\t<a href='/search?kd="+jobkind2[2].jk2Name+"&choose=1'>"+jobkind2[2].jk2Name+"</a>\n" +
+									"\t\t\t\t\t\t<a href='/search?kd="+jobkind2[3].jk2Name+"&choose=1'>"+jobkind2[3].jk2Name+"</a>\n" +
 									"\t\t\t\t\t</div>\n" +
 									"\n" +
 									"</div>");
@@ -85,7 +85,7 @@
 										"\t\t\t\t\t\t\t</dt><dd></dd>\n" +
 										"</dl>");
 								for (var k = 0; k < jobkind2.length; k++) {
-									$("#mainNavs .menu_sub").eq(i).children("dl").eq(j).children("dd").append("<a>"+jobkind2[k].jk2Name+"</a>")
+									$("#mainNavs .menu_sub").eq(i).children("dl").eq(j).children("dd").append("<a href='/search?kd="+jobkind2[k].jk2Name+"&choose=1'>"+jobkind2[k].jk2Name+"</a>")
 								}
 							}
 						}
@@ -324,16 +324,16 @@
 
 			<dl class="hotSearch">
 				<dt>热门搜索：</dt>
-				<dd><a href="list.htmlJava?labelWords=label&city=">Java</a></dd>
-				<dd><a href="list.htmlPHP?labelWords=label&city=">PHP</a></dd>
-				<dd><a href="list.htmlAndroid?labelWords=label&city=">Android</a></dd>
-				<dd><a href="list.htmliOS?labelWords=label&city=">iOS</a></dd>
-				<dd><a href="list.html前端?labelWords=label&city=">前端</a></dd>
-				<dd><a href="list.html产品经理?labelWords=label&city=">产品经理</a></dd>
-				<dd><a href="list.htmlUI?labelWords=label&city=">UI</a></dd>
-				<dd><a href="list.html运营?labelWords=label&city=">运营</a></dd>
-				<dd><a href="list.htmlBD?labelWords=label&city=">BD</a></dd>
-				<dd><a href="list.html?gx=实习&city=">实习</a></dd>
+				<dd><a href="/search?choose=1&kd=Java">Java</a></dd>
+				<dd><a href="/search?choose=1&kd=PHP">PHP</a></dd>
+				<dd><a href="/search?choose=1&kd=Android">Android</a></dd>
+				<dd><a href="/search?choose=1&kd=iOS">iOS</a></dd>
+				<dd><a href="/search?choose=1&kd=前端">前端</a></dd>
+				<dd><a href="/search?choose=1&kd=产品经理">产品经理</a></dd>
+				<dd><a href="/search?choose=1&kd=UI">UI</a></dd>
+				<dd><a href="/search?choose=1&kd=运营">运营</a></dd>
+				<dd><a href="/search?choose=1&kd=BD">BD</a></dd>
+				<dd><a href="/search?choose=1&kd=实习">实习</a></dd>
 			</dl>
 
 			<div id="home_banner">

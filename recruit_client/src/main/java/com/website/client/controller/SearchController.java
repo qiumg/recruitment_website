@@ -34,10 +34,10 @@ public class SearchController {
         }
         if(choose ==1){
             jobName=kd;
-            page = restTemplate.getForObject("http://PROVIDER-SERVER/search/jobname?jobName="+this.jobName+"pageNum="+pageNum, PageInfo.class);
+            page = restTemplate.getForObject("http://PROVIDER-SERVER/search/jobname?jobName="+this.jobName+"&pageNum="+pageNum, PageInfo.class);
         }else{
             companyName=kd;
-            page = restTemplate.getForObject("http://PROVIDER-SERVER/search/companyName?companyName="+this.companyName+"pageNum="+pageNum, PageInfo.class);
+            page = restTemplate.getForObject("http://PROVIDER-SERVER/search/companyName?companyName="+this.companyName+"&pageNum="+pageNum, PageInfo.class);
         }
         map.addAttribute("kd",kd);
         map.addAttribute("choose",choose);
@@ -70,8 +70,5 @@ public class SearchController {
                 "&education={education}&nature={nature}&date={date}&pageNum={pageNum}", PageInfo.class, map);
         return page;
     }
-    @RequestMapping("/jump")
-    public String jump(Integer id){
-        return null;
-    }
+
 }
