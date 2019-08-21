@@ -165,7 +165,7 @@
                                 }
                             }
                         }
-                        $("#hotList>ul").eq(0).append("<a href=\"list.html?city=%E5%85%A8%E5%9B%BD\" class=\"btn fr\" target=\"_blank\">查看更多</a>")
+                        $("#hotList>ul").eq(0).append("<a href=\"/search?kd=&choose=1\" class=\"btn fr\" target=\"_blank\">查看更多</a>")
 					}
 				})
                 $.ajax({
@@ -242,7 +242,7 @@
                                 }
                             }
                         }
-                        $("#hotList>ul").eq(1).append("<a href=\"list.html?city=%E5%85%A8%E5%9B%BD\" class=\"btn fr\" target=\"_blank\">查看更多</a>")
+                        $("#hotList>ul").eq(1).append("<a href=\"/search?kd=&choose=1\" class=\"btn fr\" target=\"_blank\">查看更多</a>")
                     }
                 })
 				$("#mainNavs").delegate(".menu_box","mouseenter",function () {
@@ -324,7 +324,7 @@
 
 			<dl class="hotSearch">
 				<dt>热门搜索：</dt>
-				<dd><a href="/search?choose=1&kd=Java">Java</a></dd>
+				<dd><a href="/search?choose=1&kd=java">Java</a></dd>
 				<dd><a href="/search?choose=1&kd=PHP">PHP</a></dd>
 				<dd><a href="/search?choose=1&kd=Android">Android</a></dd>
 				<dd><a href="/search?choose=1&kd=iOS">iOS</a></dd>
@@ -444,7 +444,7 @@
 
 				<ul class="hot_pos hot_posHotPosition reset" style="display:none;">
 
-					<a href="list.html?city=%E5%85%A8%E5%9B%BD" class="btn fr" target="_blank">查看更多</a>
+<!--					<a href="/search?kd=&choose=1" class="btn fr" target="_blank">查看更多</a>-->
 				</ul>
 			</div>
 
@@ -491,5 +491,5 @@
 
 
 
-</body>
+</div></body>
 </html>
