@@ -7,7 +7,7 @@ public class UserWorks {
 
     private String link;
 
-    private String describe;
+    private String describe1;
 
     public Integer getId() {
         return id;
@@ -30,14 +30,24 @@ public class UserWorks {
     }
 
     public void setLink(String link) {
-        this.link = link == null ? null : link.trim();
+        this.link = link;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescribe1() {
+        return describe1;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe == null ? null : describe.trim();
+    public void setDescribe1(String describe1) {
+        this.describe1 = describe1;
+    }
+
+    @Override
+    public String toString() {
+        return "UserWorks{" +
+                "id=" + id +
+                ", resumeId=" + resumeId +
+                ", link='" + link + '\'' +
+                ", describe1='" + describe1 + '\'' +
+                '}';
     }
 }

@@ -12,6 +12,12 @@
   <sql id="Base_Column_List">
     id, resume_id, company_name, post_name, strat_time, stop_time
   </sql>
+  <select id="selectByjianliname" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_jobexp
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -76,9 +82,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.UserJobexp">
     update user_jobexp
     <set>
-      <if test="resumeId != null">
-        resume_id = #{resumeId,jdbcType=INTEGER},
-      </if>
       <if test="companyName != null">
         company_name = #{companyName,jdbcType=VARCHAR},
       </if>
@@ -92,7 +95,7 @@
         stop_time = #{stopTime,jdbcType=DATE},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where resume_id = #{resumeId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.UserJobexp">
     update user_jobexp

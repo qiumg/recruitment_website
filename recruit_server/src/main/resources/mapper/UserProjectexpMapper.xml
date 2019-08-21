@@ -6,13 +6,19 @@
     <result column="resume_id" jdbcType="INTEGER" property="resumeId" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="post_name" jdbcType="VARCHAR" property="postName" />
-    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="describe1" jdbcType="VARCHAR" property="describe1" />
     <result column="strat_time" jdbcType="DATE" property="stratTime" />
     <result column="stop_time" jdbcType="DATE" property="stopTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, resume_id, project_name, post_name, describe, strat_time, stop_time
+    id, resume_id, project_name, post_name, describe1, strat_time, stop_time
   </sql>
+  <select id="selectByjianliname" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_projectexp
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -25,10 +31,10 @@
   </delete>
   <insert id="insert" parameterType="com.website.server.pojo.UserProjectexp">
     insert into user_projectexp (id, resume_id, project_name, 
-      post_name, describe, strat_time, 
+      post_name, describe1, strat_time,
       stop_time)
     values (#{id,jdbcType=INTEGER}, #{resumeId,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, 
-      #{postName,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, #{stratTime,jdbcType=DATE}, 
+      #{postName,jdbcType=VARCHAR}, #{describe1,jdbcType=VARCHAR}, #{stratTime,jdbcType=DATE},
       #{stopTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.website.server.pojo.UserProjectexp">
@@ -46,8 +52,8 @@
       <if test="postName != null">
         post_name,
       </if>
-      <if test="describe != null">
-        describe,
+      <if test="describe1 != null">
+        describe1,
       </if>
       <if test="stratTime != null">
         strat_time,
@@ -69,8 +75,8 @@
       <if test="postName != null">
         #{postName,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
-        #{describe,jdbcType=VARCHAR},
+      <if test="describe1 != null">
+        #{describe1,jdbcType=VARCHAR},
       </if>
       <if test="stratTime != null">
         #{stratTime,jdbcType=DATE},
@@ -92,8 +98,8 @@
       <if test="postName != null">
         post_name = #{postName,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
-        describe = #{describe,jdbcType=VARCHAR},
+      <if test="describe1 != null">
+        describe1 = #{describe1,jdbcType=VARCHAR},
       </if>
       <if test="stratTime != null">
         strat_time = #{stratTime,jdbcType=DATE},
@@ -102,14 +108,14 @@
         stop_time = #{stopTime,jdbcType=DATE},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where resume_id = #{resumeId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.UserProjectexp">
     update user_projectexp
     set resume_id = #{resumeId,jdbcType=INTEGER},
       project_name = #{projectName,jdbcType=VARCHAR},
       post_name = #{postName,jdbcType=VARCHAR},
-      describe = #{describe,jdbcType=VARCHAR},
+      describe1 = #{describe1,jdbcType=VARCHAR},
       strat_time = #{stratTime,jdbcType=DATE},
       stop_time = #{stopTime,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}

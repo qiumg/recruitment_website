@@ -72,4 +72,17 @@ public class UserEducation {
     public void setStopTime(Date stopTime) {
         this.stopTime = stopTime;
     }
+
+    @Override
+    public String toString() {
+        return "UserEducation{" +
+                "id=" + id +
+                ", resumeId=" + resumeId +
+                ", university='" + university + '\'' +
+                ", education='" + education + '\'' +
+                ", major='" + major + '\'' +
+                ", stratTime=" + stratTime +
+                ", stopTime=" + stopTime +
+                '}';
+    }
 }

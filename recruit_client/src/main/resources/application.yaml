@@ -5,7 +5,6 @@ spring:
     name: boot-consumer
   resources:
     static-locations: classpath:/templates,classpath:/static
-
 eureka:
   instance:
     prefer-ip-address: true #注册服务的时候使用服务的ip进行注册

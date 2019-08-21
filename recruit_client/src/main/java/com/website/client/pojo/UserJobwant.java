@@ -60,4 +60,16 @@ public class UserJobwant {
     public void setWorkTypes(String workTypes) {
         this.workTypes = workTypes == null ? null : workTypes.trim();
     }
+
+    @Override
+    public String toString() {
+        return "UserJobwant{" +
+                "id=" + id +
+                ", resumeId=" + resumeId +
+                ", salaryWant='" + salaryWant + '\'' +
+                ", placeWant='" + placeWant + '\'' +
+                ", postWant='" + postWant + '\'' +
+                ", workTypes='" + workTypes + '\'' +
+                '}';
+    }
 }

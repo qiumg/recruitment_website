@@ -62,4 +62,16 @@ public class UserJobexp {
     public void setStopTime(Date stopTime) {
         this.stopTime = stopTime;
     }
+
+    @Override
+    public String toString() {
+        return "UserJobexp{" +
+                "id=" + id +
+                ", resumeId=" + resumeId +
+                ", companyName='" + companyName + '\'' +
+                ", postName='" + postName + '\'' +
+                ", stratTime=" + stratTime +
+                ", stopTime=" + stopTime +
+                '}';
+    }
 }
