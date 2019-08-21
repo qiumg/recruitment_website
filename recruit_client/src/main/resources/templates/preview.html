@@ -108,7 +108,7 @@ $(function(){
 
 		<div class="profile_box" id="worksShow">
 			<h2>作品展示</h2>
-			<div class="workShow">
+			<div class="workShow" th:if="${userWorks}!=null">
 				<ul class="slist clearfix">
 					<li class="noborder">
 						<div class="workList c7">
