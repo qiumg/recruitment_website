@@ -1,6 +1,8 @@
 package com.website.server.service.impl;
 
+import com.website.server.dao.CompanyInfoMapper;
 import com.website.server.dao.JobInfoMapper;
+import com.website.server.pojo.CompanyInfo;
 import com.website.server.pojo.JobInfo;
 import com.website.server.pojo.justforeasy.JobInfo2;
 import org.apache.ibatis.annotations.Select;
@@ -13,6 +15,8 @@ import java.util.List;
 public class JobInfoService {
     @Autowired
     private JobInfoMapper jobInfoMapper;
+    @Autowired
+    private CompanyInfoMapper companyInfoMapper;
 
     //添加职位 用公司id
     public Integer addJobInfoService(JobInfo record,int c_id){
@@ -132,8 +136,12 @@ public class JobInfoService {
         return c_static;
     }
 
-    //查询所有企业信息
-
+    //查询所有审核通过企业信息
+    public List<CompanyInfo> selectAllByStaticService(String c_static){
+        List<CompanyInfo> companyInfos;
+        companyInfos=companyInfoMapper.selectAllByStatic(c_static);
+        return companyInfos;
+    }
 
 
 

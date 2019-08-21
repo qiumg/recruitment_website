@@ -1,9 +1,8 @@
-package com.website.server.pojo;
+package com.website.client.pojo;
 
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 public class CompanyInfo {
@@ -21,7 +20,7 @@ public class CompanyInfo {
 
     private String cPname;
 
-    private Long cPhone;
+    private Integer cPhone;
 
     private String cFax;
 
@@ -43,12 +42,10 @@ public class CompanyInfo {
 
     private String cStatic;
 
-    private List<JobInfo> jobInfoList;
-
     public CompanyInfo() {
     }
 
-    public CompanyInfo(Integer cId, String cName, String cCtype, Double cMoney, Date cFdate, String cAddress, String cPname, Long cPhone, String cFax, String cHttp, String cSummary, String cLicense, String cLogo, String cScale, String cPpost, String cStage, String cEmail, String cStatic, List<JobInfo> jobInfoList) {
+    public CompanyInfo(Integer cId, String cName, String cCtype, Double cMoney, Date cFdate, String cAddress, String cPname, Integer cPhone, String cFax, String cHttp, String cSummary, String cLicense, String cLogo, String cScale, String cPpost, String cStage, String ceEmail, String cStatic) {
         this.cId = cId;
         this.cName = cName;
         this.cCtype = cCtype;
@@ -65,9 +62,8 @@ public class CompanyInfo {
         this.cScale = cScale;
         this.cPpost = cPpost;
         this.cStage = cStage;
-        this.cEmail = cEmail;
+        this.cEmail = ceEmail;
         this.cStatic = cStatic;
-        this.jobInfoList = jobInfoList;
     }
 
     public Integer getcId() {
@@ -126,11 +122,11 @@ public class CompanyInfo {
         this.cPname = cPname == null ? null : cPname.trim();
     }
 
-    public Long getcPhone() {
+    public Integer getcPhone() {
         return cPhone;
     }
 
-    public void setcPhone(Long cPhone) {
+    public void setcPhone(Integer cPhone) {
         this.cPhone = cPhone;
     }
 
@@ -193,9 +189,8 @@ public class CompanyInfo {
                 ", cScale='" + cScale + '\'' +
                 ", cPpost='" + cPpost + '\'' +
                 ", cStage='" + cStage + '\'' +
-                ", cEmail='" + cEmail + '\'' +
+                ", ceEmail='" + cEmail + '\'' +
                 ", cStatic='" + cStatic + '\'' +
-                ", jobInfoList=" + jobInfoList +
                 '}';
     }
 }

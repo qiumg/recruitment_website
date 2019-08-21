@@ -96,7 +96,7 @@ public class RecruitServerApplicationTests {
 	}
 	@Test
 	public void test6(){
-		System.out.println(jobInfoService.selectCStaticByCIdService(1));
+		System.out.println(jobInfoService.selectAllByStaticService("审核通过"));
 	}
 
 }

@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface CompanyInfoMapper {
@@ -17,8 +19,8 @@ public interface CompanyInfoMapper {
 
     CompanyInfo selectByPrimaryKey(Integer cId);
 
-    @Select("select * from ")
-    CompanyInfo selectAllByStatic(String c_static);
+
+    List<CompanyInfo> selectAllByStatic(String c_static);
 
 
     int updateByPrimaryKeySelective(CompanyInfo record);

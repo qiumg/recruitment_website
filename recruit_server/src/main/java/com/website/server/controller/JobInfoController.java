@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.website.server.pojo.CompanyInfo;
 import com.website.server.pojo.JobInfo;
 import com.website.server.pojo.UserResume;
 import com.website.server.pojo.justforeasy.JobInfo2;
@@ -224,6 +225,19 @@ public class JobInfoController {
         JobInfo2 jobInfo2=jobInfoService.selectAllByJId(j_id);
         map1.put("jobInfo2",jobInfo2);
         return map1;
+    }
+
+    //查询所有(审核通过)企业信息
+    @RequestMapping("/selectAllCompantInfo2")
+    public PageInfo<CompanyInfo> selectAllByStatic(@RequestBody ModelMap modelMap){
+        List<CompanyInfo> companyInfos;
+        ObjectMapper mapper = new ObjectMapper();
+        int pageNum=mapper.convertValue(modelMap.get("pageNum"),Integer.class);
+        PageHelper.startPage(pageNum,1000);
+        companyInfos=jobInfoService.selectAllByStaticService("审核通过");
+        PageInfo<CompanyInfo> pageInfo=new PageInfo(companyInfos);
+        System.out.println(pageInfo);
+        return pageInfo;
     }
 
 

@@ -29,7 +29,7 @@ public class JobInfo {
 
     private String jExperience;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date jDate;
 
     private Integer jNum;

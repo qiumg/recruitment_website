@@ -2,6 +2,7 @@ package com.website.client.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
+import com.website.client.pojo.CompanyInfo;
 import com.website.client.pojo.JobInfo;
 import com.website.client.pojo.JobInfo2;
 import org.json.JSONArray;
@@ -212,12 +213,12 @@ public class JobInfoController {
     }
 
 
-    @RequestMapping(value = "/jobdetail1" )
-    public String jobdetail1(ModelMap modelMap){
+    @GetMapping(value = "/jobdetail1" )
+    public String jobdetail1(@RequestParam("jid") Integer j_id,ModelMap modelMap){
         String url = "http://PROVIDER-SERVER/jobInfo/selectAllJobByJid";
         Map map = new HashMap();
         Map map1=new HashMap();
-        map.put("jid",1);
+        map.put("jid",j_id);
         map1=restTemplate.postForObject(url,map,Map.class);
         ObjectMapper mapper=new ObjectMapper();
         jobInfo2=mapper.convertValue(map1.get("jobInfo2"),JobInfo2.class);
@@ -264,6 +265,17 @@ public class JobInfoController {
         return result;
     }
 
+    //显示所有审核通过公司信息
+    @GetMapping("/selectAllCompantInfo")
+    public String selectAllByStatic(HttpServletRequest request,ModelMap map,@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum){
+        PageInfo<JobInfo2> pageInfo;
+        Map map1=new HashMap();
+        map1.put("pageNum",pageNum);
+        PageInfo<CompanyInfo> companyInfoPageInfo =restTemplate.postForObject("http://PROVIDER-SERVER/jobInfo/selectAllCompantInfo2",map1,PageInfo.class);
+        map.addAttribute("page",companyInfoPageInfo);
+        System.out.println(companyInfoPageInfo);
+        return "companylist";
+    }
 
 
 
