@@ -56,6 +56,30 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>5.1.10</version>
+		</dependency>
+		<dependency>
+
+			<groupId>org.thymeleaf.extras</groupId>
+
+			<artifactId>thymeleaf-extras-java8time</artifactId>
+
+			<version>3.0.1.RELEASE</version>
+
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>4.3.1</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -66,11 +90,6 @@
 				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.webjars</groupId>
-				<artifactId>jquery</artifactId>
-				<version>3.4.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

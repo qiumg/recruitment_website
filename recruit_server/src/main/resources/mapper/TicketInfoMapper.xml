@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.website.server.dao.TicketInfoMapper">
+  <resultMap id="BaseResultMap" type="com.website.server.pojo.TicketInfo">
+    <id column="tic_id" jdbcType="INTEGER" property="ticId" />
+    <result column="tic_kind" jdbcType="VARCHAR" property="ticKind" />
+    <result column="tic_name" jdbcType="VARCHAR" property="ticName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tic_id, tic_kind, tic_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_info
+    where tic_id = #{ticId,jdbcType=INTEGER}
+  </select>
+  <select id="selectTicketInfoBycId" parameterType="int" resultMap="BaseResultMap">
+    select tic_name
+    from ticket_info t,company_ticket c
+    where t.tic_id=c.tic_id and c.c_id=#{cid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ticket_info
+    where tic_id = #{ticId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.website.server.pojo.TicketInfo">
+    insert into ticket_info (tic_id, tic_kind, tic_name
+      )
+    values (#{ticId,jdbcType=INTEGER}, #{ticKind,jdbcType=VARCHAR}, #{ticName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.server.pojo.TicketInfo">
+    insert into ticket_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ticId != null">
+        tic_id,
+      </if>
+      <if test="ticKind != null">
+        tic_kind,
+      </if>
+      <if test="ticName != null">
+        tic_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ticId != null">
+        #{ticId,jdbcType=INTEGER},
+      </if>
+      <if test="ticKind != null">
+        #{ticKind,jdbcType=VARCHAR},
+      </if>
+      <if test="ticName != null">
+        #{ticName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.TicketInfo">
+    update ticket_info
+    <set>
+      <if test="ticKind != null">
+        tic_kind = #{ticKind,jdbcType=VARCHAR},
+      </if>
+      <if test="ticName != null">
+        tic_name = #{ticName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tic_id = #{ticId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.TicketInfo">
+    update ticket_info
+    set tic_kind = #{ticKind,jdbcType=VARCHAR},
+      tic_name = #{ticName,jdbcType=VARCHAR}
+    where tic_id = #{ticId,jdbcType=INTEGER}
+  </update>
+</mapper>

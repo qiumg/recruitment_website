@@ -1,11 +1,7 @@
 package com.website.server.dao;
 
 import com.website.server.pojo.CompanyInfo;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
-@Repository
-@Mapper
 public interface CompanyInfoMapper {
     int deleteByPrimaryKey(Integer cId);
 

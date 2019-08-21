@@ -30,4 +30,13 @@ public class JobKind2Info {
     public void setJk1Id(Integer jk1Id) {
         this.jk1Id = jk1Id;
     }
+
+    @Override
+    public String toString() {
+        return "JobKind2Info{" +
+                "jk2Id=" + jk2Id +
+                ", jk2Name='" + jk2Name + '\'' +
+                ", jk1Id=" + jk1Id +
+                '}';
+    }
 }

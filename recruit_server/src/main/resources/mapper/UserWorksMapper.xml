@@ -5,11 +5,17 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="resume_id" jdbcType="INTEGER" property="resumeId" />
     <result column="link" jdbcType="VARCHAR" property="link" />
-    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="describe1" jdbcType="VARCHAR" property="describe1" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, resume_id, link, describe
+    id, resume_id, link, describe1
   </sql>
+  <select id="selectByjianliname" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_works
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -22,9 +28,9 @@
   </delete>
   <insert id="insert" parameterType="com.website.server.pojo.UserWorks">
     insert into user_works (id, resume_id, link, 
-      describe)
+      describe1)
     values (#{id,jdbcType=INTEGER}, #{resumeId,jdbcType=INTEGER}, #{link,jdbcType=VARCHAR}, 
-      #{describe,jdbcType=VARCHAR})
+      #{describe1,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.website.server.pojo.UserWorks">
     insert into user_works
@@ -38,8 +44,8 @@
       <if test="link != null">
         link,
       </if>
-      <if test="describe != null">
-        describe,
+      <if test="describe1 != null">
+        describe1,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -52,8 +58,8 @@
       <if test="link != null">
         #{link,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
-        #{describe,jdbcType=VARCHAR},
+      <if test="describe1 != null">
+        #{describe1,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -66,17 +72,17 @@
       <if test="link != null">
         link = #{link,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
-        describe = #{describe,jdbcType=VARCHAR},
+      <if test="describe1 != null">
+        describe1 = #{describe1,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where resume_id = #{resumeId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.UserWorks">
     update user_works
     set resume_id = #{resumeId,jdbcType=INTEGER},
       link = #{link,jdbcType=VARCHAR},
-      describe = #{describe,jdbcType=VARCHAR}
+      describe1 = #{describe1,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

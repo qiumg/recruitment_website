@@ -1,199 +1,290 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.server.dao.JobInfoMapper">
-  <resultMap id="BaseResultMap" type="com.website.server.pojo.JobInfo">
-    <id column="j_id" jdbcType="INTEGER" property="jId" />
-    <result column="j_name" jdbcType="VARCHAR" property="jName" />
-    <result column="j_character" jdbcType="VARCHAR" property="jCharacter" />
-    <result column="jk2_name" jdbcType="VARCHAR" property="jk2Name" />
-    <result column="j_mlow" jdbcType="INTEGER" property="jMlow" />
-    <result column="j_mhigh" jdbcType="INTEGER" property="jMhigh" />
-    <result column="j_experience" jdbcType="VARCHAR" property="jExperience" />
-    <result column="j_date" jdbcType="TIMESTAMP" property="jDate" />
-    <result column=" j_num" jdbcType="INTEGER" property="jNum" />
-    <result column="j_loc" jdbcType="VARCHAR" property="jLoc" />
-    <result column="j_req" jdbcType="VARCHAR" property="jReq" />
-    <result column="j_des" jdbcType="VARCHAR" property="jDes" />
-    <result column="j_benefit" jdbcType="VARCHAR" property="jBenefit" />
-    <result column="c_id" jdbcType="INTEGER" property="cId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    j_id, j_name, j_character, jk2_name, j_mlow, j_mhigh, j_experience, j_date, " j_num", 
-    j_loc, j_req, j_des, j_benefit, c_id
+    <resultMap id="BaseResultMap" type="com.website.server.pojo.JobInfo">
+        <id column="j_id" jdbcType="INTEGER" property="jId"/>
+        <result column="j_name" jdbcType="VARCHAR" property="jName"/>
+        <result column="j_character" jdbcType="VARCHAR" property="jCharacter"/>
+        <result column="jk2_name" jdbcType="VARCHAR" property="jk2Name"/>
+        <result column="j_mlow" jdbcType="INTEGER" property="jMlow"/>
+        <result column="j_mhigh" jdbcType="INTEGER" property="jMhigh"/>
+        <result column="j_education" jdbcType="VARCHAR" property="jEducation"/>
+        <result column="j_experience" jdbcType="VARCHAR" property="jExperience"/>
+        <result column="j_date" jdbcType="TIMESTAMP" property="jDate"/>
+        <result column="j_num" jdbcType="INTEGER" property="jNum"/>
+        <result column="j_loc" jdbcType="VARCHAR" property="jLoc"/>
+        <result column="j_req" jdbcType="VARCHAR" property="jReq"/>
+        <result column="j_des" jdbcType="VARCHAR" property="jDes"/>
+        <result column="j_benefit" jdbcType="VARCHAR" property="jBenefit"/>
+        <result column="c_id" jdbcType="INTEGER" property="cId"/>
+        <result column="j_click" jdbcType="INTEGER" property="jClick"/>
+        <association property="companyInfo" javaType="CompanyInfo" select="selectCompany" column="c_id"></association>
+    </resultMap>
+    <sql id="Base_Column_List">
+    j_id, j_name, j_character, jk2_name, j_mlow, j_mhigh, j_education, j_experience, 
+    j_date, j_num, j_loc, j_req, j_des, j_benefit, c_id, j_click
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from job_info
-    where j_id = #{jId,jdbcType=INTEGER}
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from job_info
+        where j_id = #{jId,jdbcType=INTEGER}
+    </select>
+    <select id="selectJobInfoByClick" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from job_info
+        order by j_click desc
+    </select>
+    <select id="selectCompany" parameterType="int" resultType="CompanyInfo">
+    select * from company_info where c_id=#{cId}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectJobInfoByDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from job_info order by j_date desc
+    </select>
+    <select id="selectJobInfoLikeName" resultMap="BaseResultMap" parameterType="string">
+        select
+        <include refid="Base_Column_List"/>
+        from job_info
+        <where>
+            <if test="jobName != null and jobName !=''">
+                and j_name like concat('%',#{jobName},'%')
+            </if>
+        </where>
+    </select>
+    <select id="selectJobInfoLikeCompanyName" parameterType="string" resultMap="BaseResultMap">
+     select j_id, j_name, j_character, jk2_name, j_mlow, j_mhigh, j_education, j_experience,
+            j_date, j_num, j_loc, j_req, j_des, j_benefit, j.c_id, j_click
+     from job_info j,company_info c
+     <where>
+         <if test="companyName !=null and companyName !=''">
+            and j.c_id=c.c_id and c.c_name like concat('%',#{companyName},'%')
+         </if>
+     </where>
+  </select>
+    <select id="selectJobInfoByCondition" resultMap="BaseResultMap">
+        select j_id, j_name, j_character, jk2_name, j_mlow, j_mhigh, j_education, j_experience,
+        j_date, j_num, j_loc, j_req, j_des, j_benefit, j.c_id, j_click
+        from job_info j,company_info c
+        <where>
+            j.c_id=c.c_id
+            <if test="jobName != null and jobName !=''">
+                and j_name like concat('%',#{jobName},'%')
+            </if>
+            <if test="companyName != null and companyName !=''">
+                and j.c_id=c.c_id and c.c_name like concat('%',#{companyName},'%')
+            </if>
+            <if test="addr !=null and addr !=''">
+                and j_loc=#{addr}
+            </if>
+            <if test="low != null and high != null">
+                and j_mlow>=#{low} and j_mhigh &lt;= #{high}
+            </if>
+            <if test="education != null and education != ''">
+                and j_education=#{education}
+            </if>
+            <if test="exp != null and exp !=''">
+                and j_experience = #{exp}
+            </if>
+            <if test="nature != null and nature !=''">
+                and j_character = #{nature}
+            </if>
+            <if test="date != null">
+                and j_date>= DATE_SUB(NOW(),INTERVAL #{date} DAY)
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from job_info
     where j_id = #{jId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.website.server.pojo.JobInfo">
+    <insert id="insert" parameterType="com.website.server.pojo.JobInfo">
     insert into job_info (j_id, j_name, j_character, 
       jk2_name, j_mlow, j_mhigh, 
-      j_experience, j_date, " j_num", 
-      j_loc, j_req, j_des, j_benefit, 
-      c_id)
+      j_education, j_experience, j_date, 
+      j_num, j_loc, j_req, j_des, 
+      j_benefit, c_id, j_click
+      )
     values (#{jId,jdbcType=INTEGER}, #{jName,jdbcType=VARCHAR}, #{jCharacter,jdbcType=VARCHAR}, 
       #{jk2Name,jdbcType=VARCHAR}, #{jMlow,jdbcType=INTEGER}, #{jMhigh,jdbcType=INTEGER}, 
-      #{jExperience,jdbcType=VARCHAR}, #{jDate,jdbcType=TIMESTAMP}, #{jNum,jdbcType=INTEGER}, 
-      #{jLoc,jdbcType=VARCHAR}, #{jReq,jdbcType=VARCHAR}, #{jDes,jdbcType=VARCHAR}, #{jBenefit,jdbcType=VARCHAR}, 
-      #{cId,jdbcType=INTEGER})
+      #{jEducation,jdbcType=VARCHAR}, #{jExperience,jdbcType=VARCHAR}, #{jDate,jdbcType=TIMESTAMP}, 
+      #{jNum,jdbcType=INTEGER}, #{jLoc,jdbcType=VARCHAR}, #{jReq,jdbcType=VARCHAR}, #{jDes,jdbcType=VARCHAR}, 
+      #{jBenefit,jdbcType=VARCHAR}, #{cId,jdbcType=INTEGER}, #{jClick,jdbcType=INTEGER}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.website.server.pojo.JobInfo">
-    insert into job_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="jId != null">
-        j_id,
-      </if>
-      <if test="jName != null">
-        j_name,
-      </if>
-      <if test="jCharacter != null">
-        j_character,
-      </if>
-      <if test="jk2Name != null">
-        jk2_name,
-      </if>
-      <if test="jMlow != null">
-        j_mlow,
-      </if>
-      <if test="jMhigh != null">
-        j_mhigh,
-      </if>
-      <if test="jExperience != null">
-        j_experience,
-      </if>
-      <if test="jDate != null">
-        j_date,
-      </if>
-      <if test="jNum != null">
-        " j_num",
-      </if>
-      <if test="jLoc != null">
-        j_loc,
-      </if>
-      <if test="jReq != null">
-        j_req,
-      </if>
-      <if test="jDes != null">
-        j_des,
-      </if>
-      <if test="jBenefit != null">
-        j_benefit,
-      </if>
-      <if test="cId != null">
-        c_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="jId != null">
-        #{jId,jdbcType=INTEGER},
-      </if>
-      <if test="jName != null">
-        #{jName,jdbcType=VARCHAR},
-      </if>
-      <if test="jCharacter != null">
-        #{jCharacter,jdbcType=VARCHAR},
-      </if>
-      <if test="jk2Name != null">
-        #{jk2Name,jdbcType=VARCHAR},
-      </if>
-      <if test="jMlow != null">
-        #{jMlow,jdbcType=INTEGER},
-      </if>
-      <if test="jMhigh != null">
-        #{jMhigh,jdbcType=INTEGER},
-      </if>
-      <if test="jExperience != null">
-        #{jExperience,jdbcType=VARCHAR},
-      </if>
-      <if test="jDate != null">
-        #{jDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="jNum != null">
-        #{jNum,jdbcType=INTEGER},
-      </if>
-      <if test="jLoc != null">
-        #{jLoc,jdbcType=VARCHAR},
-      </if>
-      <if test="jReq != null">
-        #{jReq,jdbcType=VARCHAR},
-      </if>
-      <if test="jDes != null">
-        #{jDes,jdbcType=VARCHAR},
-      </if>
-      <if test="jBenefit != null">
-        #{jBenefit,jdbcType=VARCHAR},
-      </if>
-      <if test="cId != null">
-        #{cId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.JobInfo">
-    update job_info
-    <set>
-      <if test="jName != null">
-        j_name = #{jName,jdbcType=VARCHAR},
-      </if>
-      <if test="jCharacter != null">
-        j_character = #{jCharacter,jdbcType=VARCHAR},
-      </if>
-      <if test="jk2Name != null">
-        jk2_name = #{jk2Name,jdbcType=VARCHAR},
-      </if>
-      <if test="jMlow != null">
-        j_mlow = #{jMlow,jdbcType=INTEGER},
-      </if>
-      <if test="jMhigh != null">
-        j_mhigh = #{jMhigh,jdbcType=INTEGER},
-      </if>
-      <if test="jExperience != null">
-        j_experience = #{jExperience,jdbcType=VARCHAR},
-      </if>
-      <if test="jDate != null">
-        j_date = #{jDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="jNum != null">
-        " j_num" = #{jNum,jdbcType=INTEGER},
-      </if>
-      <if test="jLoc != null">
-        j_loc = #{jLoc,jdbcType=VARCHAR},
-      </if>
-      <if test="jReq != null">
-        j_req = #{jReq,jdbcType=VARCHAR},
-      </if>
-      <if test="jDes != null">
-        j_des = #{jDes,jdbcType=VARCHAR},
-      </if>
-      <if test="jBenefit != null">
-        j_benefit = #{jBenefit,jdbcType=VARCHAR},
-      </if>
-      <if test="cId != null">
-        c_id = #{cId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where j_id = #{jId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.JobInfo">
+    <insert id="insertSelective" parameterType="com.website.server.pojo.JobInfo">
+        insert into job_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jId != null">
+                j_id,
+            </if>
+            <if test="jName != null">
+                j_name,
+            </if>
+            <if test="jCharacter != null">
+                j_character,
+            </if>
+            <if test="jk2Name != null">
+                jk2_name,
+            </if>
+            <if test="jMlow != null">
+                j_mlow,
+            </if>
+            <if test="jMhigh != null">
+                j_mhigh,
+            </if>
+            <if test="jEducation != null">
+                j_education,
+            </if>
+            <if test="jExperience != null">
+                j_experience,
+            </if>
+            <if test="jDate != null">
+                j_date,
+            </if>
+            <if test="jNum != null">
+                j_num,
+            </if>
+            <if test="jLoc != null">
+                j_loc,
+            </if>
+            <if test="jReq != null">
+                j_req,
+            </if>
+            <if test="jDes != null">
+                j_des,
+            </if>
+            <if test="jBenefit != null">
+                j_benefit,
+            </if>
+            <if test="cId != null">
+                c_id,
+            </if>
+            <if test="jClick != null">
+                j_click,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jId != null">
+                #{jId,jdbcType=INTEGER},
+            </if>
+            <if test="jName != null">
+                #{jName,jdbcType=VARCHAR},
+            </if>
+            <if test="jCharacter != null">
+                #{jCharacter,jdbcType=VARCHAR},
+            </if>
+            <if test="jk2Name != null">
+                #{jk2Name,jdbcType=VARCHAR},
+            </if>
+            <if test="jMlow != null">
+                #{jMlow,jdbcType=INTEGER},
+            </if>
+            <if test="jMhigh != null">
+                #{jMhigh,jdbcType=INTEGER},
+            </if>
+            <if test="jEducation != null">
+                #{jEducation,jdbcType=VARCHAR},
+            </if>
+            <if test="jExperience != null">
+                #{jExperience,jdbcType=VARCHAR},
+            </if>
+            <if test="jDate != null">
+                #{jDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="jNum != null">
+                #{jNum,jdbcType=INTEGER},
+            </if>
+            <if test="jLoc != null">
+                #{jLoc,jdbcType=VARCHAR},
+            </if>
+            <if test="jReq != null">
+                #{jReq,jdbcType=VARCHAR},
+            </if>
+            <if test="jDes != null">
+                #{jDes,jdbcType=VARCHAR},
+            </if>
+            <if test="jBenefit != null">
+                #{jBenefit,jdbcType=VARCHAR},
+            </if>
+            <if test="cId != null">
+                #{cId,jdbcType=INTEGER},
+            </if>
+            <if test="jClick != null">
+                #{jClick,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.website.server.pojo.JobInfo">
+        update job_info
+        <set>
+            <if test="jName != null">
+                j_name = #{jName,jdbcType=VARCHAR},
+            </if>
+            <if test="jCharacter != null">
+                j_character = #{jCharacter,jdbcType=VARCHAR},
+            </if>
+            <if test="jk2Name != null">
+                jk2_name = #{jk2Name,jdbcType=VARCHAR},
+            </if>
+            <if test="jMlow != null">
+                j_mlow = #{jMlow,jdbcType=INTEGER},
+            </if>
+            <if test="jMhigh != null">
+                j_mhigh = #{jMhigh,jdbcType=INTEGER},
+            </if>
+            <if test="jEducation != null">
+                j_education = #{jEducation,jdbcType=VARCHAR},
+            </if>
+            <if test="jExperience != null">
+                j_experience = #{jExperience,jdbcType=VARCHAR},
+            </if>
+            <if test="jDate != null">
+                j_date = #{jDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="jNum != null">
+                j_num = #{jNum,jdbcType=INTEGER},
+            </if>
+            <if test="jLoc != null">
+                j_loc = #{jLoc,jdbcType=VARCHAR},
+            </if>
+            <if test="jReq != null">
+                j_req = #{jReq,jdbcType=VARCHAR},
+            </if>
+            <if test="jDes != null">
+                j_des = #{jDes,jdbcType=VARCHAR},
+            </if>
+            <if test="jBenefit != null">
+                j_benefit = #{jBenefit,jdbcType=VARCHAR},
+            </if>
+            <if test="cId != null">
+                c_id = #{cId,jdbcType=INTEGER},
+            </if>
+            <if test="jClick != null">
+                j_click = #{jClick,jdbcType=INTEGER},
+            </if>
+        </set>
+        where j_id = #{jId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.JobInfo">
     update job_info
     set j_name = #{jName,jdbcType=VARCHAR},
       j_character = #{jCharacter,jdbcType=VARCHAR},
       jk2_name = #{jk2Name,jdbcType=VARCHAR},
       j_mlow = #{jMlow,jdbcType=INTEGER},
       j_mhigh = #{jMhigh,jdbcType=INTEGER},
+      j_education = #{jEducation,jdbcType=VARCHAR},
       j_experience = #{jExperience,jdbcType=VARCHAR},
       j_date = #{jDate,jdbcType=TIMESTAMP},
-      " j_num" = #{jNum,jdbcType=INTEGER},
+      j_num = #{jNum,jdbcType=INTEGER},
       j_loc = #{jLoc,jdbcType=VARCHAR},
       j_req = #{jReq,jdbcType=VARCHAR},
       j_des = #{jDes,jdbcType=VARCHAR},
       j_benefit = #{jBenefit,jdbcType=VARCHAR},
-      c_id = #{cId,jdbcType=INTEGER}
+      c_id = #{cId,jdbcType=INTEGER},
+      j_click = #{jClick,jdbcType=INTEGER}
     where j_id = #{jId,jdbcType=INTEGER}
   </update>
 </mapper>
