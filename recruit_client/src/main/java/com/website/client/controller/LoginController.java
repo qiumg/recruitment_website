@@ -1,5 +1,6 @@
 package com.website.client.controller;
 
+import com.website.client.pojo.CompanySignLogin;
 import com.website.client.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,7 +36,18 @@ public class LoginController {
                 return "login";
             }
         } else {
-            return null;
+            String newcemail=request.getParameter("email");
+            String cpwd=request.getParameter("password");
+            Map map=new HashMap();
+            map.put("newcemail",newcemail);
+            map.put("cpwd",cpwd);
+            CompanySignLogin c=restTemplate.getForObject("http://PROVIDER-SERVER/clogin?newcemail={newcemail}&cpwd={cpwd}",CompanySignLogin.class,map);
+            session.setAttribute("companySignLogin",c);
+            if (c != null) {
+                return "index01";
+            } else {
+                return "login";
+            }
         }
     }
     @RequestMapping("/register")
@@ -54,7 +66,17 @@ public class LoginController {
                 return "register";
             }
         }else {
-            return null;
+            String newcemail=request.getParameter("email");
+            String cpwd=request.getParameter("password");
+            Map map=new HashMap();
+            map.put("newcemail",newcemail);
+            map.put("cpwd",cpwd);
+            String c=restTemplate.getForObject("http://PROVIDER-SERVER/cregister?newcemail={newcemail}&cpwd={cpwd}",String.class,map);
+            if (c != null) {
+                return "login";
+            } else {
+                return "register";
+            }
         }
     }
 

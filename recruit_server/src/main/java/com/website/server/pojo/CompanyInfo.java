@@ -1,9 +1,11 @@
 package com.website.server.pojo;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@Data
 public class CompanyInfo {
     private Integer cId;
 
@@ -31,7 +33,7 @@ public class CompanyInfo {
 
     private String cLogo;
 
-    private Integer cScale;
+    private String cScale;
 
     private String cPpost;
 
@@ -42,6 +44,65 @@ public class CompanyInfo {
     private String cStatic;
 
     private List<TicketInfo> ticketInfos = new ArrayList<>();
+
+    public CompanyInfo() {
+    }
+
+    public CompanyInfo(Integer cId, String cName, String cCtype, Double cMoney, String cAddress, String cPname, Long cPhone, String cFax, String cHttp, String cSummary, String cScale, String cPpost, String cStage, String cEmail, String cStatic) {
+        this.cId = cId;
+        this.cName = cName;
+        this.cCtype = cCtype;
+        this.cMoney = cMoney;
+        this.cAddress = cAddress;
+        this.cPname = cPname;
+        this.cPhone = cPhone;
+        this.cFax = cFax;
+        this.cHttp = cHttp;
+        this.cSummary = cSummary;
+        this.cScale = cScale;
+        this.cPpost = cPpost;
+        this.cStage = cStage;
+        this.cEmail = cEmail;
+        this.cStatic = cStatic;
+    }
+
+    public CompanyInfo(String cName, String cCtype, Double cMoney, String cAddress, String cPname, Long cPhone, String cFax, String cHttp, String cSummary, String cScale, String cPpost, String cStage, String cEmail) {
+        this.cName = cName;
+        this.cCtype = cCtype;
+        this.cMoney = cMoney;
+        this.cAddress = cAddress;
+        this.cPname = cPname;
+        this.cPhone = cPhone;
+        this.cFax = cFax;
+        this.cHttp = cHttp;
+        this.cSummary = cSummary;
+        this.cScale = cScale;
+        this.cPpost = cPpost;
+        this.cStage = cStage;
+        this.cEmail = cEmail;
+    }
+
+    public CompanyInfo(Integer cId, String cName, String cCtype, Double cMoney, Date cFdate, String cAddress, String cPname, Long cPhone, String cFax, String cHttp, String cSummary, String cLicense, String cLogo, String cScale, String cPpost, String cStage, String cEmail, String cStatic, List<TicketInfo> ticketInfos) {
+        this.cId = cId;
+        this.cName = cName;
+        this.cCtype = cCtype;
+        this.cMoney = cMoney;
+        this.cFdate = cFdate;
+        this.cAddress = cAddress;
+        this.cPname = cPname;
+        this.cPhone = cPhone;
+        this.cFax = cFax;
+        this.cHttp = cHttp;
+        this.cSummary = cSummary;
+        this.cLicense = cLicense;
+        this.cLogo = cLogo;
+        this.cScale = cScale;
+        this.cPpost = cPpost;
+        this.cStage = cStage;
+        this.cEmail = cEmail;
+        this.cStatic = cStatic;
+        this.ticketInfos = ticketInfos;
+    }
 
     public List<TicketInfo> getTicketInfos() {
         return ticketInfos;
@@ -155,11 +216,11 @@ public class CompanyInfo {
         this.cLogo = cLogo == null ? null : cLogo.trim();
     }
 
-    public Integer getcScale() {
+    public String getcScale() {
         return cScale;
     }
 
-    public void setcScale(Integer cScale) {
+    public void setcScale(String cScale) {
         this.cScale = cScale;
     }
 

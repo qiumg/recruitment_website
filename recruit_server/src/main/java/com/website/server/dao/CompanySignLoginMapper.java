@@ -15,6 +15,10 @@ public interface CompanySignLoginMapper {
 
     CompanySignLogin selectByPrimaryKey(Integer cId);
 
+    CompanySignLogin selectCompany(CompanySignLogin record);
+
+    CompanySignLogin selectByCEmail(CompanySignLogin record);
+
     int updateByPrimaryKeySelective(CompanySignLogin record);
 
     int updateByPrimaryKey(CompanySignLogin record);

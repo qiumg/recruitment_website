@@ -8,13 +8,45 @@
     <result column="c_email" jdbcType="VARCHAR" property="cEmail" />
   </resultMap>
   <sql id="Base_Column_List">
-    c_id, c_name, c_pwd, c_email
+    c_id, c_name, c_pwd, c_email,c_state
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from company_sign_login
     where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <select id="selectCompany" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company_sign_login
+    <where>
+      <if test="cName != null">
+        c_name = #{cName,jdbcType=VARCHAR} and
+      </if>
+      <if test="cEmail != null">
+        c_email = #{cEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="cPwd != null">
+        and c_pwd = #{cPwd,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="selectByCEmail" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company_sign_login
+    <where>
+      <if test="cName != null">
+        c_name = #{cName,jdbcType=VARCHAR} and
+      </if>
+      <if test="cEmail != null">
+        c_email = #{cEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="cPwd != null">
+        and c_pwd = #{cPwd,jdbcType=VARCHAR}
+      </if>
+    </where>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from company_sign_login
@@ -41,6 +73,9 @@
       <if test="cEmail != null">
         c_email,
       </if>
+      <if test="cState != null">
+        c_state,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="cId != null">
@@ -54,6 +89,9 @@
       </if>
       <if test="cEmail != null">
         #{cEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="cState != null">
+        #{cState,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

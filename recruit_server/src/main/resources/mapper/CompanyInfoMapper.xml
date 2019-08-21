@@ -15,7 +15,7 @@
     <result column="c_summary" jdbcType="VARCHAR" property="cSummary" />
     <result column="c_license" jdbcType="VARCHAR" property="cLicense" />
     <result column="c_logo" jdbcType="VARCHAR" property="cLogo" />
-    <result column="c_scale" jdbcType="INTEGER" property="cScale" />
+    <result column="c_scale" jdbcType="VARCHAR" property="cScale" />
     <result column="c_ppost" jdbcType="VARCHAR" property="cPpost" />
     <result column="c_stage" jdbcType="VARCHAR" property="cStage" />
     <result column="c_email" jdbcType="VARCHAR" property="cEmail" />
@@ -47,11 +47,15 @@
       #{cMoney,jdbcType=DOUBLE}, #{cFdate,jdbcType=TIMESTAMP}, #{cAddress,jdbcType=VARCHAR}, 
       #{cPname,jdbcType=VARCHAR}, #{cPhone,jdbcType=BIGINT}, #{cFax,jdbcType=VARCHAR}, 
       #{cHttp,jdbcType=VARCHAR}, #{cSummary,jdbcType=VARCHAR}, #{cLicense,jdbcType=VARCHAR}, 
-      #{cLogo,jdbcType=VARCHAR}, #{cScale,jdbcType=INTEGER}, #{cPpost,jdbcType=VARCHAR}, 
+      #{cLogo,jdbcType=VARCHAR}, #{cScale,jdbcType=VARCHAR}, #{cPpost,jdbcType=VARCHAR},
       #{cStage,jdbcType=VARCHAR}, #{cEmail,jdbcType=VARCHAR}, #{cStatic,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.website.server.pojo.CompanyInfo">
+
+    <selectKey keyColumn="c_id" keyProperty="cId" resultType="Integer" order="AFTER">
+      select last_insert_id()
+    </selectKey>
     insert into company_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cId != null">
@@ -150,7 +154,7 @@
         #{cLogo,jdbcType=VARCHAR},
       </if>
       <if test="cScale != null">
-        #{cScale,jdbcType=INTEGER},
+        #{cScale,jdbcType=VARCHAR},
       </if>
       <if test="cPpost != null">
         #{cPpost,jdbcType=VARCHAR},
@@ -172,7 +176,7 @@
       <if test="cName != null">
         c_name = #{cName,jdbcType=VARCHAR},
       </if>
-      <if test="cCtype != null">
+      <if test="cCtype != null and cCtype !=''">
         c_ctype = #{cCtype,jdbcType=VARCHAR},
       </if>
       <if test="cMoney != null">
@@ -181,19 +185,19 @@
       <if test="cFdate != null">
         c_fdate = #{cFdate,jdbcType=TIMESTAMP},
       </if>
-      <if test="cAddress != null">
+      <if test="cAddress != null and cAddress !=''" >
         c_address = #{cAddress,jdbcType=VARCHAR},
       </if>
       <if test="cPname != null">
         c_pname = #{cPname,jdbcType=VARCHAR},
       </if>
-      <if test="cPhone != null">
+      <if test="cPhone != null and cPhone !='' ">
         c_phone = #{cPhone,jdbcType=BIGINT},
       </if>
-      <if test="cFax != null">
+      <if test="cFax != null and cFax !='' ">
         c_fax = #{cFax,jdbcType=VARCHAR},
       </if>
-      <if test="cHttp != null">
+      <if test="cHttp != null and cHttp !=''">
         c_http = #{cHttp,jdbcType=VARCHAR},
       </if>
       <if test="cSummary != null">
@@ -205,16 +209,16 @@
       <if test="cLogo != null">
         c_logo = #{cLogo,jdbcType=VARCHAR},
       </if>
-      <if test="cScale != null">
-        c_scale = #{cScale,jdbcType=INTEGER},
+      <if test="cScale != null and cScale !='' ">
+        c_scale = #{cScale,jdbcType=VARCHAR},
       </if>
       <if test="cPpost != null">
         c_ppost = #{cPpost,jdbcType=VARCHAR},
       </if>
-      <if test="cStage != null">
+      <if test="cStage != null and cStage !='' ">
         c_stage = #{cStage,jdbcType=VARCHAR},
       </if>
-      <if test="cEmail != null">
+      <if test="cEmail != null and cEmail !='' ">
         c_email = #{cEmail,jdbcType=VARCHAR},
       </if>
       <if test="cStatic != null">
@@ -237,7 +241,7 @@
       c_summary = #{cSummary,jdbcType=VARCHAR},
       c_license = #{cLicense,jdbcType=VARCHAR},
       c_logo = #{cLogo,jdbcType=VARCHAR},
-      c_scale = #{cScale,jdbcType=INTEGER},
+      c_scale = #{cScale,jdbcType=VARCHAR},
       c_ppost = #{cPpost,jdbcType=VARCHAR},
       c_stage = #{cStage,jdbcType=VARCHAR},
       c_email = #{cEmail,jdbcType=VARCHAR},

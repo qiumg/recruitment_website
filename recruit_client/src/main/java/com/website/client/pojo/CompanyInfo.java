@@ -31,7 +31,7 @@ public class CompanyInfo {
 
     private String cLogo;
 
-    private Integer cScale;
+    private String cScale;
 
     private String cPpost;
 
@@ -155,11 +155,11 @@ public class CompanyInfo {
         this.cLogo = cLogo == null ? null : cLogo.trim();
     }
 
-    public Integer getcScale() {
+    public String getcScale() {
         return cScale;
     }
 
-    public void setcScale(Integer cScale) {
+    public void setcScale(String cScale) {
         this.cScale = cScale;
     }
 

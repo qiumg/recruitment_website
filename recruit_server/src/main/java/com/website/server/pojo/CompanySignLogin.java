@@ -1,5 +1,8 @@
 package com.website.server.pojo;
 
+import lombok.Data;
+
+@Data
 public class CompanySignLogin {
     private Integer cId;
 
@@ -8,6 +11,24 @@ public class CompanySignLogin {
     private String cPwd;
 
     private String cEmail;
+
+    private String cState;
+
+    public CompanySignLogin() {
+    }
+
+    public CompanySignLogin(String cPwd, String cEmail) {
+        this.cPwd = cPwd;
+        this.cEmail = cEmail;
+    }
+
+    public String getcState() {
+        return cState;
+    }
+
+    public void setcState(String cState) {
+        this.cState = cState;
+    }
 
     public Integer getcId() {
         return cId;
