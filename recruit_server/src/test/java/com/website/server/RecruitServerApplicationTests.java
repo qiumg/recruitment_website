@@ -22,8 +22,10 @@ public class RecruitServerApplicationTests {
 
 	@Test
 	public void contextLoads(){
-		Date date = new Date();
-		System.out.println(date);
+		String s = "yanhuan@qq.com";
+		int length = s.length();
+		s = s.substring(0,length-7);
+		System.out.println(s);
 
 	}
 
