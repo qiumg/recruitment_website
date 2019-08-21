@@ -28,7 +28,7 @@ public class LoginServiceImpl implements ILoginService {
                 return user;
             }else {
                 System.out.println("该用户有违规，无法登录");
-                return null;
+                return user;
             }
 
         }
@@ -38,7 +38,6 @@ public class LoginServiceImpl implements ILoginService {
     @Override
     public String insertUserByEmail(User record) {
         User existUser = userMapper.selectUser(record);
-        System.out.println(existUser);
         if (existUser != null){
 //            用户名已经存在
             System.out.println("用户名已存在");
@@ -50,6 +49,24 @@ public class LoginServiceImpl implements ILoginService {
             userMapper.insertSelective(record);
             System.out.println("注册成功");
             return "111";
+        }
+
+    }
+//  找回密码
+    @Override
+    public int updatePassword(User record) {
+        userMapper.updatePwd(record);
+        return 1;
+    }
+//  修改密码
+    @Override
+    public int updatePwd(User record) {
+        User user = userMapper.selectByEmail(record);
+        if (user == null){
+            return 0;
+        }else {
+            userMapper.updatePwd(record);
+            return 1;
         }
 
     }

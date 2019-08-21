@@ -10,8 +10,13 @@ public class SecurityController {
         return "register";
     }
 
-//    @GetMapping("/person/login")
-////    public String loginPage() {
-////        return "login";
-////    }
+    @GetMapping("/login")
+    public String loginPage() {
+        return "index";
+    }
+
+    @GetMapping("/register")
+    public String registerPage(){
+        return "login";
+    }
 }

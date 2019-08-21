@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:wb="http://open.weibo.com/wb"><head>
+<html xmlns:th="http://www.thymeleaf.org"><head>
 </script><script type="text/javascript" async="" src="style/js/conversion.js"></script><script src="style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script><style type="text/css"></style>
 <meta content="no-siteapp" http-equiv="Cache-Control">
 <link  media="handheld" rel="alternate">
@@ -40,22 +40,21 @@ var youdao_conv_id = 271546;
     			<img width="229" height="60" alt="拉勾招聘-专注互联网招聘" src="style/images/logo.png">
     		</a>
     		<ul id="navheader" class="reset">
-    			<li><a href="index.html">首页</a></li>
-    			<li><a href="companylist.html">公司</a></li>
-    			<li class="current"><a rel="nofollow" href="jianli.html">我的简历</a></li>
+				<li><a href="http://localhost:8200/login">首页</a></li>
+				<li ><a href="http://localhost:8200/companylist" >公司</a></li>
+    			<li class="current"><a rel="nofollow" href="http://localhost:8200/tojianli">我的简历</a></li>
 	    	</ul>
         	<dl class="collapsible_menu">
             	<dt>
-           			<span>jason&nbsp;</span> 
+					<span th:text="${session.user.name}"></span>
             		<span class="red dn" id="noticeDot-0"></span>
             		<i></i>
             	</dt>
-                                	<dd><a rel="nofollow" href="jianli.html">我的简历</a></dd>
-                	                	<dd><a href="collections.html">我收藏的职位</a></dd>
-                	                	                	<dd class="btm"><a href="subscribe.html">我的订阅</a></dd>
-                	<dd><a href="create.html">我要招人</a></dd>
-                                                <dd><a href="accountBind.html">帐号设置</a></dd>
-                                <dd class="logout"><a rel="nofollow" href="login.html">退出</a></dd>
+					<dd><a rel="nofollow" href="http://localhost:8200/tojianli">我的简历</a></dd>
+					<dd><a href="collections.html">我收藏的职位</a></dd>
+					<dd class="btm"><a href="subscribe.html">我的订阅</a></dd>
+					<dd><a href="http://localhost:8200/updatePwd">修改密码</a></dd>
+					<dd class="logout"><a rel="nofollow" href="login.html">退出</a></dd>
             </dl>
                                     <div class="dn" id="noticeTip">
             	<span class="bot"></span>

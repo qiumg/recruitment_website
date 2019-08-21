@@ -23,4 +23,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
+    int updatePwd(User record);
+
+
 }

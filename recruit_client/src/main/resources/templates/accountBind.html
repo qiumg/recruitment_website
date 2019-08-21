@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE HTML>
-<html xmlns:wb="http://open.weibo.com/wb"><head>
+<html xmlns:th="http://www.thymeleaf.org"><head>
 </script><script type="text/javascript" async="" src="style/js/conversion.js"></script><script src="style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script><style type="text/css"></style>
 <meta content="no-siteapp" http-equiv="Cache-Control">
 <link  media="handheld" rel="alternate">
@@ -41,26 +41,21 @@ var youdao_conv_id = 271546;
     			<img width="229" height="43" alt="拉勾招聘-专注互联网招聘" src="style/images/logo.png">
     		</a>
     		<ul id="navheader" class="reset">
-    			<li><a href="index.html">首页</a></li>
-    			<li><a href="companylist.html">公司</a></li>
-    			<li><a target="_blank" href="h/toForum.html">论坛</a></li>
-    				    			<li>
-	    				<a rel="nofollow" href="positions.html">简历管理</a>
-	    					    			</li>
-	    							    			<li><a rel="nofollow" href="create.html">发布职位</a></li>
-	    		    		</ul>
+				<li ><a href="http://localhost:8200/login">首页</a></li>
+				<li ><a href="http://localhost:8200/companylist">公司</a></li>
+				<li ><a href="http://localhost:8200/tojianli" rel="nofollow">我的简历</a></li>
+			</ul>
         	        	<dl class="collapsible_menu">
             	<dt>
-           			<span>jason&nbsp;</span> 
+           			<span th:text="${session.user.name}"></span>
             		<span class="red dn" id="noticeDot-1"></span>
             		<i></i>
             	</dt>
-                                	<dd style="display: none;"><a href="positions.html">我发布的职位</a></dd>
-                	<dd style="display: none;"><a href="positions.html">我收到的简历</a></dd>
-                	<dd class="btm" style="display: none;"><a href="myhome.html">我的公司主页</a></dd>
-                	<dd style="display: none;"><a href="list.html">我要找工作</a></dd>
-                                                <dd style="display: none;"><a href="accountBind.html">帐号设置</a></dd>
-                                <dd class="logout" style="display: none;"><a rel="nofollow" href="login.html">退出</a></dd>
+							<dd><a rel="nofollow" href="http://localhost:8200/tojianli">我的简历</a></dd>
+							<dd><a href="collections.html">我收藏的职位</a></dd>
+							<dd class="btm"><a href="subscribe.html">我的订阅</a></dd>
+							<dd><a href="http://localhost:8200/accountBind">帐号设置</a></dd>
+							<dd class="logout"><a rel="nofollow" href="login.html">退出</a></dd>
             </dl>
                                 </div>
     </div><!-- end #header -->
@@ -68,8 +63,8 @@ var youdao_conv_id = 271546;
         	<div class="user_bindSidebar">
     <dl id="user_sideBarmenu" class="user_sideBarmenu">
      	        <dt><h3>帐号设置</h3></dt>
-                <dd><a class="hover" href="accountBind.html">帐号绑定</a></dd>
-        <dd><a href="updatePwd.html">修改密码</a></dd>
+                <dd><a class="hover" href="http://localhost:8200/accountBind">帐号绑定</a></dd>
+        		<dd><a href="http://localhost:8200/updatePwd">修改密码</a></dd>
             </dl>
 </div>
 <input type="hidden" id="hasSidebar" value="1">	<div class="user_bindContent">
@@ -79,12 +74,12 @@ var youdao_conv_id = 271546;
             </dt>
             <dd id="pad">
                 <ul class="user_noModify">
-                    <li>当前登录帐号：<span>jason@qq.com</span> </li>
+                    <li>当前登录帐号：<span th:text="${session.user.email}"></span> </li>
                     <li>绑定后，你可以同时使用以下方式登录拉勾</li>
                 </ul>
                 <dl class="user_thirdLogin">
                     <dt><img alt="qq" src="style/images/qq.png"></dt>
-                                        	<dd>已绑定QQ帐号  <span>jason</span>
+                                        	<dd>已绑定QQ帐号  <span th:text="${session.user.name}"></span>
                     	 	<a id="cancelBind" href="javascript:;">解除绑定</a>
                     	 </dd>
                 	                </dl>

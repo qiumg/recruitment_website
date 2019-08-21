@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <script id="allmobilize" charset="utf-8" src="/style/js/allmobilize.min.js"></script>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -40,14 +40,14 @@ var youdao_conv_id = 271546;
     			<img src="/style/images/logo.png" width="229" height="60" alt="启职者-专注互联网招聘" />
     		</a>
     		<ul class="reset" id="navheader">
-    			<li class="current"><a href="index.html">首页</a></li>
-    			<li ><a href="companylist.html" >公司</a></li>
-    			<li ><a href="jianli.html" rel="nofollow">我的简历</a></li>
+    			<li class="current"><a href="http://localhost:8200/login">首页</a></li>
+    			<li ><a href="http://localhost:8200/companylist">公司</a></li>
+    			<li ><a href="http://localhost:8200/tojianli" rel="nofollow">我的简历</a></li>
 	    	</ul>
         	<ul class="loginTop">
-            	<li><a href="login.html" rel="nofollow">登录</a></li> 
-            	<li>|</li>
-            	<li><a href="register.html" rel="nofollow">注册</a></li>
+            	<li>欢迎：<span th:text="${session.user.name}"></span></li>
+            	<li>&nbsp |</li>
+            	<li><a href="/logout" rel="nofollow">退出登录</a></li>
             </ul>
          </div>
     </div><!-- end #header -->

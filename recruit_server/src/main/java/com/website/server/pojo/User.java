@@ -11,6 +11,8 @@ public class User {
 
     private String password;
 
+    private String newPassword;
+
     private Integer sex;
 
     private Integer age;

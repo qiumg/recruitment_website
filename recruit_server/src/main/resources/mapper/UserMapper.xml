@@ -201,6 +201,9 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updatePwd" parameterType="com.website.server.pojo.User">
+    update user set password = #{newPassword,jdbcType=VARCHAR} where email = #{email,jdbcType=VARCHAR}
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.website.server.pojo.User">
     update user
     set name = #{name,jdbcType=VARCHAR},

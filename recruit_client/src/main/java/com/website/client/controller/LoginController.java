@@ -9,20 +9,21 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-
-public class LoginController {
+public class LoginController{
     @Autowired
     private RestTemplate restTemplate;
     @RequestMapping("/login")
-    public String getUser(HttpServletRequest request, HttpSession session) {
+    public String getUser(HttpServletRequest request, HttpSession session) throws IOException {
         String type = request.getParameter("type");
-
+        System.out.println(type);
         if (type.equals("0")) {
             String newemail = request.getParameter("email");
+            System.out.println(newemail);
             String pwd = request.getParameter("password");
             Map map = new HashMap();
             map.put("newemail", newemail);
@@ -57,5 +58,15 @@ public class LoginController {
             return null;
         }
     }
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "login";
+    }
 
+    @RequestMapping("/update")
+    public String updatePwd(){
+        return "login";
+    }
 }

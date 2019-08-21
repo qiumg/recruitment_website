@@ -485,29 +485,31 @@ $(function(){
     	   	}
     	},
     	submitHandler:function(form){
-    		var oldpassword = $('#oldpassword').val();
-    		var newpassword = $('#newpassword').val();
-    		var comfirmpassword = $('#comfirmpassword').val();
-    		var resubmitToken = $('#resubmitToken').val();
-    		$.ajax({
-    			url:ctx+'/user/updatePwd.json',
-    			type:'POST',
-    			data:{
-    				oldPassword:oldpassword,
-    				newPassword:newpassword,
-    				newPassword2:comfirmpassword,
-    				resubmitToken:resubmitToken
-    			},
-            	dataType:'json'
-    		}).done(function(result){
-				$('#resubmitToken').val(result.resubmitToken);
-    			if(result.success){
-    				$.colorbox({inline:true, href:$("#updatePassword"),title:"修改密码成功"});
-    				setCountdown(4,'updatePassword h4 span',ctx+"/user/logout.html");	//调用倒计时
-    			}else{
-    				$('#updatePwd_beError').html(result.msg).show();
-    			}
-    		});
+    	// 	var oldpassword = $('#oldpassword').val();
+    	// 	var newpassword = $('#newpassword').val();
+    	// 	var comfirmpassword = $('#comfirmpassword').val();
+    	// 	var resubmitToken = $('#resubmitToken').val();
+			$.ajax({
+				type:'get',
+				data: $("#updatePswForm").serialize(),
+				url:'/person/update',
+				dataType:'json',
+				success:function (data) {
+					alert(data.message);
+					if (data.success) {
+						window.location.href = "/update";
+					}
+				}
+			});
+    	// 	}).done(function(result){
+		// 		$('#resubmitToken').val(result.resubmitToken);
+    	// 		if(result.success){
+    	// 			$.colorbox({inline:true, href:$("#updatePassword"),title:"修改密码成功"});
+    	// 			setCountdown(4,'updatePassword h4 span',ctx+"/user/logout.html");	//调用倒计时
+    	// 		}else{
+    	// 			$('#updatePwd_beError').html(result.msg).show();
+    	// 		}
+    	// 	});
         }
     });
 
