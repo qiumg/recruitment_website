@@ -38,14 +38,14 @@
                 <img src="/style/images/logo.png" width="229" height="60" alt="启职者"/>
             </a>
             <ul class="reset" id="navheader">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="companylist.html">公司</a></li>
-                <li><a href="jianli.html" rel="nofollow">我的简历</a></li>
+                <li><a href="/login">首页</a></li>
+                <li><a href="/companylist">公司</a></li>
+                <li><a href="/user/jianli" rel="nofollow">我的简历</a></li>
             </ul>
             <ul class="loginTop">
-                <li><a href="login.html" rel="nofollow">登录</a></li>
-                <li>|</li>
-                <li><a href="register.html" rel="nofollow">注册</a></li>
+                <li>欢迎：<span th:text="${session.user.name}"></span></li>
+                <li>&nbsp |</li>
+                <li><a href="/logout" rel="nofollow">退出登录</a></li>
             </ul>
         </div>
     </div><!-- end #header -->
