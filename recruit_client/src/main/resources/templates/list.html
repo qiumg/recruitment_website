@@ -405,7 +405,7 @@
                     </div>
                     <div class="hot_pos_r">
                         <div class="apply">
-                            <a href="toudi.html" target="_blank">投个简历</a>
+                            <a th:href="@{/test(jobId=${job.jId})}" target="_blank">投个简历</a>
                         </div>
                         <div class="mb10"><a href="h/c/1712.html" title="紫色医疗" target="_blank" th:text="${job.companyInfo.cName}">紫色医疗</a></div>
                         <span><em class="c7">性质： </em>[[${job.companyInfo.cCtype}]]</span>
@@ -548,7 +548,7 @@
                         "                    </div>\n" +
                         "                    <div class=\"hot_pos_r\">\n" +
                         "                        <div class=\"apply\">\n" +
-                        "                            <a href=\"toudi.html\" target=\"_blank\">投个简历</a>\n" +
+                        "                            <a href=\"text?jobId="+list[i].jId+"\" target=\"_blank\">投个简历</a>\n" +
                         "                        </div>\n" +
                         "                        <div class=\"mb10\"><a href=\"h/c/1712.html\" title=\"紫色医疗\" target=\"_blank\" >"+list[i].companyInfo.cName+"</a></div>\n" +
                         "                        <span><em class=\"c7\">性质： </em>"+list[i].companyInfo.cCtype+"</span>\n" +
