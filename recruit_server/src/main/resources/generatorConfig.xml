@@ -32,7 +32,7 @@
         </javaClientGenerator>
 
 
-        <table schema="general" tableName="resume1_info" domainObjectName="Resume1Info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table schema="general" tableName="user_collection" domainObjectName="userCollection" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
 
     </context>
