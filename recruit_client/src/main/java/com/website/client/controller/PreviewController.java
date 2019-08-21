@@ -22,10 +22,12 @@ public class PreviewController {
     @RequestMapping("/jianli")
     public String getinfo(HttpSession session, ModelMap mm) {//显示简历信息
         //Integer userId= (Integer) session.getAttribute("userId");
+        User user= (User) session.getAttribute("user");
+        int userId = user.getId();
         Integer resumeId = (Integer) session.getAttribute("resumeId");
         Map mapInfo = new HashMap();
         mapInfo.put("resumeId", resumeId);
-        mapInfo.put("userId", 1001);
+        mapInfo.put("userId", userId);
         Map m1 = restTemplate.getForObject("http://PROVIDER-SERVER/user/jianli2?resumeId={resumeId}&userId={userId}", HashMap.class, mapInfo);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         ObjectMapper mapper = new ObjectMapper();
