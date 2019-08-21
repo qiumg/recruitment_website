@@ -206,7 +206,7 @@
                                     "\t\t\t\t\t</li>")
                                 var ticketInfo = list[i].companyInfo.ticketInfos;
                                 for (var j = 0; j < ticketInfo.length; j++) {
-                                    $(".companyTags.reset").eq(i).append("<li>"+ticketInfo[j].ticName+"</li>")
+                                    $(".companyTags.reset").eq(i+10).append("<li>"+ticketInfo[j].ticName+"</li>")
                                 }
                             }else{
                                 $("#hotList>ul").eq(1).append("<li class=\"odd clearfix\">\n" +
@@ -239,7 +239,7 @@
                                     "\t\t\t\t\t</li>")
                                 var ticketInfo = list[i].companyInfo.ticketInfos;
                                 for (var j = 0; j < ticketInfo.length; j++) {
-                                    $(".companyTags.reset").eq(i).append("<li>"+ticketInfo[j].ticName+"</li>")
+                                    $(".companyTags.reset").eq(i+10).append("<li>"+ticketInfo[j].ticName+"</li>")
                                 }
                             }
                         }
