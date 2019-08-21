@@ -2,8 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"><head>
 </script><script type="text/javascript" async="" src="style/js/conversion.js"></script><script src="style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script><style type="text/css"></style>
 <meta content="no-siteapp" http-equiv="Cache-Control">
-	<meta name="_csrf" th:content="${_csrf.token}">
-	<meta name="_csrf_header" th:content="${_csrf.headerName}">
 <link  media="handheld" rel="alternate">
 <!-- end 云适配 -->
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -194,7 +192,7 @@ var youdao_conv_id = 271546;
 						    <img width="120" height="120" src="">
 						    <span>更换头像</span>
 						  </div>
-							<form action="/user/uploadhead" method="post" enctype="multipart/form-data" id="updateHeader">
+							<form action="/user/uploadhead" method="post" enctype="multipart/form-data" id="uploadhead">
 							<input type="file" value="" title="支持jpg、jpeg、gif、png格式，文件小于5M"  name="headPortrait" id="headPic" class="myfiles">
 							<!-- <input type="hidden" id="headPicHidden" /> -->
 						  	<em>
@@ -202,7 +200,6 @@ var youdao_conv_id = 271546;
 								大小：小于5M
 							<input type="submit" value="提交"  class="btn_profile_save">
 						  	</em>
-
 						  	<span style="display:none;" id="headPic_error" class="error"></span>
 							</form>
 						</div><!--end .new_portrait-->
@@ -1279,14 +1276,21 @@ CallCenter.init(url);
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		$("#updateHeader").validate({
+		$("#uploadhead").validate({
 
 			submitHandler:function(form){
-				var token = $("meta[name='_csrf']").attr(content);
-					var header = $("meta[name='_csrf_header']").attr(content);
-					$(document).ajaxSend(function (e,xhr,options) {
-						xhr.setRequestHeader(header,token);
-					})
+                $.ajax({
+                    type:'get',
+                    data: $("#uploadhead").serialize(),
+                    url:'/person/header',
+                    dataType:'json',
+                    success:function (data) {
+                        alert(data.message);
+                        if (data.success) {
+                            window.location.href = "/user/uploadhead";
+                        }
+                    }
+                });
 			}
 		});
 	});

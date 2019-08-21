@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -151,5 +153,40 @@ public class AjaxController{
             return result;
         }
 
+    }
+
+    @ResponseBody
+    @RequestMapping("/header")
+    public Result header(MultipartFile headPortrait, HttpSession session)throws IOException{
+        Result result = new Result();
+        User user= (User) session.getAttribute("user");
+        int userId = user.getId();
+        if(!headPortrait.isEmpty()){
+            String name = headPortrait.getName();//表单属性名
+            String originalFilename = headPortrait.getOriginalFilename();//实际名
+            String contentType =  headPortrait.getContentType();//类型
+            //          String showurl="/style/images/"+originalFilename;
+//            long size =  headPortrait.getSize();//大小
+//            String uploadPath = "/uploadfile";//确定文件保存目录
+//            String realPath = session.getServletContext().getRealPath(uploadPath);
+            File uploadDir = new File("G:\\gitstore\\recruitment_website\\recruit_client\\src\\main\\resources\\static\\style\\images\\");
+            if(!uploadDir.exists()){
+                uploadDir.mkdirs();
+            }
+            File newFile = new File(uploadDir,originalFilename); //上传文件到指定目录
+            headPortrait.transferTo(newFile);
+            Map mapInfo = new HashMap();
+            mapInfo.put("id", userId);
+            mapInfo.put("headPortrait", originalFilename);
+            Boolean s =restTemplate.getForObject("http://PROVIDER-SERVER/user1/uploadhead?id={id}&headPortrait={headPortrait}", Boolean.class, mapInfo);
+            if (s) {
+                result.setMessage("更换成功");
+                result.setSuccess(true);
+                return result;
+            } else return result;
+        }else{
+            result.setSuccess(true);
+            return  result;
+        }
     }
 }
