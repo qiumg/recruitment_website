@@ -44,15 +44,15 @@ var youdao_conv_id = 271546;
     			<li><a href="index.html">首页</a></li>
     			<li><a href="companylist.html">公司</a></li>
     			<li><a target="_blank" href="h/toForum.html">论坛</a></li>
-    				    			<li class="current"><a rel="nofollow" href="jianli.html">我的简历</a></li>
+    				    			<li class="current"><a rel="nofollow" href="/user/jianli">我的简历</a></li>
 	    						    		</ul>
         	        	<dl class="collapsible_menu">
             	<dt>
-           			<span>jason&nbsp;</span> 
+           			<span th:text="${userinfo.getName()}">用户名</span>
             		<span class="red dn" id="noticeDot-0"></span>
             		<i></i>
             	</dt>
-                                	<dd><a rel="nofollow" href="jianli.html">我的简历</a></dd>
+                                	<dd><a rel="nofollow" href="/user/jianli">我的简历</a></dd>
                 	                	<dd><a href="collections.html">我收藏的职位</a></dd>
                 	                	                	<dd class="btm"><a href="subscribe.html">我的订阅</a></dd>
                 	<dd><a href="create.html">我要招人</a></dd>
@@ -73,8 +73,8 @@ var youdao_conv_id = 271546;
             <div class="content_l">
             	<div class="fl" id="resume_name">
 	            	<div class="nameShow fl">
-						<h1 title="jason的简历" th:if="${userResume}==null"></h1><h1 title="jason的简历" th:text="${userResume.getResumeName()}" th:if="${userResume}!=null"></h1>
-	            		<span class="rename" th:if="${userResume}!=null">重命名</span> <span class="rename" th:if="${userResume}==null">创建简历</span>| <a target="_blank" href="/preview.html">预览</a>
+						<h1 title="jason的简历" th:if="${userResume}==null"></h1><h1 title="简历" th:text="${userResume.getResumeName()}" th:if="${userResume}!=null"></h1>
+	            		<span class="rename" th:if="${userResume}!=null">重命名</span> <span class="rename" th:if="${userResume}==null">创建简历</span>| <a target="_blank" href="/view/jianli" th:if="${userResume}!=null">预览</a>
             		</div>
             		<form class="fl dn" id="resumeNameForm" action="/user/altername" method="get">
             			<input type="text" th:value="${userResume.getResumeName()}" name="resumeName" class="nameEdit c9" th:if="${userResume}!=null">
@@ -949,7 +949,7 @@ var youdao_conv_id = 271546;
 	            			<table>
 	            				<tbody><tr>
 									<td colspan="2">
-										<textarea class="selfDescription s_textarea" name="selfIntroduction" placeholder=""></textarea>
+										<textarea class="selfDescription s_textarea" name="selfIntroduction" placeholder="自我描述不少于10个字"></textarea>
 										<div class="word_count">你还可以输入 <span>500</span> 字</div>
 									</td>
 	            				</tr>
@@ -970,7 +970,7 @@ var youdao_conv_id = 271546;
 					<div class="descriptionAdd pAdd" th:if="${selfIntroduction}!=null">
 						简介：[[${selfIntroduction}]]。。。等<br>
 						点击下方修改
-						<span>修改自我描述</span>
+						<span>修改自我描述(不少于10个字)</span>
 					</div><!--end .descriptionAdd-->
             	</div><!--end #selfDescription-->
 
@@ -1011,7 +1011,7 @@ var youdao_conv_id = 271546;
 						<span>添加作品展示</span>
             		</div><!--end .workAdd-->
 					<div class="workAdd pAdd" th:if="${userWorks}!=null">
-						我的作品：[[${userWorks.getLink()}]]<br>
+						我的作品：<a th:href="${userWorks.getLink()}">[[${userWorks.getLink()}]]</a><br>
 						点击下方修改
 						<span>修改作品展示</span>
 					</div><!--end .workAdd-->
@@ -1021,36 +1021,36 @@ var youdao_conv_id = 271546;
             <div class="content_r">
             	<div class="mycenterR" id="myInfo">
             		<h2>我的信息</h2>
-            		<a target="_blank" href="collections.html">我收藏的职位</a>
-            		<br>
-					<a target="_blank" href="subscribe.html">我订阅的职位</a>
+            		<a target="_blank" href="/collections.html">我收藏的职位</a>
+<!--            		<br>-->
+<!--					<a target="_blank" href="subscribe.html">我订阅的职位</a>-->
             	</div><!--end #myInfo-->
 
-				<div class="mycenterR" id="myResume">
-            		<h2>我的附件简历 
-						<a title="上传附件简历" href="#uploadFile" class="inline cboxElement">上传简历</a>
-					</h2>
-            		<div class="resumeUploadDiv">
-						暂无附件简历
-					</div>
-            	</div><!--end #myResume-->
+<!--				<div class="mycenterR" id="myResume">-->
+<!--            		<h2>我的附件简历 -->
+<!--						<a title="上传附件简历" href="#uploadFile" class="inline cboxElement">上传简历</a>-->
+<!--					</h2>-->
+<!--            		<div class="resumeUploadDiv">-->
+<!--						暂无附件简历-->
+<!--					</div>-->
+<!--            	</div>&lt;!&ndash;end #myResume&ndash;&gt;-->
 
-            	<div class="mycenterR" id="resumeSet">
-            		<h2>投递简历设置  <span>修改设置</span></h2>
-            		<!-- -1 (0=附件， 1=在线， 其他=未设置) -->
-					<div class="noSet set0 dn">默认使用<span>附件简历</span>进行投递</div>
-            			<div class="noSet set1 dn">默认使用<span>在线简历</span>进行投递</div>
-						<div class="noSet">暂未设置默认投递简历</div>
-					<input type="hidden" class="defaultResume" value="-1">
-            		<form class="dn" id="resumeSetForm">
-	            		<label><input type="radio" value="1" class="resume1" name="resume">默认使用<span>在线简历</span>进行投递</label>
-	            		<label><input type="radio" value="0" class="resume0" name="resume">默认使用<span>附件简历</span>进行投递</label>
-	            		<span class="setTip error"></span>
-	            		<div class="resumeTip">设置后投递简历时将不再提醒</div>
-	            		<input type="submit" value="保 存" class="btn_profile_save">
-						<a class="btn_profile_cancel" href="javascript:;">取 消</a>
-	            	</form>
-            	</div><!--end #resumeSet-->
+<!--            	<div class="mycenterR" id="resumeSet">-->
+<!--            		<h2>投递简历设置  <span>修改设置</span></h2>-->
+<!--            		&lt;!&ndash; -1 (0=附件， 1=在线， 其他=未设置) &ndash;&gt;-->
+<!--					<div class="noSet set0 dn">默认使用<span>附件简历</span>进行投递</div>-->
+<!--            			<div class="noSet set1 dn">默认使用<span>在线简历</span>进行投递</div>-->
+<!--						<div class="noSet">暂未设置默认投递简历</div>-->
+<!--					<input type="hidden" class="defaultResume" value="-1">-->
+<!--            		<form class="dn" id="resumeSetForm">-->
+<!--	            		<label><input type="radio" value="1" class="resume1" name="resume">默认使用<span>在线简历</span>进行投递</label>-->
+<!--	            		<label><input type="radio" value="0" class="resume0" name="resume">默认使用<span>附件简历</span>进行投递</label>-->
+<!--	            		<span class="setTip error"></span>-->
+<!--	            		<div class="resumeTip">设置后投递简历时将不再提醒</div>-->
+<!--	            		<input type="submit" value="保 存" class="btn_profile_save">-->
+<!--						<a class="btn_profile_cancel" href="javascript:;">取 消</a>-->
+<!--	            	</form>-->
+<!--            	</div>&lt;!&ndash;end #resumeSet&ndash;&gt;-->
 				
 				<div class="mycenterR" id="myShare">
             		<h2>当前每日投递量：10个</h2>
@@ -1059,7 +1059,7 @@ var youdao_conv_id = 271546;
             	
 								
 				<div class="greybg qrcode mt20">
-                	<img width="242" height="242" alt="拉勾微信公众号二维码" src="style/images/qr_resume.png">
+                	<img width="242" height="242" alt="拉勾微信公众号二维码" src="/style/images/qr_resume.png">
                     <span class="c7">微信扫一扫，轻松找工作</span>
                 </div>
             </div><!--end .content_r-->

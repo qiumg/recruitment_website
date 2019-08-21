@@ -11,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +22,9 @@ public class UserSimpInfoController {
     @RequestMapping("/jianli")
     public String getinfo(HttpSession session, ModelMap mm){//显示简历信息
         //Integer userId= (Integer) session.getAttribute("userId");
-        Map m =restTemplate.getForObject("http://PROVIDER-SERVER/user/jianli1", HashMap.class);
+        Map mapInfo0 = new HashMap();
+        mapInfo0.put("userId",1001);
+        Map m =restTemplate.getForObject("http://PROVIDER-SERVER/user/jianli1?userId={userId}", HashMap.class,mapInfo0);
         ObjectMapper mapper = new ObjectMapper();
         UserResume userResume  = mapper.convertValue(m.get("userResume"),UserResume.class);//简历
         if(null!=userResume) {
@@ -41,7 +42,8 @@ public class UserSimpInfoController {
 
             Map mapInfo = new HashMap();
             mapInfo.put("resumeId", userResume.getId());
-            Map m1 = restTemplate.getForObject("http://PROVIDER-SERVER/user/jianli2?resumeId={resumeId}", HashMap.class, mapInfo);
+            mapInfo.put("userId", 1001);
+            Map m1 = restTemplate.getForObject("http://PROVIDER-SERVER/user/jianli2?resumeId={resumeId}&userId={userId}", HashMap.class, mapInfo);
             User userinfo = mapper.convertValue(m1.get("userinfo"), User.class);//基本
             session.setAttribute("userinfo", userinfo);
             mm.addAttribute("userinfo", userinfo);

@@ -28,20 +28,22 @@ public class ShowUserJianliController {
     @RequestMapping("/jianli1")
     public Map getinfo(Integer userId){//查询简历基本信息
         Map m=new HashMap();
-        UserResume userResume=userSimpleInfoService.getresumeybyuid(1001);
+        UserResume userResume=userSimpleInfoService.getresumeybyuid(userId);
         m.put("userResume",userResume);
         return m;
     }
 
     @RequestMapping("/jianli2")
-    public Map getmoreinfo(Integer resumeId){//查询简历具体信息
+    public Map getmoreinfo(Integer resumeId,Integer userId){//查询简历具体信息
         Map m=new HashMap();
-        User userinfo=userSimpleInfoService.getuserinfo(1001);
+        UserResume userResume=userSimpleInfoService.getresumeybyuid(userId);
+        User userinfo=userSimpleInfoService.getuserinfo(userId);
         UserJobwant userJobwant =jobWantService.showJobwant(resumeId);
         UserJobexp userJobexp=jobExpService.showJobexp(resumeId);
         UserProjectexp userProjectexp=projectexpService.showProjectexp(resumeId);
         UserEducation userEducation=educationService.showUseredu(resumeId);
         UserWorks userWorks=worksService.showUserworks(resumeId);
+        m.put("userResume",userResume);
         m.put("userinfo",userinfo);
         m.put("userJobwant",userJobwant);
         m.put("userJobexp",userJobexp);
