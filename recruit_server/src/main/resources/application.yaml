@@ -5,7 +5,7 @@ spring:
     name: provider-server
     #数据源的配置
   datasource:
-    url: jdbc:mysql://localhost:3306/recruitment?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/recruitment?characterencoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root

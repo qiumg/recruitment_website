@@ -1,8 +1,18 @@
 package com.website.server.pojo;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
 public class JobInfo {
+
     private Integer jId;
 
     private String jName;
@@ -15,10 +25,11 @@ public class JobInfo {
 
     private Integer jMhigh;
 
-    private String jEducation;
+    private String jEducation;  //学历要求
 
     private String jExperience;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date jDate;
 
     private Integer jNum;
@@ -33,17 +44,32 @@ public class JobInfo {
 
     private Integer cId;
 
-    private Integer jClick;
+    private Integer jClick;    //点击量
 
-    private CompanyInfo companyInfo;
 
-    public CompanyInfo getCompanyInfo() {
-        return companyInfo;
+    public JobInfo() {
     }
 
-    public void setCompanyInfo(CompanyInfo companyInfo) {
-        this.companyInfo = companyInfo;
+    public JobInfo(Integer jId, String jName, String jCharacter, String jk2Name, Integer jMlow, Integer jMhigh, String jExperience, Date jDate, Integer jNum, String jLoc, String jReq, String jDes, String jBenefit, Integer cId) {
+        this.jId = jId;
+        this.jName = jName;
+        this.jCharacter = jCharacter;
+        this.jk2Name = jk2Name;
+        this.jMlow = jMlow;
+        this.jMhigh = jMhigh;
+        this.jExperience = jExperience;
+        this.jDate = jDate;
+        this.jNum = jNum;
+        this.jLoc = jLoc;
+        this.jReq = jReq;
+        this.jDes = jDes;
+        this.jBenefit = jBenefit;
+        this.cId = cId;
     }
+
+
+
+
 
     public Integer getjId() {
         return jId;
@@ -91,14 +117,6 @@ public class JobInfo {
 
     public void setjMhigh(Integer jMhigh) {
         this.jMhigh = jMhigh;
-    }
-
-    public String getjEducation() {
-        return jEducation;
-    }
-
-    public void setjEducation(String jEducation) {
-        this.jEducation = jEducation == null ? null : jEducation.trim();
     }
 
     public String getjExperience() {
@@ -165,14 +183,6 @@ public class JobInfo {
         this.cId = cId;
     }
 
-    public Integer getjClick() {
-        return jClick;
-    }
-
-    public void setjClick(Integer jClick) {
-        this.jClick = jClick;
-    }
-
     @Override
     public String toString() {
         return "JobInfo{" +
@@ -192,7 +202,6 @@ public class JobInfo {
                 ", jBenefit='" + jBenefit + '\'' +
                 ", cId=" + cId +
                 ", jClick=" + jClick +
-                ", companyInfo=" + companyInfo +
                 '}';
     }
 }

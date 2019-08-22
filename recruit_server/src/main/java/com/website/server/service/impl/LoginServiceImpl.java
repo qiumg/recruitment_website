@@ -75,7 +75,7 @@ public class LoginServiceImpl implements ILoginService {
             System.out.println("用户名已存在");
             return null;
         } else {
-            record.setcState("审核未通过");
+            record.setcState("审核中");
             companySignLoginMapper.insertSelective(record);
             System.out.println("注册成功");
             return "111";

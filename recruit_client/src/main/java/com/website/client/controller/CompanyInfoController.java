@@ -54,12 +54,14 @@ public class CompanyInfoController {
         mapCInfo.put("cPpost", mapCInfo11);
         mapCInfo.put("cStage", mapCInfo12);
         mapCInfo.put("cSummary", mapCInfo13);
+        mapCInfo.put("cStatic","审核中");
 
         //mapCInfo.put("mapCInfo6",mapCInfo9);
         System.out.println(mapCInfo);
-        Integer c = restTemplate.getForObject("http://PROVIDER-SERVER/companyInfo/addcinfo?cName={cName}&cHttp={cHttp}&cAddress={cAddress}&cPhone={cPhone}&cEmail={cEmail}&cFax={cFax}&cCtype={cCtype}&cScale={cScale}&cMoney={cMoney}&cPname={cPname}&cPpost={cPpost}&cStage={cStage}&cSummary={cSummary}", Integer.class, mapCInfo);
+        Integer c = restTemplate.getForObject("http://PROVIDER-SERVER/companyInfo/addcinfo?cName={cName}&cHttp={cHttp}&cAddress={cAddress}&cPhone={cPhone}&cEmail={cEmail}&cFax={cFax}&cCtype={cCtype}&cScale={cScale}&cMoney={cMoney}&cPname={cPname}&cPpost={cPpost}&cStage={cStage}&cSummary={cSummary}&cStatic={cStatic}", Integer.class, mapCInfo);
         if (c != 0) {
             session.setAttribute("cid", c);
+            session.setAttribute("cname",mapCInfo1);
             return "redirect:/company/selectCompanyInfo";
             /* return "myhome";*/
         } else return "index01";

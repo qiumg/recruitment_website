@@ -1,9 +1,12 @@
 package com.website.client.pojo;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Data
 public class CompanyInfo {
     private Integer cId;
 
@@ -41,15 +44,37 @@ public class CompanyInfo {
 
     private String cStatic;
 
+    private List<JobInfo> jobInfoList;
     private List<TicketInfo> ticketInfos = new ArrayList<>();
 
-    public List<TicketInfo> getTicketInfos() {
-        return ticketInfos;
+
+    public CompanyInfo() {
     }
 
-    public void setTicketInfos(List<TicketInfo> ticketInfos) {
+
+    public CompanyInfo(Integer cId, String cName, String cCtype, Double cMoney, Date cFdate, String cAddress, String cPname, Long cPhone, String cFax, String cHttp, String cSummary, String cLicense, String cLogo, String cScale, String cPpost, String cStage, String cEmail, String cStatic, List<TicketInfo> ticketInfos, List<JobInfo> jobInfoList) {
+        this.cId = cId;
+        this.cName = cName;
+        this.cCtype = cCtype;
+        this.cMoney = cMoney;
+        this.cFdate = cFdate;
+        this.cAddress = cAddress;
+        this.cPname = cPname;
+        this.cPhone = cPhone;
+        this.cFax = cFax;
+        this.cHttp = cHttp;
+        this.cSummary = cSummary;
+        this.cLicense = cLicense;
+        this.cLogo = cLogo;
+        this.cScale = cScale;
+        this.cPpost = cPpost;
+        this.cStage = cStage;
+        this.cEmail = cEmail;
+        this.cStatic = cStatic;
         this.ticketInfos = ticketInfos;
+        this.jobInfoList = jobInfoList;
     }
+
 
     public Integer getcId() {
         return cId;
@@ -147,46 +172,6 @@ public class CompanyInfo {
         this.cLicense = cLicense == null ? null : cLicense.trim();
     }
 
-    public String getcLogo() {
-        return cLogo;
-    }
-
-    public void setcLogo(String cLogo) {
-        this.cLogo = cLogo == null ? null : cLogo.trim();
-    }
-
-    public String getcScale() {
-        return cScale;
-    }
-
-    public void setcScale(String cScale) {
-        this.cScale = cScale;
-    }
-
-    public String getcPpost() {
-        return cPpost;
-    }
-
-    public void setcPpost(String cPpost) {
-        this.cPpost = cPpost == null ? null : cPpost.trim();
-    }
-
-    public String getcStage() {
-        return cStage;
-    }
-
-    public void setcStage(String cStage) {
-        this.cStage = cStage == null ? null : cStage.trim();
-    }
-
-    public String getcEmail() {
-        return cEmail;
-    }
-
-    public void setcEmail(String cEmail) {
-        this.cEmail = cEmail == null ? null : cEmail.trim();
-    }
-
     public String getcStatic() {
         return cStatic;
     }
@@ -211,12 +196,13 @@ public class CompanyInfo {
                 ", cSummary='" + cSummary + '\'' +
                 ", cLicense='" + cLicense + '\'' +
                 ", cLogo='" + cLogo + '\'' +
-                ", cScale=" + cScale +
+                ", cScale='" + cScale + '\'' +
                 ", cPpost='" + cPpost + '\'' +
                 ", cStage='" + cStage + '\'' +
                 ", cEmail='" + cEmail + '\'' +
                 ", cStatic='" + cStatic + '\'' +
-                ", ticketInfos=" + ticketInfos +
+                ", jobInfoList=" + jobInfoList +
+                ",ticketInfos=" + ticketInfos +
                 '}';
     }
 }

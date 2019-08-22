@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE HTML>
-<html xmlns:wb="http://open.weibo.com/wb"><head>
+<html xmlns:wb="http://open.weibo.com/wb" xmlns:th="http://www.thymeleaf.org"><head>
 <script async="" src="style/js/analytics.js"></script><script type="text/javascript" async="" src="style/js/conversion.js"></script><script src="style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script><style type="text/css"></style>
 <meta content="no-siteapp" http-equiv="Cache-Control">
 <link  media="handheld" rel="alternate">
@@ -16,34 +16,36 @@
 var ctx = "http://www.lagou.com";
 console.log(1);
 </script>
+
 <link href="http://www.lagou.com/images/favicon.ico" rel="Shortcut Icon">
-<link href="style/css/style.css" type="text/css" rel="stylesheet">
-<link href="style/css/external.min.css" type="text/css" rel="stylesheet">
-<link href="style/css/popup.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="style/js/jquery.1.10.1.min.js"></script>
-<script src="style/js/jquery.lib.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="style/js/ajaxfileupload.js"></script>
-<script src="style/js/additional-methods.js" type="text/javascript"></script>
+<link href="/style/css/style.css" type="text/css" rel="stylesheet">
+<link href="/style/css/external.min.css" type="text/css" rel="stylesheet">
+<link href="/style/css/popup.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/style/js/jquery.1.10.1.min.js"></script>
+<script src="/style/js/jquery.lib.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/style/js/ajaxfileupload.js"></script>
+<script src="/style/js/additional-methods.js" type="text/javascript"></script>
 <!--[if lte IE 8]>
-    <script type="text/javascript" src="style/js/excanvas.js"></script>
+    <script type="text/javascript" src="/style/js/excanvas.js"></script>
+
 <![endif]-->
 <script type="text/javascript">
 var youdao_conv_id = 271546; 
 </script> 
-<script src="style/js/conv.js" type="text/javascript"></script>
-<script src="style/js/ajaxCross.json" charset="UTF-8"></script></head>
+<script src="/style/js/conv.js" type="text/javascript"></script>
+<script src="/style/js/ajaxCross.json" charset="UTF-8"></script></head>
 <body>
 <div id="body">
 	<div id="header">
     	<div class="wrapper">
     		<a class="logo" href="http://www.lagou.com/">
-    			<img width="229" height="43" alt="拉勾招聘-专注互联网招聘" src="style/images/logo.png">
+    			<img width="229" height="43" alt="拉勾招聘-专注互联网招聘" src="/style/images/logo.png">
     		</a>
     		<ul id="navheader" class="reset">
-    			<li><a href="index.html">首页</a></li>
-    			<li><a href="companylist.html">公司</a></li>
+    			<li><a href="http://localhost:8200/index.html">首页</a></li>
+    			<li><a href="http://localhost:8200/companylist.html">公司</a></li>
     			<li><a target="_blank" href="http://www.lagou.com/toForum.html">论坛</a></li>
-    				    			<li><a rel="nofollow" href="jianli.html">我的简历</a></li>
+    				    			<li><a rel="nofollow" href="http://localhost:8200/jianli.html">我的简历</a></li>
 	    						    		</ul>
         	        	<dl class="collapsible_menu">
             	<dt>
@@ -51,13 +53,13 @@ var youdao_conv_id = 271546;
             		<span class="red" id="noticeDot-0"></span>
             		<i></i>
             	</dt>
-                                	<dd><a rel="nofollow" href="jianli.html">我的简历</a></dd>
-                	                	<dd><a href="collections.html">我收藏的职位</a></dd>
-                	                	                	<dd><a href="delivery.html">我投递的职位 <span id="noticeNo" class="red">(1)</span></a></dd>
-                	                	<dd class="btm"><a href="subscribe.html">我的订阅</a></dd>
+                                	<dd><a rel="nofollow" href="http://localhost:8200/jianli.html">我的简历</a></dd>
+                	                	<dd><a href="http://localhost:8200/collections.html">我收藏的职位</a></dd>
+                	                	                	<dd><a href="http://localhost:8200/delivery.html">我投递的职位 <span id="noticeNo" class="red">(1)</span></a></dd>
+                	                	<dd class="btm"><a href="http://localhost:8200/subscribe.html">我的订阅</a></dd>
                 	<dd><a href="create.html">我要招人</a></dd>
-                                                <dd><a href="accountBind.html">帐号设置</a></dd>
-                                <dd class="logout"><a rel="nofollow" href="login.html">退出</a></dd>
+                                                <dd><a href="http://localhost:8200/accountBind.html">帐号设置</a></dd>
+                                <dd class="logout"><a rel="nofollow" href="http://localhost:8200/login.html">退出</a></dd>
             </dl>
                                     <div id="noticeTip">
             	<span class="bot"></span>
@@ -69,32 +71,32 @@ var youdao_conv_id = 271546;
     </div><!-- end #header -->
     <div id="container">
                 	<div class="sidebar">
-            	<a class="btn_create" href="create.html">发布新职位</a>
+            	<a class="btn_create" href="http://localhost:8200/create.html">发布新职位</a>
                 <dl class="company_center_aside">
 		<dt>我收到的简历</dt>
 		<dd>
-		<a href="unHandleResumes.html">待处理简历</a> 
+		<a href="http://localhost:8200/unHandleResumes.html">待处理简历</a>
 			</dd>
 	<dd>
-		<a href="canInterviewResumes.html">待定简历</a>
+		<a href="http://localhost:8200/canInterviewResumes.html">待定简历</a>
 	</dd>
 	<dd>
-		<a href="haveNoticeResumes.html">已通知面试简历</a>
+		<a href="http://localhost:8200/haveNoticeResumes.html">已通知面试简历</a>
 	</dd>
 	<dd>
-		<a href="haveRefuseResumes.html">不合适简历</a>
+		<a href="http://localhost:8200/haveRefuseResumes.html">不合适简历</a>
 	</dd>
 	<dd class="btm">
-		<a href="autoFilterResumes.html">自动过滤简历</a> 
+		<a href="http://localhost:8200/autoFilterResumes.html">自动过滤简历</a>
 			</dd>
 </dl>
 <dl class="company_center_aside">
 		<dt>我发布的职位</dt>
 			<dd class="current">
-		<a href="positions.html">有效职位</a>
+		<a href="http://localhost:8200/JobInfo2/selectAllJob2">有效职位</a>
 	</dd>
-	<dd>
-		<a href="positions.html">已下线职位</a>
+	<dd >
+		<a href="http://localhost:8200/JobInfo2/selectHisJob2">已下线职位</a>
 	</dd>
 	</dl>
             </div><!-- end .sidebar -->
@@ -103,32 +105,127 @@ var youdao_conv_id = 271546;
                     <dt>
                         <h1>
                             <em></em>
-                           有效职位 <span>（共<i style="color:#fff;font-style:normal" id="positionNumber">1</i>个）</span>                        </h1>
+                           已发布职位
+
+							<span >（本页显示<i style="color:#fff;font-style:normal" id="positionNumber">[[${page.getSize()}]]</i>个）</span>                        </h1>
                     </dt>
                     <dd>
-                    		                    	<form id="searchForm">
-	                    		<input type="hidden" value="Publish" name="type">
-			                	<ul class="reset my_jobs">
-				                			                            	<li data-id="149594">
-		                                    <h3>
-		                                        <a target="_blank" title="随便写" href="http://www.lagou.com/jobs/149594.html">随便写</a> 
-		                                        <span>[上海]</span>
-		                                        						                        		                                    </h3>
-		                                    		                                  		<span class="receivedResumeNo"><a href="unHandleResumes.html?positionId=149594">应聘简历（1）</a></span>
-		                                  			                                    <div>兼职 / 1k-2k / 1-3年 / 硕士及以上</div>
-		                                    		                                    				                                    <div class="c9">发布时间： 2014-07-01 17:07:01</div>
-			                                    		                                    		                                    		                                    <div class="links">
-		                                    			                                       	<a class="job_refresh" href="javascript:void(0)">刷新<span>每个职位7天内只能刷新一次</span></a>
-		                                       			                                       	<a target="_blank" class="job_edit" href="create.html?positionId=149594">编辑</a>
-		                                       	<a class="job_offline" href="javascript:void(0)">下线</a>                      
-		                                        <a class="job_del" href="javascript:void(0)">删除</a>
-		                                    </div>
-		                                    		                                </li>
-	                                	                           	</ul>
-			                    			                </form>
-		                                    </dd>
+						<tr id="searchForm" th:action="@{/JobInfo2/selectHisJob2}">
+							<input type="hidden" value="Publish" name="type">
+							<ul class="reset my_jobs">
+								<tr th:each="page:${page.list}">
+								<li data-id="">
+
+<!--									[[#{jobInfo2.jName}]]-->
+									<h3>
+										<a target="_blank" title="" href="http://www.lagou.com/jobs/149594.html" th:text="${page.jname}"></a>
+										<span th:text="${page.jkName}"></span>
+										<span th:text="${page.jk1Name}"></span>
+										<span th:text="${page.jk2Name}"></span>
+										<span th:text="${page.jloc}"></span>
+									</h3>
+									<span class="receivedResumeNo">招募人数：[[${page.jnum}]]</span>
+									<div>[[${page.jcharacter}]] / [[${page.jmlow}]]K-[[${page.jmhigh}]]K / [[${page.jexperience}]] / [[${page.jeducation}]]</div>
+									<div class="c9">发布时间： [[${page.jdate}]]</div>
+
+									<div class="links">
+									<a target="_blank" class="job_edit" th:href="@{'/JobInfo2/updateJobInfoa?jid='+${page.jid}}">编辑</a>
+									<a class="job_offline" th:onclick="'javascript:down('+${page.jid}+')'">下线</a>
+									<a class="job_del" th:onclick="'javascript:deleteJob('+${page.jid}+')'">删除</a>
+									</div>
+								</li>
+					</tr>
+
+<!--									th:step="1"&ndash;&gt;-->
+
+
+<!--								<tr th:each="pages:${page.pages}" >-->
+<!--									<div class="pagination">-->
+<!--										<ul>-->
+<!--											<li><a href="#">[[${pages}]]</a></li>-->
+<!--										</ul>-->
+<!--									</div>-->
+<!--								</tr>-->
+							</ul>
+
+						</form>
+
+					</dd>
                 </dl>
+				<div style="overflow:hidden;">
+				<div class="turnPage center fr">
+					<a th:href="@{/JobInfo2/selectAllJob2(pageNum=1)}">首页</a>
+					<a th:if="${not page.isIsFirstPage()}" th:href="@{/JobInfo2/selectAllJob2(pageNum=${page.getPageNum()-1})}">上页</a>
+					<a th:if="${not page.isIsLastPage()}" th:href="@{/JobInfo2/selectAllJob2(pageNum=${page.getPageNum()+1})}">下页</a>
+					<a th:href="@{/JobInfo2/selectAllJob2(pageNum=${page.getPageSize()})}">末页</a>
+					第<span th:text="${page.getPageNum()}"></span>页
+					共<span th:text="${page.getPages()}" ></span>页
+				</div>
+			</div>
             </div><!-- end .content -->
+
+		<script type="text/javascript">
+			function down(jid) {
+				if (confirm('确认下线吗?')){$.ajax({
+							url: "/JobInfo2/downJob2",
+							type: "post",
+							data: {'jid': jid},
+							success: function (data) {
+								if (data.msg == 'success') {
+									alert('下线成功！')
+									window.location.href = 'http://localhost:8200/JobInfo2/selectAllJob2';
+								}
+								if (data.msg == 'fail') {
+									alert('下线失败！')
+									window.location.href = 'http://localhost:8200/JobInfo2/selectAllJob2';
+								}
+							}
+						}
+				);
+				}}
+
+			function deleteJob(jid){
+				if (confirm('确认删除吗?')){$.ajax({
+							url: "/JobInfo2/deleteJob2",
+							type: "post",
+							data: {'jid': jid},
+							success: function (data) {
+								if (data.msg == 'success') {
+									alert('删除成功！')
+									window.location.href = 'http://localhost:8200/JobInfo2/selectAllJob2';
+								}
+								if (data.msg == 'fail') {
+									alert('删除失败！')
+									window.location.href = 'http://localhost:8200/JobInfo2/selectAllJob2';
+								}
+							}
+						}
+				);}
+
+			}
+
+			// function updateJob(jid){
+			// 	$.ajax({
+			// 				url: "/JobInfo2/updateJobInfo2a",
+			// 				type: "post",
+			// 				data: {'jid': jid},
+			// 				// success: function (data) {
+			// 				// 	if (data.msg == 'success') {
+			// 				// 		alert('删除成功！')
+			// 				// 		window.location.href = 'http://localhost:8200/JobInfo2/selectAllJob2';
+			// 				// 	}
+			// 				// 	if (data.msg == 'fail') {
+			// 				// 		alert('删除失败！')
+			// 				// 		window.location.href = 'http://localhost:8200/JobInfo2/selectAllJob2';
+			// 				// 	}
+			// 				// }
+			// 			}
+			// 	);
+			// }
+
+
+
+		</script>
 <script src="style/js/job_list.min.js" type="text/javascript"></script> 
 			<div class="clear"></div>
 			<input type="hidden" value="74fb1ce14ebf4e2495270b0fbad64704" id="resubmitToken">

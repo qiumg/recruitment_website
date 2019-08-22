@@ -15,9 +15,9 @@
     from job_kind2_info
     where jk2_id = #{jk2Id,jdbcType=INTEGER}
   </select>
-  <select id="selectByJK1Id" resultType="JobKind2Info" parameterType="int">
-    select jk2_id,jk2_name from job_kind2_info where jk1_id = #{jk1Id}
-  </select>
+<!--  <select id="selectByJK1Id" resultType="JobKind2Info" parameterType="int">-->
+<!--    select jk2_id,jk2_name from job_kind2_info where jk1_id = #{jk1Id}-->
+<!--  </select>-->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from job_kind2_info
     where jk2_id = #{jk2Id,jdbcType=INTEGER}

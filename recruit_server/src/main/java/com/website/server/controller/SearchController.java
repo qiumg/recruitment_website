@@ -15,27 +15,27 @@ import java.util.Map;
 @RestController
 @RequestMapping("/search")
 public class SearchController {
-    @Autowired
-    private IJobKindInfoService jobKindInfoService;
-    @RequestMapping("/jobname")
-    public PageInfo<JobInfo> searchByJobName(String jobName){
-        PageHelper.startPage(1,10);
-        List<JobInfo> jobInfos = jobKindInfoService.queryJobInfoLiKeName(jobName);
-        PageInfo<JobInfo> page = new PageInfo<>(jobInfos);
-        return page;
-    }
-    @RequestMapping("/companyName")
-    public  PageInfo<JobInfo> searchByCompanyName(String companyName){
-        PageHelper.startPage(1,10);
-        List<JobInfo> jobInfos = jobKindInfoService.queryJobInfoLikeCompany(companyName);
-        PageInfo<JobInfo> page = new PageInfo<>(jobInfos);
-        return page;
-    }
-    @RequestMapping("/condition")
-    public PageInfo<JobInfo> searchByCondition(String addr, Integer low, Integer high, String exp, String education, String nature, Integer date){
-        PageHelper.startPage(1,10);
-        List<JobInfo> jobInfos = jobKindInfoService.queryJobInfoByCondition(addr, low, high, exp, education, nature, date);
-        PageInfo<JobInfo> page = new PageInfo<>(jobInfos);
-        return page;
-    }
+//    @Autowired
+//    private IJobKindInfoService jobKindInfoService;
+//    @RequestMapping("/jobname")
+//    public PageInfo<JobInfo> searchByJobName(String jobName){
+//        PageHelper.startPage(1,10);
+//        List<JobInfo> jobInfos = jobKindInfoService.queryJobInfoLiKeName(jobName);
+//        PageInfo<JobInfo> page = new PageInfo<>(jobInfos);
+//        return page;
+//    }
+//    @RequestMapping("/companyName")
+//    public  PageInfo<JobInfo> searchByCompanyName(String companyName){
+//        PageHelper.startPage(1,10);
+//        List<JobInfo> jobInfos = jobKindInfoService.queryJobInfoLikeCompany(companyName);
+//        PageInfo<JobInfo> page = new PageInfo<>(jobInfos);
+//        return page;
+//    }
+//    @RequestMapping("/condition")
+//    public PageInfo<JobInfo> searchByCondition(String addr, Integer low, Integer high, String exp, String education, String nature, Integer date){
+//        PageHelper.startPage(1,10);
+//        List<JobInfo> jobInfos = jobKindInfoService.queryJobInfoByCondition(addr, low, high, exp, education, nature, date);
+//        PageInfo<JobInfo> page = new PageInfo<>(jobInfos);
+//        return page;
+//    }
 }

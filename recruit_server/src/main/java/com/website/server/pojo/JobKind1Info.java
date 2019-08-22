@@ -1,8 +1,5 @@
 package com.website.server.pojo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class JobKind1Info {
     private Integer jk1Id;
 
@@ -10,15 +7,6 @@ public class JobKind1Info {
 
     private Integer jkId;
 
-    private List<JobKind2Info> jobKind2Infos = new ArrayList<>();
-
-    public List<JobKind2Info> getJobKind2Infos() {
-        return jobKind2Infos;
-    }
-
-    public void setJobKind2Infos(List<JobKind2Info> jobKind2Infos) {
-        this.jobKind2Infos = jobKind2Infos;
-    }
 
     public Integer getJk1Id() {
         return jk1Id;
@@ -42,15 +30,5 @@ public class JobKind1Info {
 
     public void setJkId(Integer jkId) {
         this.jkId = jkId;
-    }
-
-    @Override
-    public String toString() {
-        return "JobKind1Info{" +
-                "jk1Id=" + jk1Id +
-                ", jk1Name='" + jk1Name + '\'' +
-                ", jkId=" + jkId +
-                ", jobKind2Infos=" + jobKind2Infos +
-                '}';
     }
 }

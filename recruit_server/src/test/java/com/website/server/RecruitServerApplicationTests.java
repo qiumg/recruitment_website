@@ -35,8 +35,8 @@ public class RecruitServerApplicationTests {
 	}
 	@Test
 	public void contextLoads1(){
-		CompanyInfo companyInfo = new CompanyInfo("张三","中外合资",333.55,"北京","zhangsan",12345678912L,"888888","www.zhangsan.com","啊啊","8888人","CEO","A轮","942557853@qq.com");
-	iCompanyInfoService.addCompanyInfo(companyInfo);
+//		CompanyInfo companyInfo = new CompanyInfo("张三","中外合资",333.55,"北京","zhangsan",12345678912L,"888888","www.zhangsan.com","啊啊","8888人","CEO","A轮","942557853@qq.com");
+//	iCompanyInfoService.addCompanyInfo(companyInfo);
 
 	}
 	@Test

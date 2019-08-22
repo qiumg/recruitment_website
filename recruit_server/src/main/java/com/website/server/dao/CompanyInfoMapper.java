@@ -4,8 +4,10 @@ import com.website.server.pojo.CompanyInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-@Mapper
+import java.util.List;
+
 @Repository
+@Mapper
 public interface CompanyInfoMapper {
     int deleteByPrimaryKey(Integer cId);
 
@@ -13,7 +15,12 @@ public interface CompanyInfoMapper {
 
     int insertSelective(CompanyInfo record);
 
+
     CompanyInfo selectByPrimaryKey(Integer cId);
+
+
+    List<CompanyInfo> selectAllByStatic(String c_static);
+
 
     int updateByPrimaryKeySelective(CompanyInfo record);
 

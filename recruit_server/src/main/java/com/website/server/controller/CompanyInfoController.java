@@ -19,7 +19,7 @@ public class CompanyInfoController {
     @Autowired
     private ICompanyInfoService iCompanyInfoService;
     @RequestMapping("/addcinfo")
-    public int addinfo(HttpSession session, String cName, String cCtype, Double cMoney, String cAddress, String cPname, Long cPhone, String cFax, String cHttp, String cSummary, String cScale, String cPpost, String cStage, String cEmail) {
+    public int addinfo(HttpSession session, String cName, String cCtype, Double cMoney, String cAddress, String cPname, Long cPhone, String cFax, String cHttp, String cSummary, String cScale, String cPpost, String cStage, String cEmail,String cStatic) {
 
         CompanyInfo companyInfo = new CompanyInfo();
 
@@ -33,10 +33,12 @@ public class CompanyInfoController {
         companyInfo.setcFax(cFax);
         companyInfo.setcHttp(cHttp);
         companyInfo.setcSummary(cSummary);
-        companyInfo.setcScale(cScale);
-        companyInfo.setcPpost(cPpost);
-        companyInfo.setcStage(cStage);
-        companyInfo.setcEmail(cEmail);
+        companyInfo.setCScale(cScale);
+        companyInfo.setcStatic(cStatic);
+
+        companyInfo.setCPpost(cPpost);
+        companyInfo.setCStage(cStage);
+        companyInfo.setCEmail(cEmail);
         System.out.println(companyInfo);
         return iCompanyInfoService.addCompanyInfo(companyInfo);
     }
@@ -70,10 +72,10 @@ public class CompanyInfoController {
         companyInfo.setcFax(cFax);
         companyInfo.setcHttp(cHttp);
         companyInfo.setcSummary(cSummary);
-        companyInfo.setcScale(cScale);
+        companyInfo.setCScale(cScale);
         /*companyInfo.setcPpost(cPpost);*/
-        companyInfo.setcStage(cStage);
-        companyInfo.setcEmail(cEmail);
+        companyInfo.setCStage(cStage);
+        companyInfo.setCEmail(cEmail);
         System.out.println(companyInfo);
         return iCompanyInfoService.updateCompany(companyInfo);
     }

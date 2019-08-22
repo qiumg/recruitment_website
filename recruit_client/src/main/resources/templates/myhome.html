@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html xmlns:wb="http://open.weibo.com/wb" xmlns:th="http://www.thymeleaf.org"><head>
 	</script><script type="text/javascript" async="" src="/style/js/conversion.js"></script><script src="/style/js/allmobilize.min.js" charset="utf-8" id="allmobilize"></script><style type="text/css"></style>
 	<meta content="no-siteapp" http-equiv="Cache-Control">
@@ -16,7 +16,7 @@
 		var ctx = "http://www.lagou.com";
 		console.log(1);
 	</script>
-	<link href="http://www.lagou.com/images/favicon.ico" rel="Shortcut Icon">
+	<link href="/http://www.lagou.com/images/favicon.ico" rel="Shortcut Icon">
 	<link href="/style/css/style.css" type="text/css" rel="stylesheet">
 	<link href="/style/css/external.min.css" type="text/css" rel="stylesheet">
 	<link href="/style/css/popup.css" type="text/css" rel="stylesheet">
@@ -71,7 +71,7 @@
 				<div class="c_detail">
 					<div style="background-color:#fff;" class="c_logo">
 						<a title="上传公司LOGO" id="logoShow" class="inline cboxElement" href="#logoUploader">
-							<img width="190" height="190" alt="公司logo" src="style/images/logo_default.png">
+							<img width="190" height="190" alt="公司logo" src="/style/images/logo_default.png">
 
 							<span>更换公司图片<br>190px*190px 小于5M</span>
 						</a>
@@ -89,29 +89,28 @@
                          -->
 
 					<div class="c_box companyName">
-						<h2 title="平潭协创进出口贸易有限公司" th:text="${companyInfo.getcName()}" th:if="${companyInfo.getcName()}!=null"></h2>
-<!--
-						<em class="unvalid"></em>
--->
-						<!--<span class="va dn">拉勾未认证企业</span>-->
+						<h2 title="平潭协创进出口贸易有限公司" th:text="${companyInfo.getcName()}"></h2>
+
+						<!--<em class="unvalid"></em>
+						<span class="va dn">拉勾未认证企业</span>-->
 						<a target="_blank" class="applyC" th:text="${companyInfo.getcStatic()}"></a>
-						<!--<div class="clear"></div>-->
+						<div class="clear"></div>
 
 						<!--<h1 title="福建平潭协创进出口贸易有限公司" class="fullname">福建平潭协创进出口贸易有限公司</h1>-->
 
 						<!--<form class="clear editDetail dn" id="editDetailForm">-->
-<!--
-							<input type="text" placeholder="请输入公司简称" maxlength="15" value="平潭协创进出口贸易有限公司" name="companyShortName" id="companyShortName">
--->
-<!--							<input type="text" placeholder="一句话描述公司优势，核心价值，限50字" maxlength="50" value="测试的发打发打发大范德萨发" name="companyFeatures" id="companyFeatures">-->
+							<!--
+                                                        <input type="text" placeholder="请输入公司简称" maxlength="15" value="平潭协创进出口贸易有限公司" name="companyShortName" id="companyShortName">
+                            -->
+							<!--							<input type="text" placeholder="一句话描述公司优势，核心价值，限50字" maxlength="50" value="测试的发打发打发大范德萨发" name="companyFeatures" id="companyFeatures">-->
 							<!--<input type="hidden" value="25927" id="companyId" name="companyId">
 							<input type="submit" value="保存" id="saveDetail" class="btn_small">
 							<a id="cancelDetail" class="btn_cancel_s" >取消</a>
 						</form>-->
 
-<!--
-						<div class="clear oneword"><img width="17" height="15" src="style/images/quote_l.png">&nbsp; <span>测试的发打发打发大范德萨发</span> &nbsp;<img width="17" height="15" src="style/images/quote_r.png"></div>
--->
+						<!--
+                                                <div class="clear oneword"><img width="17" height="15" src="style/images/quote_l.png">&nbsp; <span>测试的发打发打发大范德萨发</span> &nbsp;<img width="17" height="15" src="style/images/quote_r.png"></div>
+                        -->
 						<h3 class="dn">已选择标签</h3>
 						<ul style="overflow:auto" id="hasLabels" class="reset clearfix">
 							<li><span>年终分红</span></li>
@@ -236,12 +235,8 @@
 							</dt>
 							<dd>
 								<form id="companyDesForm" method="get" action="/company/updatecominfo">
-									<!--<textarea placeholder="请分段详细描述公司简介、企业文化等" name="companyProfile" id="companyProfile">该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎</textarea>
-									<div class="word_count fr">你还可以输入 <span>1000</span> 字</div>-->
-
-									<textarea placeholder="请分段详细描述公司简介、企业文化等" name="companyProfile" id="companyProfile" th:text="${companyInfo.getcSummary()}"></textarea>
-
-									<div class="word_count">你还可以输入 <span>1000</span> 字</div>
+									<textarea placeholder="请分段详细描述公司简介、企业文化等" name="companyProfile" id="companyProfile" th:text="${companyInfo.getcSummary()}">该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎</textarea>
+									<div class="word_count fr">你还可以输入 <span>1000</span> 字</div>
 									<div class="clear"></div>
 									<input type="submit" value="保存" id="submitProfile" class="btn_small">
 									<a id="delProfile" class="btn_cancel_s" href="javascript:void(0)">取消</a>
@@ -255,7 +250,7 @@
 								<h2><em></em>公司介绍</h2>
 							</dt>
 							<dd>
-								<div class="c_intro" th:text="${companyInfo.getcSummary()}"></div>
+								<div class="c_intro" th:text="${companyInfo.getcSummary()}"> </div>
 								<a title="编辑公司介绍" id="editIntro" class="c_edit" href="javascript:void(0)"></a>
 							</dd>
 						</dl>
@@ -273,7 +268,7 @@
 					<dd>
 						<div class="addnew">
 							发布需要的人才信息，让伯乐和千里马尽快相遇……<br>
-							<a href="create.html">+添加招聘职位</a>
+							<a href="http://localhost:8200/create.html">+添加招聘职位</a>
 						</div>
 					</dd>
 				</dl>
@@ -298,7 +293,7 @@
 							</tr>
 							<tr>
 								<td>规模</td>
-								<td><span th:text="${companyInfo.getcScale()}"></span></td>
+								<td><span th:text="${companyInfo.getCScale()}"></span></td>
 							</tr>
 							<tr>
 								<td>注册资金</td><!-- 支持多选 -->
@@ -317,7 +312,7 @@
 							</tr>
 							<tr>
 								<td>邮箱</td>
-								<td><span th:text="${companyInfo.getcEmail()}"></span></td>
+								<td><span th:text="${companyInfo.getCEmail()}"></span></td>
 							</tr>
 							<tr>
 								<td>传真</td>
@@ -335,38 +330,38 @@
 										<input type="text" placeholder="请输入地点" th:value="${companyInfo.getcAddress()}" name="city" id="city">
 									</td>
 								</tr>
+
 								<tr>
 									<td>公司类型</td>
 									<td>
-										<input type="text" placeholder="请输入类型" th:value="${companyInfo.getcCtype()}" name="ctyle" id="ctyle">
+										<input type="text" placeholder="请输入公司类型" th:value="${companyInfo.getcCtype()}" name="ctyle" id="ctyle">
 									</td>
 								</tr>
-
 								<tr>
 									<td>规模</td>
 									<td>
-										<input type="text" placeholder="请输入规模" th:value="${companyInfo.getcScale()}" name="companySize" id="companySize">
+									<td>
+										<input type="text" placeholder="请输入规模" th:value="${companyInfo.getCScale()}" name="companySize" id="companySize">
 									</td>
-									<!--<td>
-										<input type="hidden" value="150-500人" id="companySize" name="companySize">
-										<input type="button" value="150-500人" id="select_sca" class="select_tags">
-										<div class="selectBox dn" id="box_sca" style="display: none;">
-											<ul class="reset">
-												<li>少于15人</li>
-												<li>15-50人</li>
-												<li>50-150人</li>
-												<li class="current">150-500人</li>
-												<li>500-2000人</li>
-												<li>2000人以上</li>
-											</ul>
-										</div>
-									</td>-->
+
+									</td>
 								</tr>
+
 								<tr>
 									<td>注册资金</td><!-- 支持多选 -->
 									<td>
 										<input type="text" placeholder="请输入注册资金" th:value="${companyInfo.getcMoney()}" name="money" id="money">
 									</td>
+									<!--<td>
+										<input type="hidden" value="移动互联网" id="industryField" name="industryField">
+										<input type="button" style="background:none;cursor:default;border:none !important;" disable="disable" value="移动互联网" id="select_ind" class="select_tags">
+							-->			<!-- <div id="box_ind" class="selectBox dn">
+                                            <ul class="reset">
+                                                                                                                                                            <li class="current">移动互联网</li>
+                                                                                                                                                </ul>
+                                        </div>	 -->
+									<!--</td>-->
+
 								</tr>
 								<tr>
 									<td>主页</td>
@@ -374,16 +369,18 @@
 										<input type="text" placeholder="请输入网址" th:value="${companyInfo.getcHttp()}" name="companyUrl" id="companyUrl">
 									</td>
 								</tr>
+
 								<tr>
 									<td>联系电话</td>
 									<td>
 										<input type="text" placeholder="请输入联系电话" th:value="${companyInfo.getcPhone()}" name="cphone" id="cphone">
 									</td>
 								</tr>
+
 								<tr>
 									<td>邮箱</td>
 									<td>
-										<input type="text" placeholder="请输入邮箱" th:value="${companyInfo.getcEmail()}" name="cemail" id="cemail">
+										<input type="text" placeholder="请输入邮箱" th:value="${companyInfo.getCEmail()}" name="cemail" id="cemail">
 									</td>
 								</tr>
 
@@ -393,11 +390,14 @@
 										<input type="text" placeholder="请输入传真" th:value="${companyInfo.getcFax()}" name="comfax" id="comfax">
 									</td>
 								</tr>
+
+
+
 								</tbody></table>
 							<!--<input type="hidden" id="comCity" value="上海">
 							<input type="hidden" id="comInd" value="移动互联网">
 							<input type="hidden" id="comSize" value="150-500人">
-							<input type="hidden" id="comUrl" value="">-->
+							<input type="hidden" id="comUrl" value="http://www.zmtpost.com">-->
 							<input type="submit" value="保存" id="submitFeatures" class="btn_small">
 							<a id="cancelFeatures" class="btn_cancel_s" href="javascript:void(0)">取消</a>
 							<div class="clear"></div>
@@ -408,29 +408,18 @@
 				<dl class="c_section c_stages">
 					<dt>
 						<h2><em></em>融资阶段</h2>
-						<a title="编辑融资阶段" class="c_edit" href="javascript:void(0)"></a>
+						<!--<a title="编辑融资阶段" class="c_edit" href="javascript:void(0)"></a>-->
 					</dt>
 					<dd>
 						<ul class="reset stageshow">
-							<li>目前阶段：<span class="c5" th:text="${companyInfo.getcStage()}"></span></li>
+							<li>目前阶段：<span class="c5" th:text="${companyInfo.getCStage()}"></span></li>
 						</ul>
-						<form method="get" action="/company/updatecominfo" class="dn" id="stageform">
+						<!--<form class="dn" id="stageform">
 							<div class="stageSelect">
 								<label>目前阶段</label>
-								<input type="hidden" value="" id="financeStage" name="financeStage">
-								<!--<input type="button" value="" id="select_fin" class="select_tags_short fl">-->
-
-								<div>
-									<div >
-										<input type="radio" name="s_radio_hidden" value="未融资"/>未融资
-										<input type="radio" name="s_radio_hidden" value="天使轮"/>天使轮
-										<input type="radio" name="s_radio_hidden" value="A轮"/>A轮
-										<input type="radio" name="s_radio_hidden" value="B轮"/>B轮
-										<input type="radio" name="s_radio_hidden" value="C轮"/>C轮
-										<input type="radio" name="s_radio_hidden" value="D轮及以上"/>D轮及以上
-										<input type="radio" name="s_radio_hidden" value="上市公司"/>上市公司
-									</div>
-								<!--<div class="selectBoxShort dn" id="box_fin" style="display: none;">
+								<input type="hidden" value="天使轮" id="financeStage" name="financeStage">
+								<input type="button" value="天使轮" id="select_fin" class="select_tags_short fl">
+								<div class="selectBoxShort dn" id="box_fin" style="display: none;">
 									<ul class="reset">
 
 										<li>未融资</li>
@@ -454,9 +443,9 @@
 										<li>上市公司</li>
 
 									</ul>
-								</div>-->
+								</div>
 							</div>
-							<!--<ul id="stagesList" class="reset">
+							<ul id="stagesList" class="reset">
 								<li>
 									<label>融资阶段</label>
 									<input type="hidden" class="select_invest_hidden" name="select_invest_hidden">
@@ -474,14 +463,14 @@
 									<label>投资机构</label>
 									<input type="text" placeholder="如真格基金" name="stageorg" value="">
 								</li>
-							</ul>-->
+							</ul>
 							<input type="submit" value="保存" class="btn_small">
 							<a id="cancelStages" class="btn_cancel_s" href="javascript:void(0)">取消</a>
 							<div class="clear"></div>
 
 							<div class="dn" id="cloneInvest">
 								<label>融资阶段</label>
-								<input type="hidden" class="select_invest_hidden" name="select_invest_hidden" th:value="${companyInfo.getcStage()}">
+								<input type="hidden" class="select_invest_hidden" name="select_invest_hidden">
 								<input type="button" value="发展阶段" class="select_tags_short select_invest">
 								<div class="selectBoxShort dn" style="display: none;">
 									<ul class="reset">
@@ -493,12 +482,10 @@
 										<li>上市公司</li>
 									</ul>
 								</div>
-								<!--<label>投资机构</label>
-								<input type="text" placeholder="如真格基金" name="stageorg">-->
+								<label>投资机构</label>
+								<input type="text" placeholder="如真格基金" name="stageorg">
 							</div>
-								<div/>
-
-						</form>
+						</form>-->
 					</dd>
 				</dl><!-- end .c_stages -->
 
@@ -521,8 +508,8 @@
 								</div>
 
 								<!-- 编辑创始人 -->
-								<!--<div class="member_info newMember dn">
-									<form class="memberForm">-->
+								<div class="member_info newMember dn">
+									<form class="memberForm" method="get" action="/company/updatecominfo">
 										<!--<div class="new_portrait">
 											<div class="portrait_upload dn portraitNo">
 												<span>上传创始人头像</span>
@@ -539,34 +526,41 @@
 												大小：小于5M
 											</em>
 										</div>-->
-									<!--	<input type="text" placeholder="请输入创始人姓名" th:value="${companyInfo.getcPname()}" name="pname">
-										<input type="text" placeholder="请输入创始人当前职位" th:text="${companyInfo.getcPpost()}" name="position">-->
+
+										<input type="text" placeholder="请输入创始人姓名" th:value="${companyInfo.getcPname()}" name="pname">
+										<input type="text" placeholder="请输入创始人当前职位" th:value="${companyInfo.getCPpost()}" name="position">
 										<!--<input type="text" placeholder="请输入创始人新浪微博地址" value="http://weimob.weibo.com" name="weibo">
 										<textarea placeholder="请输入创始人个人简介" maxlength="500" class="s_textarea" name="remark">发放的发达范德萨范德萨范德萨发的复大发大水发生的</textarea>
 										<div class="word_count fr">你还可以输入 <span>500</span> 字</div>-->
-										<!--<div class="clear"></div>
+										<div class="clear"></div>
 										<input type="submit" value="保存" class="btn_small">
 										<a class="btn_cancel_s member_delete" href="javascript:void(0)">删除</a>
 										<input type="hidden" value="11493" class="leader_id">
-									</form>-->
+									</form>
 								</div>
 
 								<!-- 显示创始人 -->
-								<span class="member_info">
-									<!--<a title="编辑创始人" class="c_edit member_edit" href="javascript:void(0)"></a>-->
-<!--									<div class="m_portrait">-->
-<!--										<div></div>-->
-										<!--<img width="120" height="120" alt="孙泰英" src="style/images/leader_default.png">-->
-								<!--	</div>-->
-									创始人： <span  th:text="${companyInfo.getcPname()}"></span><br><br>
-&nbsp;&nbsp;&nbsp;
-									<!-- <a target="_blank" class="weibo" href="http://weimob.weibo.com"></a> -->
-
-									&nbsp;    职位：<span th:text="${companyInfo.getcPpost()}"></span>
+								<div class="member_info">
+									<!--<a title="编辑创始人" class="c_edit member_edit" href="javascript:void(0)"></a>
+									<div class="m_portrait">
+										<div></div>
+										<img width="120" height="120" alt="孙泰英" src="/style/images/leader_default.png">
+									</div>-->
+									创始人：<span th:text="${companyInfo.getcPname()}"></span><br/><br/>
+									&nbsp;&nbsp;&nbsp;
+									职位：<span th:text="${companyInfo.getCPpost()}"></span>
+									<!--<div class="m_name">-->
+										<!-- <span th:text="${companyInfo.getcPname()}"></span> -->
+										<!-- <a target="_blank" class="weibo" href="http://weimob.weibo.com"></a> -->
+									<!--</div>
+									<div class="m_position">-->
+										<!-- <span th:text="${companyInfo.getcPpost()}"> -->
+										<!--CEO
+									</div>-->
 									<!-- <div class="m_intro">发放的发达范德萨范德萨范德萨发的复大发大水发生的</div> -->
+								</div>
 
-
-							<!-- end .member_wrap -->
+							</div><!-- end .member_wrap -->
 						</dd>
 					</dl>
 				</div> <!-- end #Member -->

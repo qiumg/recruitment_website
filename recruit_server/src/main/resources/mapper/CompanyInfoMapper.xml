@@ -21,16 +21,49 @@
     <result column="c_email" jdbcType="VARCHAR" property="cEmail" />
     <result column="c_static" jdbcType="VARCHAR" property="cStatic" />
   </resultMap>
+
+  <resultMap id="DouResultMap" type="com.website.server.pojo.CompanyInfo">
+    <id column="c_id" jdbcType="INTEGER" property="cId" />
+    <result column="c_name" jdbcType="VARCHAR" property="cName" />
+    <result column="c_ctype" jdbcType="VARCHAR" property="cCtype" />
+    <result column="c_money" jdbcType="DOUBLE" property="cMoney" />
+    <result column="c_fdate" jdbcType="TIMESTAMP" property="cFdate" />
+    <result column="c_address" jdbcType="VARCHAR" property="cAddress" />
+    <result column="c_pname" jdbcType="VARCHAR" property="cPname" />
+    <result column="c_phone" jdbcType="INTEGER" property="cPhone" />
+    <result column="c_fax" jdbcType="VARCHAR" property="cFax" />
+    <result column="c_http" jdbcType="VARCHAR" property="cHttp" />
+    <result column="c_summary" jdbcType="VARCHAR" property="cSummary" />
+    <result column="c_license" jdbcType="VARCHAR" property="cLicense" />
+    <result column="c_logo" jdbcType="VARCHAR" property="cLogo" />
+    <result column="c_scale" jdbcType="VARCHAR" property="cScale" />
+    <result column="c_ppost" jdbcType="VARCHAR" property="cPpost" />
+    <result column="c_stage" jdbcType="VARCHAR" property="cStage" />
+    <result column="c_email" jdbcType="VARCHAR" property="cEmail" />
+    <result column="c_static" jdbcType="VARCHAR" property="cStatic" />
+    <collection property="jobInfoList" ofType="JobInfo">
+      <id column="j_id" jdbcType="INTEGER" property="jId" />
+      <result column="j_name" jdbcType="VARCHAR" property="jName" />
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List">
     c_id, c_name, c_ctype, c_money, c_fdate, c_address, c_pname, c_phone, c_fax, c_http, 
     c_summary, c_license, c_logo, c_scale, c_ppost, c_stage, c_email, c_static
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from company_info
     where c_id = #{cId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectAllByStatic" parameterType="java.lang.String" resultMap="DouResultMap">
+    select c.c_id, c_name, c_ctype, c_money, c_fdate, c_address, c_pname, c_phone, c_fax, c_http,
+    c_summary, c_license, c_static,j.j_id,j.j_name
+    from company_info c,job_info j
+    where c.c_id=j.c_id and c_static=#{c_static,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from company_info
     where c_id = #{cId,jdbcType=INTEGER}
